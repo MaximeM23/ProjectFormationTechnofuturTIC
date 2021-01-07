@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Procedures", "Procedures", 
 		..\DB\Procedures\SelectClientById.sql = ..\DB\Procedures\SelectClientById.sql
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Token.Tools", "Token.Tools\Token.Tools.csproj", "{5CF94500-F3D1-46C1-8A41-A021A5065851}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{E1DC361A-C250-49C4-A091-1DF33A29A53C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1DC361A-C250-49C4-A091-1DF33A29A53C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1DC361A-C250-49C4-A091-1DF33A29A53C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CF94500-F3D1-46C1-8A41-A021A5065851}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CF94500-F3D1-46C1-8A41-A021A5065851}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CF94500-F3D1-46C1-8A41-A021A5065851}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CF94500-F3D1-46C1-8A41-A021A5065851}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -35,6 +35,14 @@ namespace DTO.Service
             return _clientRepo.GetAll().Select(x => x.ClientDTOToClientDAO());
         }
 
+        public Client GetClientByMailAndPasswordMatch(string email, string password)
+        {
+            Client baseClient = _clientRepo.GetClientByMailAndPasswordMatch(email, password).ClientDTOToClientDAO();
+            baseClient.Role = new Role();            
+            baseClient.Role = _roleRepo.GetOne(baseClient.IdRole).RoleDTOToRoleDAO();
+            return baseClient;
+        }
+
         public Client GetOne(int Id)
         {
             return _clientRepo.GetOne(Id).ClientDTOToClientDAO();

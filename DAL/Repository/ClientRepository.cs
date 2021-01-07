@@ -60,5 +60,13 @@ namespace DAL.Repository
             if(_con.ExecuteNonQuery(cmd) > 0) return true;
             return false;
         }
+
+        public Client GetClientByMailAndPasswordMatch(string email, string password)
+        {
+            Connection.Command cmd = new Connection.Command("GetClientByMailAndPasswordMatch", true);
+            cmd.AddParameter("@email", email);
+            cmd.AddParameter("@password", password);
+            return _con.ExecuteReader(cmd, Mapper.ClientToDAO).SingleOrDefault();
+        }
     }
 }

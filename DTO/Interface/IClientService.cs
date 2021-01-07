@@ -9,5 +9,7 @@ namespace DTO.Interface
     public interface IClientService : IService<Client>
     {
         Client GetUserWithAllInformationById(int id);
+
+        Client GetClientByMailAndPasswordMatch(string email, string password);
     }
 }
