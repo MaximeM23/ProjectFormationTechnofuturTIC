@@ -7,19 +7,21 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './Components/Navbar/Navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DetailsClientComponent } from './Components/Details-Client/Details-Client.component';
+import { LoginComponent } from './Components/Login/Login.component';
 
 @NgModule({
   declarations: [	
     AppComponent,
       NavbarComponent,
-      DetailsClientComponent
+      DetailsClientComponent,
+      LoginComponent
    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

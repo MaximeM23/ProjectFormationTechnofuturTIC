@@ -20,6 +20,11 @@ constructor(private _http: HttpClient) {
   {
     return this._http.get(this.url+ "Client/"+id);
   }
+  
+  registerClient(client: Client) : Subscribable<IClient>
+  {
+    return this._http.post<Client>()
+  }
 
   // getHeroesByTagName(name: string): Subscribable<any> {
   //   return this._http.get(this.url + '/search/' + name);
