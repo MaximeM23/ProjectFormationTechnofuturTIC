@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WineSellingProject", "WineSellingProject\WineSellingProject.csproj", "{15A2C2CC-210C-4340-A870-AEBD7000C209}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tools.Connection", "Tools.Connection\Tools.Connection.csproj", "{A132076E-F1ED-4C88-A58A-B978DE3BF869}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DAL", "DAL\DAL.csproj", "{3901583B-F0B2-4FF6-B966-37A24B912033}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DTO", "DTO\DTO.csproj", "{E1DC361A-C250-49C4-A091-1DF33A29A53C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB", "DB", "{5B6A03BF-13E9-4C51-B488-25EEE3A1E970}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScriptDB", "ScriptDB", "{1236E3D1-FBDA-460A-9265-4823569F8946}"
+	ProjectSection(SolutionItems) = preProject
+		..\DB\CreateDataBaseScript.sql = ..\DB\CreateDataBaseScript.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Procedures", "Procedures", "{02957A9E-3AB0-4C0A-8837-BE1414D52655}"
+	ProjectSection(SolutionItems) = preProject
+		..\DB\Procedures\CreateAddress.sql = ..\DB\Procedures\CreateAddress.sql
+		..\DB\Procedures\CreateClient.sql = ..\DB\Procedures\CreateClient.sql
+		..\DB\Procedures\CreateClientAddress.sql = ..\DB\Procedures\CreateClientAddress.sql
+		..\DB\Procedures\GetAddressForUser.sql = ..\DB\Procedures\GetAddressForUser.sql
+		..\DB\Procedures\GetCitiesById.sql = ..\DB\Procedures\GetCitiesById.sql
+		..\DB\Procedures\GetRoleById.sql = ..\DB\Procedures\GetRoleById.sql
+		..\DB\Procedures\SelectClientById.sql = ..\DB\Procedures\SelectClientById.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15A2C2CC-210C-4340-A870-AEBD7000C209}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15A2C2CC-210C-4340-A870-AEBD7000C209}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15A2C2CC-210C-4340-A870-AEBD7000C209}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15A2C2CC-210C-4340-A870-AEBD7000C209}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A132076E-F1ED-4C88-A58A-B978DE3BF869}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A132076E-F1ED-4C88-A58A-B978DE3BF869}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A132076E-F1ED-4C88-A58A-B978DE3BF869}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A132076E-F1ED-4C88-A58A-B978DE3BF869}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3901583B-F0B2-4FF6-B966-37A24B912033}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3901583B-F0B2-4FF6-B966-37A24B912033}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3901583B-F0B2-4FF6-B966-37A24B912033}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3901583B-F0B2-4FF6-B966-37A24B912033}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1DC361A-C250-49C4-A091-1DF33A29A53C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1DC361A-C250-49C4-A091-1DF33A29A53C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1DC361A-C250-49C4-A091-1DF33A29A53C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1DC361A-C250-49C4-A091-1DF33A29A53C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1236E3D1-FBDA-460A-9265-4823569F8946} = {5B6A03BF-13E9-4C51-B488-25EEE3A1E970}
+		{02957A9E-3AB0-4C0A-8837-BE1414D52655} = {5B6A03BF-13E9-4C51-B488-25EEE3A1E970}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7449C75C-AE35-4FCB-AC5B-EF73B7B1064C}
+	EndGlobalSection
+EndGlobal

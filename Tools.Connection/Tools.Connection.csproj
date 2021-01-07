@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Morre Thierry</Authors>
+    <Company>Cognitic</Company>
+    <Product>Tools.Connection</Product>
+    <Description>Package créant un proxy de connection base de données pour Sql Server</Description>
+    <Copyright>Morre Thierry ©2020</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+</Project>

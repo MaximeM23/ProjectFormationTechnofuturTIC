@@ -1,0 +1,11 @@
+CREATE PROCEDURE GetRoleById
+	@Id INT
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	SELECT IdRole,RoleName
+	FROM [Role]
+	WHERE IdRole = @Id
+END
+GO

@@ -1,0 +1,163 @@
+CREATE DATABASE WineSellingProject
+
+USE WineSellingProject
+GO
+
+CREATE TABLE [Role](
+IdRole INT NOT NULL IDENTITY,
+RoleName NVARCHAR(50) NOT NULL
+CONSTRAINT PK_Role PRIMARY KEY(IdRole),
+CONSTRAINT U_RoleName UNIQUE(RoleName))
+
+CREATE TABLE Client(
+IdClient INT NOT NULL IDENTITY,
+Firstname NVARCHAR(50) NOT NULL,
+Lastname NVARCHAR(50) NOT NULL,
+EmailAddress NVARCHAR(100) NOT NULL,
+[Password] NVARCHAR(MAX) NOT NULL,
+Salt NVARCHAR(8) NOT NULL,
+PhoneNumber NVARCHAR(20) NOT NULL,
+BirthDate DATE NOT NULL, 
+Active BIT NOT NULL, 
+IdRole INT NOT NULL,
+CONSTRAINT PK_Client PRIMARY KEY(IdClient),
+CONSTRAINT FK_Role_Client FOREIGN KEY(IdRole) REFERENCES [Role](IdRole),
+CONSTRAINT U_EmailAddress_Client UNIQUE(EmailAddress));
+
+CREATE TABLE City(
+IdCity INT NOT NULL IDENTITY,
+CityName NVARCHAR(50) NOT NULL,
+PostalCode NVARCHAR(10) NOT NULL,
+Country NVARCHAR(50) NOT NULL,
+CONSTRAINT PK_City PRIMARY KEY(IdCity));
+
+CREATE TABLE [Address](
+IdAddress INT NOT NULL IDENTITY,
+Street NVARCHAR(50) NOT NULL,
+Number NVARCHAR(10) NOT NULL,
+IdCity INT NOT NULL,
+CONSTRAINT PK_Address PRIMARY KEY(IdAddress),
+CONSTRAINT FK_City_Address FOREIGN KEY(IdCity) REFERENCES City(IdCity));
+
+CREATE TABLE ClientAddress(
+IdClientAddress INT NOT NULL IDENTITY,
+IdAddress INT NOT NULL,
+IdClient INT NOT NULL,
+CONSTRAINT PK_ClientAddress PRIMARY KEY(IdClientAddress),
+CONSTRAINT FK_Address_ClientAddress FOREIGN KEY(IdAddress) REFERENCES [Address](IdAddress),
+CONSTRAINT FK_Client_ClientAddress FOREIGN KEY(IdClient) REFERENCES Client(IdClient),
+);
+
+CREATE TABLE [Provider](
+IdProvider INT NOT NULL IDENTITY,
+ProviderName NVARCHAR(50) NOT NULL,
+[Description] NVARCHAR(50) NOT NULL,
+[Password] NVARCHAR(MAX) NOT NULL,
+Salt NVARCHAR(8) NOT NULL,
+EmailAddress NVARCHAR(50) NOT NULL,
+PhoneNumber NVARCHAR(50) NOT NULL,
+CONSTRAINT PK_Provider PRIMARY KEY(IdProvider),
+CONSTRAINT U_EmailAddress_Provider UNIQUE(EmailAddress));
+
+CREATE TABLE ProviderAddress(
+IdAddress INT NOT NULL,
+IdProvider INT NOT NULL,
+CONSTRAINT PK_ProviderAddress PRIMARY KEY(IdAddress,IdProvider),
+CONSTRAINT FK_Address_ProviderAddress FOREIGN KEY(IdAddress) REFERENCES [Address](IdAddress),
+CONSTRAINT FK_Provider_ProviderAddress FOREIGN KEY(IdProvider) REFERENCES [Provider](IdProvider))
+
+CREATE TABLE Picture(
+IdPicture INT NOT NULL IDENTITY,
+NameUrl NVARCHAR(100) NOT NULL,
+CONSTRAINT PK_Picture PRIMARY KEY(IdPicture))
+
+CREATE TABLE ProviderPicture(
+IdProvider INT NOT NULL,
+IdPicture INT NOT NULL,
+CONSTRAINT PK_ProviderPicture PRIMARY KEY(IdProvider,IdPicture),
+CONSTRAINT FK_Provider_ProviderPicture FOREIGN KEY(IdProvider) REFERENCES [Provider](IdProvider),
+CONSTRAINT FK_Picture_ProviderPicture FOREIGN KEY(IdPicture) REFERENCES Picture(IdPicture))
+
+CREATE TABLE Advertisement(
+IdAdvertisement INT NOT NULL IDENTITY,
+[Description] TEXT NOT NULL,
+DatePublication DATETIME NOT NULL,
+IdProvider INT NOT NULL,
+IdPicture INT NOT NULL,
+CONSTRAINT PK_Advertisement PRIMARY KEY(IdAdvertisement),
+CONSTRAINT FK_Provider_Advertisement FOREIGN KEY(IdProvider) REFERENCES [Provider](IdProvider),
+CONSTRAINT FK_Picture_Advertisement FOREIGN KEY(IdPicture) REFERENCES Picture(IdPicture))
+
+CREATE TABLE Wine(
+IdWine INT NOT NULL IDENTITY,
+WineName NVARCHAR(50) NOT NULL,
+[Description] TEXT NOT NULL,
+[Year] INT NOT NULL,
+[Disabled] BIT NOT NULL,
+IdProvider INT NOT NULL,
+CONSTRAINT PK_Wine PRIMARY KEY(IdWine),
+CONSTRAINT FK_Provider_Wine FOREIGN KEY(IdProvider) REFERENCES [Provider](IdProvider))
+
+CREATE TABLE Tag(
+IdTag INT NOT NULL IDENTITY,
+TagName NVARCHAR(50) NOT NULL,
+CONSTRAINT PK_IdTag PRIMARY KEY(IdTag))
+
+CREATE TABLE Category(
+IdCategory INT NOT NULL IDENTITY,
+CategoryName NVARCHAR(50) NOT NULL,
+IdTag INT NOT NULL,
+CONSTRAINT PK_Category PRIMARY KEY(IdCategory),
+CONSTRAINT FK_Tag_Category FOREIGN KEY(IdTag) REFERENCES Tag(IdTag))
+
+CREATE TABLE WineCategory(
+IdWine INT NOT NULL,
+IdCategory INT NOT NULL,
+CONSTRAINT PK_WineCategory PRIMARY KEY(IdWine,IdCategory),
+CONSTRAINT FK_Wine_WineCategory FOREIGN KEY(IdWine) REFERENCES Wine(IdWine),
+CONSTRAINT FK_Category_WineCategory FOREIGN KEY(IdCategory) REFERENCES Category(IdCategory))
+
+CREATE TABLE Price(
+DateOfPrice DATETIME NOT NULL,
+IdWine INT NOT NULL,
+Price DECIMAL NOT NULL,
+CONSTRAINT PK_Price PRIMARY KEY(DateOfPrice,IdWine),
+CONSTRAINT FK_Wine_Price FOREIGN KEY(IdWine) REFERENCES Wine(IdWine))
+
+CREATE TABLE WinePicture(
+IdWine INT NOT NULL,
+IdPicture INT NOT NULL,
+CONSTRAINT PK_WinePicture PRIMARY KEY(IdWine,IdPicture),
+CONSTRAINT FK_Wine_WinePicture FOREIGN KEY(IdWine) REFERENCES Wine(IdWine),
+CONSTRAINT FK_Picture_WinePicture FOREIGN KEY(IdPicture) REFERENCES Picture(IdPicture))
+
+
+CREATE TABLE Command(
+IdCommand INT NOT NULL IDENTITY,
+DateOfCommand DATETIME NOT NULL,
+IdClientAddress INT NOT NULL,
+IdClient INT NOT NULL,
+CONSTRAINT PK_Command PRIMARY KEY(IdCommand),
+CONSTRAINT FK_ClientAddress_Command FOREIGN KEY(IdClientAddress) REFERENCES ClientAddress(IdClientAddress),
+CONSTRAINT FK_Client_Command FOREIGN KEY(IdClient) REFERENCES Client(IdClient))
+
+CREATE TABLE CommandWine(
+IdCommandWine INT NOT NULL IDENTITY,
+Quantity INT NOT NULL,
+IdWine INT NOT NULL,
+IdCommand INT NOT NULL,
+CONSTRAINT PK_CommandWine PRIMARY KEY(IdCommandWine),
+CONSTRAINT FK_Wine_CommandWine FOREIGN KEY(IdWine) REFERENCES Wine(IdWine),
+CONSTRAINT FK_Command_CommandWine FOREIGN KEY(IdCommand) REFERENCES Command(IdCommand),
+CONSTRAINT CK_QuantityGreaterThanZeroOrEquals CHECK(Quantity >= 0))
+
+CREATE TABLE Comment(
+IdComment INT NOT NULL IDENTITY,
+Comment TEXT NULL,
+Note TINYINT NOT NULL,
+IdClient INT NOT NULL,
+IdWine INT NOT NULL,
+CONSTRAINT PK_Comment PRIMARY KEY(IdComment),
+CONSTRAINT FK_Client_Comment FOREIGN KEY(IdClient) REFERENCES Client(IdClient),
+CONSTRAINT FK_Wine_Comment FOREIGN KEY(IdWine) REFERENCES Wine(IdWine),
+CONSTRAINT CK_NoteBetweenZeroAndFive CHECK(Note BETWEEN 0 AND 5))
