@@ -1,0 +1,41 @@
+
+<div class="container login-container">
+  <div class="row">
+      <div class="col-md-6 login-form-1">
+          <h3>Connexion</h3>
+          <form [formGroup]="loginForm" (ngSubmit)="OnLoginSubmit(loginForm.value)">
+              <div class="form-group">
+                  <input type="text" class="form-control" [formControl]="loginForm.controls['emailLog']" placeholder="Adresse email" value="" />
+              </div>
+              <div class="form-group">
+                  <input type="password" class="form-control" [formControl]="loginForm.controls['passwordLog']" placeholder="Mot de passe" value="" />
+              </div>
+              <div class="form-group centered">
+                  <input type="submit" class="btnSubmit" value="Se connecter" />
+              </div>
+              <div class="form-group centered">
+                  <a href="#" class="ForgetPwd">Mot de passe oublié</a>
+              </div>
+          </form>
+      </div>
+      <div class="col-md-6 login-form-2">
+          <h3>Inscription</h3><form [formGroup]="registerForm" (ngSubmit)="OnLoginSubmit(registerForm.value)">
+            <div class="form-group">
+                <input type="text" class="form-control" [formControl]="registerForm.controls['emailRegister']" placeholder="Adresse email" value="" />
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" [formControl]="registerForm.controls['passwordRegister']" placeholder="Mot de passe" value="" />
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" [formControl]="registerForm.controls['confPwdRegister']" placeholder="Confirmation du mot de passe" value="" />
+            </div>
+            <div class="form-group centered">
+                <input type="submit" class="btnSubmit" value="S'inscrire" />
+            </div>
+            <div class="form-group centered">
+                <a href="#" class="ForgetPwd">Mot de passe oublié</a>
+            </div>
+        </form>
+      </div>
+  </div>
+</div>

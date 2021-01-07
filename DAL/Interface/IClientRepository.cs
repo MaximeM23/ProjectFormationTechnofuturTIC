@@ -7,5 +7,6 @@ namespace DAL.Interface
 {
     public interface IClientRepository : IRepository<Client>
     {
+        Client GetClientByMailAndPasswordMatch(string email, string password);
     }
 }

@@ -18,5 +18,5 @@ export class DetailsClientComponent implements OnInit {
       this.client = this._clientMapper.jsonToClient(dt);
     })
   }
-
+  
 }
