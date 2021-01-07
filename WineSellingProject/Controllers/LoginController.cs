@@ -43,7 +43,7 @@ namespace WineSellingProject.Controllers
                 Username = clientFound.EmailAddress,
                 Role = clientFound.Role.RoleName
             });
-            return Ok(token);
+            return Ok(new { token });
         }
     }
 }

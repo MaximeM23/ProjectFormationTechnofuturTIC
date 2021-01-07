@@ -21,9 +21,9 @@ constructor(private _http: HttpClient) {
     return this._http.get(this.url+ "Client/"+id);
   }
   
-  registerClient(client: Client) : Subscribable<IClient>
-  {
-    return this._http.post<Client>()
+  logClient(credentials: any) : Subscribable<any>
+  {        
+    return this._http.post<any>(this.url +"Login/",credentials);    
   }
 
   // getHeroesByTagName(name: string): Subscribable<any> {
