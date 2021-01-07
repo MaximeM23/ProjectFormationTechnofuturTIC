@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
       {
         console.log(response);
         const token = (<any>response).token;
+        sessionStorage.setItem("jwt",token);
         this.invalidLogin = false;
         this.router.navigate(["/"]);
       }, err =>{
