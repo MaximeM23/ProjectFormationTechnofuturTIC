@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
     }
     this.clientService.logClient(credentials).subscribe(response =>
       {
-        console.log(response);
         const token = (<any>response).token;
         sessionStorage.setItem("jwt",token);
         this.invalidLogin = false;
