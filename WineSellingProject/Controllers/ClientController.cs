@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 using DTO.Service;
 using DTO.Interface;
 using DTO.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WineSellingProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ClientController : ControllerBase
     {
         IClientService _service;
