@@ -18,7 +18,6 @@ public jsonToClient(dt: any): Client
   this.tmpAddresses = dt["addresses"];
   for(let i =0; i < this.tmpAddresses.length;i++)
   {
-    console.log(dt["addresses"][i]);
     addresses.push(new Address(
       this.tmpAddresses[i]["id"],
       this.tmpAddresses[i]["street"],
