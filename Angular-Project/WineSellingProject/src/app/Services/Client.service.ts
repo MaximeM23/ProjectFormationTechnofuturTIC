@@ -4,6 +4,7 @@ import { connected } from 'process';
 import { Subscribable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IClient } from '../interfaces/IClient';
+import { Client } from '../Models/Client';
 import { LoggedInformation } from '../Models/LoggedInformation';
 import { SessionStorageService } from './session-storage.service';
 
@@ -31,11 +32,12 @@ export class ClientService {
   }
 
   getCurrentUser() : Subscribable<IClient>
-  { 
-    this._sessionService.recoverIdUser()
-    console.log();
-    return this._http.get(this.url + "Client/17");
+  {     
+    return this._http.get(this.url + "Client/"+ this._sessionService.recoverIdUser());
   }
   
+  UpdateClientInformation(Client: Client) : Subscribable<IClient> {
+    return this._http.put(this.url+"Client/" + this._sessionService.recoverIdUser(),Client);
+  }
 }
 

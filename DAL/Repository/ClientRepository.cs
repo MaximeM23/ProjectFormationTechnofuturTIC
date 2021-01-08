@@ -52,13 +52,25 @@ namespace DAL.Repository
             Connection.Command cmd = new Connection.Command("UpdateClient", true);
             cmd.AddParameter("@IdUser", newValue.Id);
             cmd.AddParameter("@fn", newValue.Firstname);
-            cmd.AddParameter("@ln", newValue.Firstname);
+            cmd.AddParameter("@ln", newValue.Lastname);
             cmd.AddParameter("@EmailAddress", newValue.EmailAddress);
             cmd.AddParameter("@Password", newValue.Password);
             cmd.AddParameter("@PhoneNumber", newValue.PhoneNumber);
             cmd.AddParameter("@BirthDate", newValue.BirthDate);
             if(_con.ExecuteNonQuery(cmd) > 0) return true;
             return false;
+        }
+        public bool UpdateClientWithoutPassword(Client newValue)
+        {
+            Connection.Command cmd = new Connection.Command("UpdateClientWithoutPassword", true);
+            cmd.AddParameter("@IdUser", newValue.Id);
+            cmd.AddParameter("@fn", newValue.Firstname);
+            cmd.AddParameter("@ln", newValue.Lastname);
+            cmd.AddParameter("@EmailAddress", newValue.EmailAddress);
+            cmd.AddParameter("@PhoneNumber", newValue.PhoneNumber);
+            cmd.AddParameter("@BirthDate", newValue.BirthDate);
+            _con.ExecuteNonQuery(cmd);
+            return true;            
         }
 
         public Client GetClientByMailAndPasswordMatch(string email, string password)

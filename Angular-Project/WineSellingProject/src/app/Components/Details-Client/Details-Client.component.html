@@ -2,25 +2,32 @@
 
   <form [formGroup]="profileForm" (ngSubmit)="OnProfilChangeSubmit(profileForm.value)">
       <div class="form-group">
+        <label for="firstname">Prénom</label>
         <input type="text" class="form-control" [formControl]="profileForm.controls['firstname']" placeholder="Prénom" value="" />
       </div>
       <div class="form-group">
+        <label for="lastname">Nom</label>
         <input type="text" class="form-control" [formControl]="profileForm.controls['lastname']" placeholder="Nom" value="" />
       </div>
       <div class="form-group">
+        <label for="birthDate">Date de naissance</label>
           <input type="date" class="form-control" [formControl]="profileForm.controls['birthDate']" placeholder="Date de naissance" value="" />
       </div>
       <div class="form-group">
+        <label for="phoneNumber">Numéro de téléphone</label>
           <input type="text" class="form-control" [formControl]="profileForm.controls['phoneNumber']" placeholder="Numéro de téléphone" value="" />
       </div>
       <div class="form-group">
+        <label for="email">Email</label>
         <input type="email" class="form-control" [formControl]="profileForm.controls['email']" placeholder="Adresse email" value="" />
       </div>
       <div class="form-group">
+          <label for="password">Mot de passe</label>
           <input type="password" class="form-control" [formControl]="profileForm.controls['password']" placeholder="Mot de passe" value="" />
       </div>
       <div class="form-group">
-          <input type="password" class="form-control" [formControl]="profileForm.controls['confirmPassword']" placeholder="confirmation du mot de passe" value="" />
+        <label for="confirmPassword">Confirmation du mot de passe</label>
+          <input type="password" class="form-control" [formControl]="profileForm.controls['confirmPassword']" placeholder="Confirmation du mot de passe" value="" />
       </div> 
       <div class="form-group centered text-center">
           <input type="submit" class="btnSubmit btn-danger pr-4 pl-4 pt-2 pb-2" value="Modifier mes informations " />

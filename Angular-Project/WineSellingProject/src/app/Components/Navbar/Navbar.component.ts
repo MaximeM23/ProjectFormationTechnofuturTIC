@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ClientService } from 'src/app/Services/Client.service';
+import { SessionStorageService } from 'src/app/Services/session-storage.service';
 
 @Component({
   selector: 'app-Navbar',
@@ -11,13 +12,14 @@ import { ClientService } from 'src/app/Services/Client.service';
 export class NavbarComponent implements OnInit {
 
   constructor(private _clientService: ClientService,
-              private _router: Router) { }
+              private _router: Router,
+              private _sessionService : SessionStorageService) { }
 
   ngOnInit() {
   }
 
   userIsConnected(): boolean {
-    return this._clientService.connectedClient != null
+    return this._sessionService.recoverIdUser() != null;
   }
 
   userLoggout() : void {

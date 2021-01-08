@@ -90,5 +90,10 @@ namespace DTO.Service
             }
             return true;
         }
+
+        public bool UpdateClientWithoutPassword(Client client)
+        {
+            return _clientRepo.UpdateClientWithoutPassword(client.ClientDALToClientDTO());
+        }
     }
 }

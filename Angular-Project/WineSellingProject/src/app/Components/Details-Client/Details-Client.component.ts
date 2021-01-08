@@ -4,6 +4,7 @@ import { Form, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms
 import { Client } from 'src/app/Models/Client';
 import { ClientService } from 'src/app/Services/Client.service';
 import { ClientMapperService } from 'src/app/Services/Mappers/ClientMapper.service';
+import { SessionStorageService } from 'src/app/Services/session-storage.service';
 
 @Component({
   selector: 'app-Details-Client',
@@ -13,7 +14,7 @@ import { ClientMapperService } from 'src/app/Services/Mappers/ClientMapper.servi
 })
 export class DetailsClientComponent implements OnInit {
   client: Client;
-  constructor(private _clientService: ClientService, private _clientMapper: ClientMapperService, private _formBuilder: FormBuilder, private _datepipe: DatePipe) { }
+  constructor(private _sessionService: SessionStorageService,private _clientService: ClientService, private _clientMapper: ClientMapperService, private _formBuilder: FormBuilder, private _datepipe: DatePipe) { }
   profileForm: FormGroup;
   ngOnInit() {
     this.profileForm = this._formBuilder.group({
@@ -41,21 +42,26 @@ export class DetailsClientComponent implements OnInit {
   }
 
   OnProfilChangeSubmit(value: NgForm): boolean{
-    if(value.value('password').value != value.value('confirmPassword')) return false;
-    passwordChanged : Boolean;
-    client : Client;
-    if((this.profileForm.controls["password"].dirty) && (this.profileForm.controls["confirmPassword"].dirty))
+    
+    if((value["password"].dirty) && (value["confirmPassword"].dirty))
     {
+      if(value['password'].value != value['confirmPassword']) return false;
       // Modification with password
     }
     else {
       // modification without password  
-      this.client.Firstname =   this.profileForm.controls["firstname"].value;
-      this.client.Lastname =    this.profileForm.controls["lastname"].value;
-      this.client.BirthDate =   this.profileForm.controls["birthDate"].value;      
-      this.client.PhoneNumber = this.profileForm.controls["phoneNumber"].value;
-      this.client.EmailAddress =this.profileForm.controls["email"].value;
-      this.client.Firstname =   this.profileForm.controls["firstname"].value;      
+      this.client.Firstname =   value["firstname"];
+      this.client.Lastname =    value["lastname"];
+      this.client.BirthDate =   value["birthDate"];      
+      this.client.PhoneNumber = value["phoneNumber"];
+      this.client.EmailAddress =value["email"];
+      this.client.Firstname =   value["firstname"];
+      this._clientService.UpdateClientInformation(this.client).subscribe(dt =>
+        {
+          //TODO need to pass data recover from user here
+          //this._sessionService.updateSessionInformation();
+        }
+        );      
     }
     return true;
   }

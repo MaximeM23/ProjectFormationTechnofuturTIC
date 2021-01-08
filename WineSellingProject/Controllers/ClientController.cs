@@ -43,7 +43,14 @@ namespace WineSellingProject.Controllers
         [HttpPut("{Id}")]
         public IActionResult Update([FromBody] Client client)
         {
-            return Ok(_service.Update(client));
+            if((client.Password == "") || (client.Password == null))
+            {
+                return Ok(_service.UpdateClientWithoutPassword(client));
+            }
+            else
+            {
+                return Ok(_service.Update(client));
+            }
         }
     }
 }
