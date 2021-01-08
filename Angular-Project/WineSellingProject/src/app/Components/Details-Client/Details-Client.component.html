@@ -1,3 +1,30 @@
 <p>
   {{client | json}}
 </p>
+<form [formGroup]="profile" (ngSubmit)="OnProfilChangeSubmit(profile.value)">
+  <div class="form-group">
+    <div class="form-group">
+      <input type="text" class="form-control" [formControl]="profile.controls['firstname']" placeholder="Mot de passe" value="" />
+    </div>
+    <div class="form-group">
+        <input type="date" class="form-control" [formControl]="profile.controls['BirthDate']" placeholder="Mot de passe" value="" />
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" [formControl]="profile.controls['phoneNumber']" placeholder="Mot de passe" value="" />
+    </div>
+      <input type="text" class="form-control" [formControl]="profile.controls['email']" placeholder="Adresse email" value="" />
+  </div>
+  <div class="form-group">
+      <input type="password" class="form-control" [formControl]="profile.controls['password']" placeholder="Mot de passe" value="" />
+  </div>
+  <div class="form-group">
+      <input type="password" class="form-control" [formControl]="profile.controls['confirmPassword']" placeholder="confirmation du mot de passe" value="" />
+  </div> 
+  <div class="form-group centered">
+      <input type="submit" class="btnSubmit" value="Se connecter" />
+  </div>
+  
+  <div class="form-group centered">
+      <a href="#" class="ForgetPwd">Mot de passe oublié</a>
+  </div>
+</form>

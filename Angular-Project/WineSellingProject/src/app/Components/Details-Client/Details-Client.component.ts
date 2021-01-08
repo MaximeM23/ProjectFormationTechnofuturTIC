@@ -13,10 +13,10 @@ export class DetailsClientComponent implements OnInit {
   constructor(private _clientService: ClientService, private _clientMapper: ClientMapperService) { }
 
   ngOnInit() {
-    this._clientService.getUserById(17).subscribe((dt) =>
-    {
+    this._clientService.getUserById(this._clientService.connectedClient.userId).subscribe((dt) =>
+    {      
       this.client = this._clientMapper.jsonToClient(dt);
-    })
+    });
   }
   
 }

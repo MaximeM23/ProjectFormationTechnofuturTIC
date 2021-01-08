@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoggedInformation } from 'src/app/Models/LoggedInformation';
 import { ClientService } from 'src/app/Services/Client.service';
+import { LogginClientService } from 'src/app/Services/LogginClient.service';
+import jwt_decode from "../../../../node_modules/jwt-decode"
 
 @Component({
   selector: 'app-Login',
@@ -13,10 +16,12 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   registerForm: FormGroup;
   invalidLogin: boolean;
+  decrypted_token: any;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private clientService: ClientService) { }
+              private clientService: ClientService,
+              private logService: LogginClientService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -36,12 +41,17 @@ export class LoginComponent implements OnInit {
       'emailAddress': form["emailLog"],
       'password': form["passwordLog"]      
     }
-    this.clientService.logClient(credentials).subscribe(response =>
+    this.logService.logClient(credentials).subscribe(response =>
       {
         const token = (<any>response).token;
         sessionStorage.setItem("jwt",token);
         this.invalidLogin = false;
-        this.router.navigate(["/"]);
+        this.decrypted_token = jwt_decode(token);
+        this.clientService.connectedClient = new LoggedInformation(
+          this.decrypted_token["UserId"],
+          this.decrypted_token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
+          this.decrypted_token["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]); 
+        this.router.navigate(["/accueil"]);
       }, err =>{
         this.invalidLogin = true;       
       });
