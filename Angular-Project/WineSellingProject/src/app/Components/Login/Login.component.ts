@@ -50,7 +50,10 @@ export class LoginComponent implements OnInit {
         this.clientService.connectedClient = new LoggedInformation(
           this.decrypted_token["UserId"],
           this.decrypted_token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
-          this.decrypted_token["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"]); 
+          this.decrypted_token["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],
+          this.decrypted_token["exp"]
+          );           
+        sessionStorage.setItem("userInfo",JSON.stringify(this.clientService.connectedClient));
         this.router.navigate(["/accueil"]);
       }, err =>{
         this.invalidLogin = true;       
