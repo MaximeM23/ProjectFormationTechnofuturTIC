@@ -63,10 +63,8 @@ export class DetailsClientComponent implements OnInit {
             if(dt != null)
             {
               this._sessionService.updateSessionInformation(dt);
-              this.successUpdate = true;
-            }
-            //TODO need to pass data recover from user here
-            //this._sessionService.updateSessionInformation();
+              this.successUpdate = true;  
+            }           
           }
           );      
       }
