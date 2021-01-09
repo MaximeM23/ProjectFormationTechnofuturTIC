@@ -8,6 +8,7 @@ using DTO.Service;
 using DTO.Interface;
 using DTO.Models;
 using Microsoft.AspNetCore.Authorization;
+using Token.Tools;
 
 namespace WineSellingProject.Controllers
 {
@@ -17,9 +18,11 @@ namespace WineSellingProject.Controllers
     public class ClientController : ControllerBase
     {
         IClientService _service;
+        protected TokenManager _tokenManager { get; }
 
-        public ClientController(IClientService service)
+        public ClientController(TokenManager tokenManager, IClientService service)
         {
+            _tokenManager = tokenManager;
             _service = service;
         }
 
@@ -43,7 +46,35 @@ namespace WineSellingProject.Controllers
         [HttpPut("{Id}")]
         public IActionResult Update([FromBody] Client client)
         {
-            return Ok(_service.Update(client));
+            if((client.Password == "") || (client.Password == null))
+            {
+                if (_service.UpdateClientWithoutPassword(client))
+                {
+
+                    string token = _tokenManager.GenerateToken(new TokenData()
+                    {
+                        UserId = client.Id,
+                        Username = client.EmailAddress,
+                        Role = client.Role.RoleName
+                    });
+                    return Ok(new { token });
+                }
+                return Ok("Failed to update");
+            }
+            else
+            {
+                if (_service.Update(client))
+                {
+                    string token = _tokenManager.GenerateToken(new TokenData()
+                    {
+                        UserId = client.Id,
+                        Username = client.EmailAddress,
+                        Role = client.Role.RoleName
+                    });
+                    return Ok(new { token });
+                }
+                return Ok("Failed to update");
+            }
         }
     }
 }

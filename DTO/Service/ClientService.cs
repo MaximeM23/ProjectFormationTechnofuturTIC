@@ -38,8 +38,11 @@ namespace DTO.Service
         public Client GetClientByMailAndPasswordMatch(string email, string password)
         {
             Client baseClient = _clientRepo.GetClientByMailAndPasswordMatch(email, password).ClientDTOToClientDAO();
-            baseClient.Role = new Role();            
-            baseClient.Role = _roleRepo.GetOne(baseClient.IdRole).RoleDTOToRoleDAO();
+            if(baseClient != null)
+            {
+                baseClient.Role = new Role();            
+                baseClient.Role = _roleRepo.GetOne(baseClient.IdRole).RoleDTOToRoleDAO();
+            }
             return baseClient;
         }
 
@@ -89,6 +92,11 @@ namespace DTO.Service
                 _addressRepo.Update(address.AddressDAOToAddressDTO());
             }
             return true;
+        }
+
+        public bool UpdateClientWithoutPassword(Client client)
+        {
+            return _clientRepo.UpdateClientWithoutPassword(client.ClientDALToClientDTO());
         }
     }
 }

@@ -1,9 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { connected } from 'process';
 import { Subscribable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IClient } from '../interfaces/IClient';
 import { Client } from '../Models/Client';
+import { LoggedInformation } from '../Models/LoggedInformation';
+import { SessionStorageService } from './session-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,23 +14,30 @@ import { Client } from '../Models/Client';
 export class ClientService {
 
   private url = environment.apiUrl;
+  private _connectedClient : LoggedInformation;
+  get connectedClient(): LoggedInformation{
+    return this._connectedClient;
+  }
+  set connectedClient(value: LoggedInformation){
+    this._connectedClient = value;
+  }
 
-constructor(private _http: HttpClient) { 
+  constructor(private _http: HttpClient, private _sessionService: SessionStorageService) { 
 
   }
   
   getUserById(id: number): Subscribable<IClient>
   {    
-    return this._http.get(this.url+ "Client/"+id,);
-  }
-  
-  logClient(credentials: any) : Subscribable<any>
-  {        
-    return this._http.post<any>(this.url +"Login/",credentials);    
+    return this._http.get(this.url+ "Client/"+id);
   }
 
-  // getHeroesByTagName(name: string): Subscribable<any> {
-  //   return this._http.get(this.url + '/search/' + name);
-  // }
+  getCurrentUser() : Subscribable<IClient>
+  {     
+    return this._http.get(this.url + "Client/"+ this._sessionService.recoverIdUser());
+  }
+  
+  UpdateClientInformation(Client: Client) : Subscribable<any> {
+    return this._http.put(this.url+"Client/" + this._sessionService.recoverIdUser(),Client);
+  }
 }
 

@@ -11,5 +11,7 @@ namespace DTO.Interface
         Client GetUserWithAllInformationById(int id);
 
         Client GetClientByMailAndPasswordMatch(string email, string password);
+
+        bool UpdateClientWithoutPassword(Client client);
     }
 }
