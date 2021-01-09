@@ -36,7 +36,7 @@ export class ClientService {
     return this._http.get(this.url + "Client/"+ this._sessionService.recoverIdUser());
   }
   
-  UpdateClientInformation(Client: Client) : Subscribable<IClient> {
+  UpdateClientInformation(Client: Client) : Subscribable<any> {
     return this._http.put(this.url+"Client/" + this._sessionService.recoverIdUser(),Client);
   }
 }

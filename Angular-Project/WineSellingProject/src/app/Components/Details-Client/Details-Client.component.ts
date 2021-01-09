@@ -14,6 +14,7 @@ import { SessionStorageService } from 'src/app/Services/session-storage.service'
 })
 export class DetailsClientComponent implements OnInit {
   client: Client;
+  successUpdate: boolean;
   constructor(private _sessionService: SessionStorageService,private _clientService: ClientService, private _clientMapper: ClientMapperService, private _formBuilder: FormBuilder, private _datepipe: DatePipe) { }
   profileForm: FormGroup;
   ngOnInit() {
@@ -35,35 +36,43 @@ export class DetailsClientComponent implements OnInit {
         birthDate: this._formBuilder.control(this._datepipe.transform(this.client.BirthDate,"yyyy-MM-dd"),[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),
         phoneNumber: this._formBuilder.control(this.client.PhoneNumber,[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),
         email: this._formBuilder.control(this.client.EmailAddress,[Validators.required, Validators.email,Validators.minLength(3),Validators.maxLength(50)]),
-        password: this._formBuilder.control('',[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),
-        confirmPassword: this._formBuilder.control('',[Validators.required,Validators.minLength(3),Validators.maxLength(50)])
+        password: this._formBuilder.control(''),
+        confirmPassword: this._formBuilder.control('')
       });
     });
   }
 
   OnProfilChangeSubmit(value: NgForm): boolean{
-    
-    if((value["password"].dirty) && (value["confirmPassword"].dirty))
-    {
-      if(value['password'].value != value['confirmPassword']) return false;
-      // Modification with password
+    if(this.profileForm.valid){
+
+      if((value["password"].dirty) && (value["confirmPassword"].dirty))
+      {
+        if(value['password'].value != value['confirmPassword']) return false;
+        // Modification with password
+      }
+      else {
+        // modification without password  
+        this.client.Firstname =   value["firstname"];
+        this.client.Lastname =    value["lastname"];
+        this.client.BirthDate =   value["birthDate"];      
+        this.client.PhoneNumber = value["phoneNumber"];
+        this.client.EmailAddress =value["email"];
+        this.client.Firstname =   value["firstname"];
+        this._clientService.UpdateClientInformation(this.client).subscribe(dt =>
+          {
+            if(dt != null)
+            {
+              this._sessionService.updateSessionInformation(dt);
+              this.successUpdate = true;
+            }
+            //TODO need to pass data recover from user here
+            //this._sessionService.updateSessionInformation();
+          }
+          );      
+      }
+      return true;
     }
-    else {
-      // modification without password  
-      this.client.Firstname =   value["firstname"];
-      this.client.Lastname =    value["lastname"];
-      this.client.BirthDate =   value["birthDate"];      
-      this.client.PhoneNumber = value["phoneNumber"];
-      this.client.EmailAddress =value["email"];
-      this.client.Firstname =   value["firstname"];
-      this._clientService.UpdateClientInformation(this.client).subscribe(dt =>
-        {
-          //TODO need to pass data recover from user here
-          //this._sessionService.updateSessionInformation();
-        }
-        );      
-    }
-    return true;
+    return false;
   }
   
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Subscribable } from 'rxjs';
 import jwt_decode from "../../../node_modules/jwt-decode";
 import { LoggedInformation } from '../Models/LoggedInformation';
 import { ClientService } from './Client.service';
@@ -22,9 +23,8 @@ export class SessionStorageService {
     return null;
   }
 
-  updateSessionInformation(response : any): void {
+  updateSessionInformation(response : any) {
     //TODO: need to recover the full use in order to regenerate the token
-    console.log(response);
     const token = (<any>response).token;
     sessionStorage.setItem("jwt",token);
     this.decrypted_token = jwt_decode(token);
@@ -34,7 +34,6 @@ export class SessionStorageService {
       this.decrypted_token["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],
       this.decrypted_token["exp"]
       );           
-      console.log(dt);
     sessionStorage.setItem("userInfo",JSON.stringify(dt));
   }
 

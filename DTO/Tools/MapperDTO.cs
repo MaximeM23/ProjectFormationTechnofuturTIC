@@ -42,6 +42,7 @@ namespace DTO.Tools
 
         public static DTO.Models.Client ClientDTOToClientDAO(this DAL.Models.Client client)
         {
+            if (client == null) return null;
             return new DTO.Models.Client
             {
                 Id = client.Id,

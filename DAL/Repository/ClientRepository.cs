@@ -70,7 +70,7 @@ namespace DAL.Repository
             cmd.AddParameter("@PhoneNumber", newValue.PhoneNumber);
             cmd.AddParameter("@BirthDate", newValue.BirthDate);
             _con.ExecuteNonQuery(cmd);
-            return true;            
+            return true;
         }
 
         public Client GetClientByMailAndPasswordMatch(string email, string password)

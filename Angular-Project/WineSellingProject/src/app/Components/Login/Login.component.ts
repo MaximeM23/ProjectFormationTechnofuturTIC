@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   registerForm: FormGroup;
   invalidLogin: boolean;
   decrypted_token: any;
+  errorMsg : string;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -56,7 +57,8 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem("userInfo",JSON.stringify(this.clientService.connectedClient));
         this.router.navigate(["/accueil"]);
       }, err =>{
-        this.invalidLogin = true;       
+        this.invalidLogin = true;      
+        this.errorMsg = "Email ou mot de passe invalide";
       });
   }
 
