@@ -67,21 +67,7 @@ namespace DTO.Service
 
         public int Insert(Client Value)
         {
-            int idClientAddress = 0;
-            int idAddress = 0;
-            int idClient = 0;
-            idClient = _clientRepo.Insert(Value.ClientDALToClientDTO());
-            foreach(Address a in Value.Addresses)
-            {
-                idAddress = _addressRepo.Insert(a.AddressDAOToAddressDTO());
-                DAL.Models.ClientAddress clientAddress = new DAL.Models.ClientAddress()
-                {
-                    IdAddress = idAddress,
-                    IdClient = idClient
-                };
-                idClientAddress = _clientAddressRepo.Insert(clientAddress);
-            }
-            return ((idClientAddress > 0) && (idClient > 0) && (idAddress > 0)) ? 1 : 0;
+            return _clientRepo.Insert(Value.ClientDALToClientDTO());
         }
 
         public bool Update(Client Value)

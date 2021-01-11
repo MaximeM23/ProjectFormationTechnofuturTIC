@@ -22,7 +22,7 @@
           </form>
       </div>
       <div class="col-md-6 login-form-2">
-          <h3>Inscription</h3><form [formGroup]="registerForm" (ngSubmit)="OnLoginSubmit(registerForm.value)">
+          <h3>Inscription</h3><form [formGroup]="registerForm" (ngSubmit)="OnRegisterSubmit(registerForm.value)">
             <div class="form-group">
                 <input type="text" class="form-control" [formControl]="registerForm.controls['emailRegister']" placeholder="Adresse email" value="" />
             </div>

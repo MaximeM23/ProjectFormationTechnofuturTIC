@@ -96,7 +96,7 @@ namespace DAL.Tools
                 Lastname = reader["Lastname"].ToString(),
                 PhoneNumber = reader["PhoneNumber"].ToString(),
                 EmailAddress = reader["EmailAddress"].ToString(),
-                BirthDate = (DateTime)reader["BirthDate"],
+                BirthDate = (reader["BirthDate"] != DBNull.Value) ? (DateTime?)reader["BirthDate"] : null,
                 Disabled = (bool)reader["Active"],
                 IdRole = (int)reader["IdRole"]               
             };

@@ -19,13 +19,9 @@ namespace DAL.Repository
 
         public int Insert(Client value)
         {
-            Connection.Command cmd = new Connection.Command("CreateClient", true);
-            cmd.AddParameter("@fn", value.Firstname);
-            cmd.AddParameter("@ln", value.Firstname);
-            cmd.AddParameter("@EmailAddress", value.EmailAddress);
+            Connection.Command cmd = new Connection.Command("RegisterClient", true);
+            cmd.AddParameter("@Email", value.EmailAddress);
             cmd.AddParameter("@Password", value.Password);
-            cmd.AddParameter("@PhoneNumber", value.PhoneNumber);
-            cmd.AddParameter("@BirthDate", value.BirthDate);
             return (int)_con.ExecuteScalar(cmd);
         }
 

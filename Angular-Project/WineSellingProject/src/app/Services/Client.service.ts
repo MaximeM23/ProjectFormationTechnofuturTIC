@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { IClient } from '../interfaces/IClient';
 import { Client } from '../Models/Client';
 import { LoggedInformation } from '../Models/LoggedInformation';
+import { RegisterClient } from '../Models/RegisterClient';
 import { SessionStorageService } from './session-storage.service';
 
 @Injectable({
@@ -38,6 +39,10 @@ export class ClientService {
   
   UpdateClientInformation(Client: Client) : Subscribable<any> {
     return this._http.put(this.url+"Client/" + this._sessionService.recoverIdUser(),Client);
+  }
+
+  RegisterClient(Client: RegisterClient) : Subscribable<RegisterClient>{
+    return this._http.post(this.url + "Client",Client)
   }
 }
 

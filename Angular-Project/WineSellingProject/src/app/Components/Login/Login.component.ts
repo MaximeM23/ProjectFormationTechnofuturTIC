@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoggedInformation } from 'src/app/Models/LoggedInformation';
+import { RegisterClient } from 'src/app/Models/RegisterClient';
 import { ClientService } from 'src/app/Services/Client.service';
 import { LogginClientService } from 'src/app/Services/LogginClient.service';
 import jwt_decode from "../../../../node_modules/jwt-decode"
@@ -60,6 +61,35 @@ export class LoginComponent implements OnInit {
         this.invalidLogin = true;      
         this.errorMsg = "Email ou mot de passe invalide";
       });
+  }
+/*
+  OnRegister(insertedId: number): void {
+    this.logService.logClient(credentials).subscribe(response =>
+      {
+        const token = (<any>response).token;
+        sessionStorage.setItem("jwt",token);
+        this.invalidLogin = false;
+        this.decrypted_token = jwt_decode(token);
+        this.clientService.connectedClient = new LoggedInformation(
+          this.decrypted_token["UserId"],
+          this.decrypted_token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
+          this.decrypted_token["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],
+          this.decrypted_token["exp"]
+          );           
+        sessionStorage.setItem("userInfo",JSON.stringify(this.clientService.connectedClient));
+        this.router.navigate(["/accueil"]);
+      }, err =>{
+        this.invalidLogin = true;      
+        this.errorMsg = "Email ou mot de passe invalide";
+      });
+  }*/
+
+  OnRegisterSubmit(form : NgForm) : void{          
+    this.clientService.RegisterClient(new RegisterClient(form['emailRegister'],form['passwordRegister'])).subscribe(
+      dt => {
+        console.log(dt);
+      }
+    );
   }
 
 }
