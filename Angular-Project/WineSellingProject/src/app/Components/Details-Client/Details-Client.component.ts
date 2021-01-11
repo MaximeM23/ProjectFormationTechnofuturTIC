@@ -35,22 +35,38 @@ export class DetailsClientComponent implements OnInit {
       this.profileForm = this._formBuilder.group({
         firstname: this._formBuilder.control(this.client.Firstname,[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),
         lastname: this._formBuilder.control(this.client.Lastname,[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),
-        birthDate: this._formBuilder.control(this._datepipe.transform(this.client.BirthDate,"yyyy-MM-dd"),[Validators.required, DateValidatorMinLength, DateValidatorMinLength]),
+        birthDate: this._formBuilder.control(this._datepipe.transform(this.client.BirthDate,"yyyy-MM-dd"),[Validators.required]),
         phoneNumber: this._formBuilder.control(this.client.PhoneNumber,[Validators.required,Validators.minLength(8),Validators.maxLength(50)]),
         email: this._formBuilder.control(this.client.EmailAddress,[Validators.required, Validators.email,Validators.minLength(3),Validators.maxLength(50)]),
-        password: this._formBuilder.control('', [PasswordValidatorMaxLength, PasswordValidatorMinLength]),
-        confirmPassword: this._formBuilder.control('',[PasswordValidatorMaxLength, PasswordValidatorMinLength])
+        password: this._formBuilder.control(''),//[PasswordValidatorMaxLength, PasswordValidatorMinLength]),
+        confirmPassword: this._formBuilder.control('')//,[PasswordValidatorMaxLength, PasswordValidatorMinLength])
       });
     });
   }
 
   OnProfilChangeSubmit(value: NgForm): boolean{
-    if(this.profileForm.valid){
-
-      if((value["password"].dirty) && (value["confirmPassword"].dirty))
+    if(this.profileForm.valid){     
+      if((this.profileForm.controls["password"].dirty) && (this.profileForm.controls["confirmPassword"].dirty))
       {
-        if(value['password'].value != value['confirmPassword']) return false;
-        // Modification with password
+        if(value['password'] != value['confirmPassword']) return false;
+        console.log(value['password'])
+        this.client.Firstname =   value["firstname"];
+        this.client.Lastname =    value["lastname"];
+        this.client.BirthDate =   value["birthDate"];      
+        this.client.PhoneNumber = value["phoneNumber"];    
+        this.client.Password =    value["password"];
+        this.client.EmailAddress =value["email"];
+        this.client.Firstname =   value["firstname"];
+        
+        this._clientService.UpdateClientInformation(this.client).subscribe(dt =>
+          {
+            if(dt != null)
+            {
+              this._sessionService.updateSessionInformation(dt);
+              this.successUpdate = true;  
+            }           
+          }
+          );      
       }
       else {
         // modification without password  

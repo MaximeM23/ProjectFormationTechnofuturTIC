@@ -1,10 +1,12 @@
 import { FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 
-export const PasswordValidatorMaxLength: ValidatorFn = (control: FormGroup): ValidationErrors => {
-  return  control.dirty && control.value.length > 50 ? { 'maxLength' : true} : { 'maxLength' : false } 
+export const PasswordValidatorMaxLength: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+  if(control.value.length == 0) return { 'maxLength' : false}
+  return  control.dirty && control.value.length > 50 ? { 'maxLength' : true} : null 
 };
 
 export const PasswordValidatorMinLength: ValidatorFn = (control: FormGroup): ValidationErrors => {
-  return  control.dirty && control.value.length < 3 ? { 'minLength' : true} : { 'minLength' : false } 
+  if(control.value.length == 0) return { 'minLength' : false}
+  return  control.dirty && control.value.length < 3 ? { 'minLength' : true} : null 
 };
 
