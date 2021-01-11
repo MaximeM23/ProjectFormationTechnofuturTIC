@@ -5,6 +5,8 @@ import { Client } from 'src/app/Models/Client';
 import { ClientService } from 'src/app/Services/Client.service';
 import { ClientMapperService } from 'src/app/Services/Mappers/ClientMapper.service';
 import { SessionStorageService } from 'src/app/Services/session-storage.service';
+import { DateValidatorMinLength } from 'src/app/Services/Validators/dateValidator';
+import { PasswordValidatorMaxLength, PasswordValidatorMinLength } from 'src/app/Services/Validators/passwordValidator';
 
 @Component({
   selector: 'app-Details-Client',
@@ -33,11 +35,11 @@ export class DetailsClientComponent implements OnInit {
       this.profileForm = this._formBuilder.group({
         firstname: this._formBuilder.control(this.client.Firstname,[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),
         lastname: this._formBuilder.control(this.client.Lastname,[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),
-        birthDate: this._formBuilder.control(this._datepipe.transform(this.client.BirthDate,"yyyy-MM-dd"),[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),
-        phoneNumber: this._formBuilder.control(this.client.PhoneNumber,[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),
+        birthDate: this._formBuilder.control(this._datepipe.transform(this.client.BirthDate,"yyyy-MM-dd"),[Validators.required, DateValidatorMinLength, DateValidatorMinLength]),
+        phoneNumber: this._formBuilder.control(this.client.PhoneNumber,[Validators.required,Validators.minLength(8),Validators.maxLength(50)]),
         email: this._formBuilder.control(this.client.EmailAddress,[Validators.required, Validators.email,Validators.minLength(3),Validators.maxLength(50)]),
-        password: this._formBuilder.control(''),
-        confirmPassword: this._formBuilder.control('')
+        password: this._formBuilder.control('', [PasswordValidatorMaxLength, PasswordValidatorMinLength]),
+        confirmPassword: this._formBuilder.control('',[PasswordValidatorMaxLength, PasswordValidatorMinLength])
       });
     });
   }
