@@ -5,6 +5,7 @@ import { LoggedInformation } from 'src/app/Models/LoggedInformation';
 import { RegisterClient } from 'src/app/Models/RegisterClient';
 import { ClientService } from 'src/app/Services/Client.service';
 import { LogginClientService } from 'src/app/Services/LogginClient.service';
+import { PasswordValidatorMaxLength, PasswordValidatorMinLength } from 'src/app/Services/Validators/passwordValidator';
 import jwt_decode from "../../../../node_modules/jwt-decode"
 
 @Component({
@@ -33,8 +34,8 @@ export class LoginComponent implements OnInit {
 
     this.registerForm = this.formBuilder.group({
       emailRegister: this.formBuilder.control('',[Validators.required, Validators.email,Validators.minLength(3)]),
-      passwordRegister: this.formBuilder.control('',[Validators.required,Validators.minLength(3)]),
-      confPwdRegister: this.formBuilder.control('',[Validators.required,Validators.minLength(3)])
+      passwordRegister: this.formBuilder.control('',[Validators.required, PasswordValidatorMaxLength, PasswordValidatorMinLength]),
+      confPwdRegister: this.formBuilder.control('',[Validators.required, PasswordValidatorMaxLength, PasswordValidatorMinLength])
     });
   }
 
