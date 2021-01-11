@@ -4,7 +4,7 @@
       <div class="form-group">
         <label for="firstname">Prénom</label>
         <input type="text" class="form-control" [formControl]="profileForm.controls['firstname']" placeholder="Prénom" value="" />
-        <!-- Here goes validations error messages -->
+        <!-- Here goes validations errors messages -->
         <div *ngIf="profileForm.controls['firstname'].invalid && (profileForm.controls['firstname'].dirty || profileForm.controls['firstname'].touched)" class="alert alert-danger">
           <div *ngIf="profileForm.controls['firstname'].errors.required">
             Le prénom est requis
@@ -20,6 +20,7 @@
       <div class="form-group">
         <label for="lastname">Nom</label>
         <input type="text" class="form-control" [formControl]="profileForm.controls['lastname']" placeholder="Nom" value="" />
+        <!-- Here goes validations errors messages -->
         <div *ngIf="profileForm.controls['lastname'].invalid && (profileForm.controls['lastname'].dirty || profileForm.controls['lastname'].touched)" class="alert alert-danger">
           <div *ngIf="profileForm.controls['lastname'].errors.required">
             Le nom est requis
@@ -27,7 +28,7 @@
           <div *ngIf="profileForm.controls['lastname'].errors.minlength">
             Le nom doit comprendre au minimum {{profileForm.controls['lastname'].errors.minlength.requiredLength}} caractères.
           </div>  
-          <div *ngIf="profileForm.controls['firstname'].errors.maxlength">
+          <div *ngIf="profileForm.controls['lastname'].errors.maxlength">
             Le nom doit comprendre au maximum {{profileForm.controls['lastname'].errors.maxlength.requiredLength }} caractères.
           </div>        
         </div>
@@ -35,6 +36,7 @@
       <div class="form-group">
         <label for="birthDate">Date de naissance</label>
           <input type="date" class="form-control" [formControl]="profileForm.controls['birthDate']" placeholder="Date de naissance" value="" />
+          <!-- Here goes validations errors messages -->
           <div *ngIf="profileForm.controls['birthDate'].invalid && (profileForm.controls['birthDate'].dirty || profileForm.controls['birthDate'].touched)" class="alert alert-danger">
             <div *ngIf="profileForm.controls['birthDate'].errors.required">
               La date de naissance est requise
@@ -50,6 +52,7 @@
       <div class="form-group">
         <label for="phoneNumber">Numéro de téléphone</label>
           <input type="text" class="form-control" [formControl]="profileForm.controls['phoneNumber']" placeholder="Numéro de téléphone" value="" />
+          <!-- Here goes validations errors messages -->
           <div *ngIf="profileForm.controls['phoneNumber'].invalid && (profileForm.controls['phoneNumber'].dirty || profileForm.controls['phoneNumber'].touched)" class="alert alert-danger">
             <div *ngIf="profileForm.controls['phoneNumber'].errors.required">
               Le numéro de téléphone est requis
@@ -65,6 +68,7 @@
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" class="form-control" [formControl]="profileForm.controls['email']" placeholder="Adresse email" value="" />
+        <!-- Here goes validations errors messages -->
         <div *ngIf="profileForm.controls['email'].invalid && (profileForm.controls['email'].dirty || profileForm.controls['email'].touched)" class="alert alert-danger">
           <div *ngIf="profileForm.controls['email'].errors.required">
             L'email est requis.
@@ -80,6 +84,7 @@
       <div class="form-group">
           <label for="password">Mot de passe</label>
           <input type="password" class="form-control" [formControl]="profileForm.controls['password']" placeholder="Mot de passe" value="" />
+          <!-- Here goes validations errors messages -->
           <div *ngIf="(profileForm.controls['password'].dirty)">            
             <div *ngIf="profileForm.controls['password'].errors?.minLength" class="alert alert-danger">
               Le mot de passe doit comprendre au minimum 3 caractères.
@@ -92,6 +97,7 @@
       <div class="form-group">
         <label for="confirmPassword">Confirmation du mot de passe</label>
           <input type="password" class="form-control" [formControl]="profileForm.controls['confirmPassword']" placeholder="Confirmation du mot de passe" value="" />
+          <!-- Here goes validations errors messages -->
           <div *ngIf="(profileForm.controls['confirmPassword'].dirty)">
             <div *ngIf="profileForm.controls['confirmPassword'].errors?.minlength" class="alert alert-danger">
               La confirmation du mot de passe doit comprendre au minimum 3 caractères.
