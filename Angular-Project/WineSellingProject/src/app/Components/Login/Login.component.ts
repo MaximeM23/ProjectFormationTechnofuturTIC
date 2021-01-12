@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoggedInformation } from 'src/app/Models/LoggedInformation';
 import { RegisterClient } from 'src/app/Models/RegisterClient';
-import { ClientService } from 'src/app/Services/Client.service';
+import { ClientService } from 'src/app/Services/ClientService/Client.service';
 import { LogginClientService } from 'src/app/Services/LogginClient.service';
 import { PasswordValidatorMaxLength, PasswordValidatorMinLength } from 'src/app/Services/Validators/passwordValidator';
 import jwt_decode from "../../../../node_modules/jwt-decode"

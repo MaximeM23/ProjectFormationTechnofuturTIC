@@ -1,6 +1,7 @@
+import { IAddress } from "../interfaces/IAddress";
 import { City } from "./City";
 
-export class Address {
+export class Address implements IAddress{
     
     Id: number;
     Street: string;

@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Client } from 'src/app/Models/Client';
-import { ClientService } from 'src/app/Services/Client.service';
+import { ClientService } from 'src/app/Services/ClientService/Client.service';
 import { ClientMapperService } from 'src/app/Services/Mappers/ClientMapper.service';
 import { SessionStorageService } from 'src/app/Services/session-storage.service';
 import { DateValidatorMinLength } from 'src/app/Services/Validators/dateValidator';

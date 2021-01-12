@@ -73,7 +73,7 @@ namespace DAL.Tools
             {
                 Id = (int)reader["IdCity"],
                 CityName = (string)reader["CityName"],
-                PostalCode = (string)reader["PostalCode"],
+                PostalCode = (reader["PostalCode"] != DBNull.Value) ? (string)reader["PostalCode"] : null ,
                 Country = (string)reader["Country"]
             };
         }

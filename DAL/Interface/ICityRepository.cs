@@ -7,5 +7,6 @@ namespace DAL.Interface
 {
     public interface ICityRepository : IRepository<City>
     {
+        IEnumerable<City> GetCityByCountryName(string Country);
     }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ClientService } from 'src/app/Services/Client.service';
+import { ClientService } from 'src/app/Services/ClientService/Client.service';
 import { SessionStorageService } from 'src/app/Services/session-storage.service';
 
 @Component({

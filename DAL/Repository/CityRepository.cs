@@ -49,5 +49,12 @@ namespace DAL.Repository
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<City> GetCityByCountryName(string Country)
+        {
+            Connection.Command cmd = new Connection.Command("GetCitiesByCountryName", true);
+            cmd.AddParameter("@name", Country);
+            return _con.ExecuteReader(cmd, Mapper.CityToDAO);
+        }
     }
 }

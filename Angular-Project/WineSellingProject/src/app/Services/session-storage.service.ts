@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subscribable } from 'rxjs';
 import jwt_decode from "../../../node_modules/jwt-decode";
 import { LoggedInformation } from '../Models/LoggedInformation';
-import { ClientService } from './Client.service';
+import { ClientService } from './ClientService/Client.service';
 
 @Injectable({
   providedIn: 'root'
