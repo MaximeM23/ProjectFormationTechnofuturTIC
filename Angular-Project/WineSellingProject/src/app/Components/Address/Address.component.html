@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-12 pl-4">    
+      <h4 class="text-center mb-4">Vos adresses</h4>
+      
+      <div *ngFor="let address of addresses; let index = index" class="bg-white card mb-4 border shadow">
+          <div class="p-4">
+              <h6 class="mb-1 text-secondary text-center">Adresse n°{{index + 1}}</h6>
+              <p>
+                {{address.Street}}, {{address.Number}}
+              </p>
+              <p>
+                {{address.City.Country}},{{address.City.CityName}}, {{address.City.PostalCode}}
+              </p>  
+              <div class="d-flex flex-nowrap bd-highlight">
+                <div class="order-1 p-2 bd-highlight"><button class="btn btn-primary">Modifier</button></div>
+                <div class="order-2 p-2 bd-highlight"><button class="btn btn-danger">Supprimer</button></div>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+</div>

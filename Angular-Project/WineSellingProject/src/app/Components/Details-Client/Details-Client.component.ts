@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Address } from 'src/app/Models/Address';
 import { Client } from 'src/app/Models/Client';
 import { ClientService } from 'src/app/Services/ClientService/Client.service';
 import { ClientMapperService } from 'src/app/Services/Mappers/ClientMapper.service';
@@ -15,7 +16,12 @@ import { PasswordUpdateValidatorMaxLength, PasswordUpdateValidatorMinLength, Pas
   providers:[DatePipe]
 })
 export class DetailsClientComponent implements OnInit {
+
   client: Client;
+  get getClientAddresses(): Address[] {
+    return this.client.Addresses;
+  }
+
   successUpdate: boolean;
   constructor(private _sessionService: SessionStorageService,private _clientService: ClientService, private _clientMapper: ClientMapperService, private _formBuilder: FormBuilder, private _datepipe: DatePipe) { }
   profileForm: FormGroup;
@@ -40,7 +46,7 @@ export class DetailsClientComponent implements OnInit {
         email: this._formBuilder.control(this.client.EmailAddress,[Validators.required, Validators.email,Validators.minLength(3),Validators.maxLength(50)]),
         password: this._formBuilder.control('',[PasswordUpdateValidatorMaxLength, PasswordUpdateValidatorMinLength]),
         confirmPassword: this._formBuilder.control('',[PasswordValidatorMaxLength, PasswordValidatorMinLength])
-      });
+      });      
     });
   }
 
