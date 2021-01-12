@@ -47,50 +47,27 @@ export class LoginComponent implements OnInit {
     }
     this.logService.logClient(credentials).subscribe(response =>
       {
-        const token = (<any>response).token;
-        sessionStorage.setItem("jwt",token);
-        this.invalidLogin = false;
-        this.decrypted_token = jwt_decode(token);
-        this.clientService.connectedClient = new LoggedInformation(
-          this.decrypted_token["UserId"],
-          this.decrypted_token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
-          this.decrypted_token["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],
-          this.decrypted_token["exp"]
-          );           
-        sessionStorage.setItem("userInfo",JSON.stringify(this.clientService.connectedClient));
-        this.router.navigate(["/accueil"]);
+        this.EncodingTokenInSession(response);
       }, err =>{
         this.invalidLogin = true;      
         this.errorMsg = "Email ou mot de passe invalide";
       });
   }
-/*
-  OnRegister(insertedId: number): void {
-    this.logService.logClient(credentials).subscribe(response =>
-      {
-        const token = (<any>response).token;
-        sessionStorage.setItem("jwt",token);
-        this.invalidLogin = false;
-        this.decrypted_token = jwt_decode(token);
-        this.clientService.connectedClient = new LoggedInformation(
-          this.decrypted_token["UserId"],
-          this.decrypted_token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
-          this.decrypted_token["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],
-          this.decrypted_token["exp"]
-          );           
-        sessionStorage.setItem("userInfo",JSON.stringify(this.clientService.connectedClient));
-        this.router.navigate(["/accueil"]);
-      }, err =>{
-        this.invalidLogin = true;      
-        this.errorMsg = "Email ou mot de passe invalide";
-      });
-  }*/
+
+  OnRegister(insertedId: number): void {   
+  }
 
   OnRegisterSubmit(form : NgForm) : void{   
     this.clientService.RegisterClient(new RegisterClient(form['emailRegister'],form['passwordRegister'])).subscribe(
-      dt => {
-        console.log("test");
-        console.log(dt);
+      dt => {            
+        const credentials = {
+          'emailAddress': form["emailRegister"],
+          'password': form["passwordRegister"]      
+        }
+        this.logService.logClient(credentials).subscribe(response =>
+          {
+            this.EncodingTokenInSession(response);
+          });
       },
       error => {
         if(error["error"]["text"]){
@@ -98,6 +75,21 @@ export class LoginComponent implements OnInit {
         }
       }
     );
+  }
+
+  private EncodingTokenInSession(response: any) : void {    
+    const token = (<any>response).token;
+    sessionStorage.setItem("jwt",token);
+    this.invalidLogin = false;
+    this.decrypted_token = jwt_decode(token);
+    this.clientService.connectedClient = new LoggedInformation(
+      this.decrypted_token["UserId"],
+      this.decrypted_token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
+      this.decrypted_token["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],
+      this.decrypted_token["exp"]
+      );           
+    sessionStorage.setItem("userInfo",JSON.stringify(this.clientService.connectedClient));
+    this.router.navigate(["/accueil"]);
   }
 
 }

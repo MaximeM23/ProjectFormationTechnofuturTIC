@@ -81,7 +81,7 @@ namespace DAL.Repository
         {
             Connection.Command cmd = new Connection.Command("FindEmail", true);
             cmd.AddParameter("@email", email);
-            int exist = (int)_con.ExecuteScalar(cmd);
+            int? exist = (int?)_con.ExecuteScalar(cmd);
             if (exist > 0) return true;
             return false;
         }
