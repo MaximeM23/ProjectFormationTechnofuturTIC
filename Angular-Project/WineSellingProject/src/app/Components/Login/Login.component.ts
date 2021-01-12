@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   invalidLogin: boolean;
   decrypted_token: any;
   errorMsg : string;
+  emailExist: boolean;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -85,10 +86,16 @@ export class LoginComponent implements OnInit {
       });
   }*/
 
-  OnRegisterSubmit(form : NgForm) : void{          
+  OnRegisterSubmit(form : NgForm) : void{   
     this.clientService.RegisterClient(new RegisterClient(form['emailRegister'],form['passwordRegister'])).subscribe(
       dt => {
+        console.log("test");
         console.log(dt);
+      },
+      error => {
+        if(error["error"]["text"]){
+          this.emailExist = true;
+        }
       }
     );
   }

@@ -44,5 +44,6 @@ export class ClientService {
   RegisterClient(Client: RegisterClient) : Subscribable<RegisterClient>{
     return this._http.post(this.url + "Client",Client)
   }
+
 }
 

@@ -29,7 +29,12 @@ namespace DTO.Service
         {
             return false;
         }
-        
+
+        public bool FindEmail(string email)
+        {
+            return _clientRepo.FindEmail(email);
+        }
+
         public IEnumerable<Client> GetAll()
         {
             return _clientRepo.GetAll().Select(x => x.ClientDTOToClientDAO());

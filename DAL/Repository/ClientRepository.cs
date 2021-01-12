@@ -76,5 +76,14 @@ namespace DAL.Repository
             cmd.AddParameter("@password", password);
             return _con.ExecuteReader(cmd, Mapper.ClientToDAO).SingleOrDefault();
         }
+
+        public bool FindEmail(string email)
+        {
+            Connection.Command cmd = new Connection.Command("FindEmail", true);
+            cmd.AddParameter("@email", email);
+            int exist = (int)_con.ExecuteScalar(cmd);
+            if (exist > 0) return true;
+            return false;
+        }
     }
 }

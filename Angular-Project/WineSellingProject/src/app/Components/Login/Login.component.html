@@ -29,10 +29,13 @@
                  <!-- Here goes validations errors messages -->
                 <div *ngIf="(registerForm.controls['emailRegister'].dirty)">
                     <div *ngIf="registerForm.controls['emailRegister'].errors?.minlength" class="alert alert-danger">
-                    L'email doit comprendre au minimum 3 caractères.
+                        L'email doit comprendre au minimum 3 caractères.
                     </div>  
                     <div *ngIf="registerForm.controls['emailRegister'].errors?.maxLength" class="alert alert-danger">
-                    L'email doit comprendre au maximum 50 caractères.
+                        L'email doit comprendre au maximum 50 caractères.
+                    </div>
+                    <div *ngIf="emailExist" class="alert alert-danger">
+                        L'email existe déjà, veuillez en choisir une autre
                     </div>
                 </div>
             </div>

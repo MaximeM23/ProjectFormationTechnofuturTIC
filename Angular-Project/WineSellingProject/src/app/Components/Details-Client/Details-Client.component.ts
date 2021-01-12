@@ -6,7 +6,7 @@ import { ClientService } from 'src/app/Services/Client.service';
 import { ClientMapperService } from 'src/app/Services/Mappers/ClientMapper.service';
 import { SessionStorageService } from 'src/app/Services/session-storage.service';
 import { DateValidatorMinLength } from 'src/app/Services/Validators/dateValidator';
-import { PasswordValidatorMaxLength, PasswordValidatorMinLength } from 'src/app/Services/Validators/passwordValidator';
+import { PasswordUpdateValidatorMaxLength, PasswordUpdateValidatorMinLength, PasswordValidatorMaxLength, PasswordValidatorMinLength } from 'src/app/Services/Validators/passwordValidator';
 
 @Component({
   selector: 'app-Details-Client',
@@ -38,8 +38,8 @@ export class DetailsClientComponent implements OnInit {
         birthDate: this._formBuilder.control(this._datepipe.transform(this.client.BirthDate,"yyyy-MM-dd"),[Validators.required]),
         phoneNumber: this._formBuilder.control(this.client.PhoneNumber,[Validators.required,Validators.minLength(8),Validators.maxLength(50)]),
         email: this._formBuilder.control(this.client.EmailAddress,[Validators.required, Validators.email,Validators.minLength(3),Validators.maxLength(50)]),
-        password: this._formBuilder.control(''),//[PasswordValidatorMaxLength, PasswordValidatorMinLength]),
-        confirmPassword: this._formBuilder.control('')//,[PasswordValidatorMaxLength, PasswordValidatorMinLength])
+        password: this._formBuilder.control('',[PasswordUpdateValidatorMaxLength, PasswordUpdateValidatorMinLength]),
+        confirmPassword: this._formBuilder.control('',[PasswordValidatorMaxLength, PasswordValidatorMinLength])
       });
     });
   }

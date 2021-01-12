@@ -9,5 +9,6 @@ namespace DAL.Interface
     {
         Client GetClientByMailAndPasswordMatch(string email, string password);
         bool UpdateClientWithoutPassword(Client client);
+        bool FindEmail(string email);
     }
 }
