@@ -10,6 +10,7 @@ import { DetailsClientComponent } from './Components/Details-Client/Details-Clie
 import { LoginComponent } from './Components/Login/Login.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { TokenInterceptorService } from './Services/Interceptor/token-interceptor.service';
+import { AddressComponent } from './Components/Address/Address.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem("jwt");
@@ -20,7 +21,8 @@ export function tokenGetter() {
     AppComponent,
       NavbarComponent,
       DetailsClientComponent,
-      LoginComponent
+      LoginComponent,
+      AddressComponent
    ],
   imports: [
     BrowserModule,

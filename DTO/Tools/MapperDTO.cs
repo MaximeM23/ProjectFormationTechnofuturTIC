@@ -87,13 +87,24 @@ namespace DTO.Tools
             };
         }
 
-        public static DTO.Models.Role RoleDTOToRoleDAO(this DAL.Models.Role role)
+        public static DAL.Models.City CityDAOToCityDTO(this DTO.Models.City city)
         {
-            return new DTO.Models.Role(role.Id, role.RoleName);
+            return new DAL.Models.City
+            {
+                Id = city.Id,
+                CityName = city.CityName,
+                Country = city.Country,
+                PostalCode = city.PostalCode
+            };
         }
         public static DTO.Models.City CityDTOToCityDAO(this DAL.Models.City City)
         {
             return new DTO.Models.City(City.Id, City.CityName, City.PostalCode, City.Country);
+        }
+
+        public static DTO.Models.Role RoleDTOToRoleDAO(this DAL.Models.Role role)
+        {
+            return new DTO.Models.Role(role.Id, role.RoleName);
         }
         #endregion
 

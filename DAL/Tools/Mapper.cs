@@ -73,7 +73,7 @@ namespace DAL.Tools
             {
                 Id = (int)reader["IdCity"],
                 CityName = (string)reader["CityName"],
-                PostalCode = (string)reader["PostalCode"],
+                PostalCode = (reader["PostalCode"] != DBNull.Value) ? (string)reader["PostalCode"] : null ,
                 Country = (string)reader["Country"]
             };
         }
@@ -96,7 +96,7 @@ namespace DAL.Tools
                 Lastname = reader["Lastname"].ToString(),
                 PhoneNumber = reader["PhoneNumber"].ToString(),
                 EmailAddress = reader["EmailAddress"].ToString(),
-                BirthDate = (DateTime)reader["BirthDate"],
+                BirthDate = (reader["BirthDate"] != DBNull.Value) ? (DateTime?)reader["BirthDate"] : null,
                 Disabled = (bool)reader["Active"],
                 IdRole = (int)reader["IdRole"]               
             };

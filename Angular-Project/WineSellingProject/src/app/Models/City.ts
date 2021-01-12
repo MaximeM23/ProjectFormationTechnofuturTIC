@@ -1,4 +1,6 @@
-export class City {
+import { ICity } from "../interfaces/ICity";
+
+export class City implements ICity{
     Id: number;
     Country: string;
     PostalCode: string;

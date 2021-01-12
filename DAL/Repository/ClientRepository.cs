@@ -19,13 +19,9 @@ namespace DAL.Repository
 
         public int Insert(Client value)
         {
-            Connection.Command cmd = new Connection.Command("CreateClient", true);
-            cmd.AddParameter("@fn", value.Firstname);
-            cmd.AddParameter("@ln", value.Firstname);
-            cmd.AddParameter("@EmailAddress", value.EmailAddress);
+            Connection.Command cmd = new Connection.Command("RegisterClient", true);
+            cmd.AddParameter("@Email", value.EmailAddress);
             cmd.AddParameter("@Password", value.Password);
-            cmd.AddParameter("@PhoneNumber", value.PhoneNumber);
-            cmd.AddParameter("@BirthDate", value.BirthDate);
             return (int)_con.ExecuteScalar(cmd);
         }
 
@@ -79,6 +75,15 @@ namespace DAL.Repository
             cmd.AddParameter("@email", email);
             cmd.AddParameter("@password", password);
             return _con.ExecuteReader(cmd, Mapper.ClientToDAO).SingleOrDefault();
+        }
+
+        public bool FindEmail(string email)
+        {
+            Connection.Command cmd = new Connection.Command("FindEmail", true);
+            cmd.AddParameter("@email", email);
+            int? exist = (int?)_con.ExecuteScalar(cmd);
+            if (exist > 0) return true;
+            return false;
         }
     }
 }

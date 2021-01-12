@@ -9,8 +9,12 @@ CREATE PROCEDURE UpdateClient
 AS
 BEGIN
 	SET NOCOUNT ON;
+
+	DECLARE @salt NVARCHAR(8)
+	Set @salt = (SUBSTRING(CONVERT(NVARCHAR,RAND()),3,8));
+
 	UPDATE Client
-	SET BirthDate = @BirthDate, EmailAddress = @EmailAddress, Firstname = @fn, Lastname = @ln, [Password] = @Password, PhoneNumber = @PhoneNumber
+	SET BirthDate = @BirthDate, EmailAddress = @EmailAddress, Firstname = @fn, Lastname = @ln, [Password] = HASHBYTES('SHA2_512',@salt + @Password), PhoneNumber = @PhoneNumber, Salt = @salt
 	FROM Client
 	WHERE Client.IdClient = @IdUser
 END

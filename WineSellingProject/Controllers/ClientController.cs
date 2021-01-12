@@ -14,7 +14,6 @@ namespace WineSellingProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class ClientController : ControllerBase
     {
         IClientService _service;
@@ -38,14 +37,17 @@ namespace WineSellingProject.Controllers
             return Ok(_service.GetUserWithAllInformationById(id));
         }
 
-        [HttpPost]
+        [HttpPost]    
         public IActionResult Insert([FromBody] Client client)
         {
+            if (_service.FindEmail(client.EmailAddress)) return Ok("Email address already exist");
             return Ok(_service.Insert(client));
         }
+
         [HttpPut("{Id}")]
         public IActionResult Update([FromBody] Client client)
         {
+            if (_service.FindEmail(client.EmailAddress)) return Ok("Email address already exist");
             if((client.Password == "") || (client.Password == null))
             {
                 if (_service.UpdateClientWithoutPassword(client))

@@ -1,0 +1,10 @@
+CREATE PROCEDURE FindEmail
+	@email NVARCHAR(50)
+AS
+BEGIN
+	SET NOCOUNT ON;
+	SELECT IdClient
+	FROM Client
+	WHERE EmailAddress = @email
+END
+GO
