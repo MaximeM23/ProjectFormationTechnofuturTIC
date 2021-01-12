@@ -16,10 +16,12 @@ import { PasswordUpdateValidatorMaxLength, PasswordUpdateValidatorMinLength, Pas
   providers:[DatePipe]
 })
 export class DetailsClientComponent implements OnInit {
-
+    
   client: Client;
   get getClientAddresses(): Address[] {
-    return this.client.Addresses;
+    if(this.client.Addresses !== undefined){
+      return this.client.Addresses;
+    }
   }
 
   successUpdate: boolean;
