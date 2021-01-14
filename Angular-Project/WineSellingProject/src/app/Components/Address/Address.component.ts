@@ -76,7 +76,7 @@ export class AddressComponent implements OnInit {
       city: this._formBuilder.control('',[Validators.required]),
       country: this._formBuilder.control('',[Validators.required]),
       street: this._formBuilder.control('',[Validators.required]),
-      number: this._formBuilder.control('',[Validators.required,Validators.minLength(1),Validators.maxLength(50)]),
+      number: this._formBuilder.control('',[Validators.required,Validators.minLength(1),Validators.maxLength(8)]),
       postalCode: this._formBuilder.control('',[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),                  
     });
 
@@ -97,7 +97,6 @@ export class AddressComponent implements OnInit {
   }
 
   AddAddressToUser(value: NgForm): void {
-    console.log(value);
     this._addressService.InsertAddressForUser(new Address(0,
                                                           value.controls["street"].value,
                                                           value.controls["number"].value,
@@ -106,6 +105,7 @@ export class AddressComponent implements OnInit {
                                                           value.controls["city"].value)
                                                           ),this._sessionService.recoverIdUser()).subscribe(dt =>{
                                                             console.log(dt);
-                                                          })
+                                                          });
+    location.reload();
   }
 }
