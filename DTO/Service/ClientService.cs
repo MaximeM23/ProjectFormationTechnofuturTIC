@@ -30,9 +30,9 @@ namespace DTO.Service
             return false;
         }
 
-        public bool FindEmail(string email)
+        public bool FindEmail(string email, int idUser)
         {
-            return _clientRepo.FindEmail(email);
+            return _clientRepo.FindEmail(email, idUser);
         }
 
         public IEnumerable<Client> GetAll()

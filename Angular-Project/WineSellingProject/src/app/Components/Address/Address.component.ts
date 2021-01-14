@@ -41,7 +41,7 @@ export class AddressComponent implements OnInit {
   
 
   OnUpdate(id: number, form: NgForm) : void{
-
+    console.log(id, form);
   }
 
 
@@ -54,6 +54,14 @@ export class AddressComponent implements OnInit {
       number: this._formBuilder.control(address.Number,[Validators.required,Validators.minLength(8),Validators.maxLength(50)]),
       postalCode: this._formBuilder.control(address.City.PostalCode,[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),                  
     });
+
+    this._CityService.getCities(address.City.Country).subscribe(dt => {
+      this.cities = dt;
+    })
+    
+    this._CityService.getCP(address.City.CityName).subscribe(dt => {
+      this.postalCode = dt;
+    })
 
     this.Clicked = true;    
     this.UpdateShown = true;
