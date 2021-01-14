@@ -78,6 +78,21 @@ namespace DAL.Tools
             };
         }
 
+        public static string CountryToDAO(IDataReader reader)
+        {
+            return (string)reader["Country"];
+        }
+
+        public static string CityStringToDAO(IDataReader reader)
+        {
+            return (string)reader["CityName"];
+        }
+        public static string CpToDAO(IDataReader reader)
+        {
+            return (reader["PostalCode"] != DBNull.Value) ? (string)reader["PostalCode"] : null;
+        }
+
+
         public static Role RoleToDAO(IDataReader reader)
         {
             return new Role

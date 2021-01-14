@@ -1,0 +1,10 @@
+CREATE PROCEDURE GetCPByCityName
+	@name NVARCHAR(50)
+AS
+BEGIN
+
+	SELECT PostalCode
+	FROM City
+	WHERE CityName = @name
+END
+GO

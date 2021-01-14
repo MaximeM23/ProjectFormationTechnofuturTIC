@@ -101,6 +101,7 @@ namespace DTO.Tools
         {
             return new DTO.Models.City(City.Id, City.CityName, City.PostalCode, City.Country);
         }
+        
 
         public static DTO.Models.Role RoleDTOToRoleDAO(this DAL.Models.Role role)
         {

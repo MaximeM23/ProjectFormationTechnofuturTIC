@@ -25,6 +25,19 @@ namespace WineSellingProject.Controllers
         {
             return Ok(_service.GetCitiesByCountry(name));
         }
+        [HttpGet]
+        [Route("/api/Countries")]
+        public IActionResult GetCountries()
+        {
+            return Ok(_service.GetCountries());
+        }
+
+        [HttpGet]
+        [Route("/api/PostalCode/{name}")]
+        public IActionResult GetPostalCode(string name)
+        {
+            return Ok(_service.GetCPByCityName(name));
+        }
 
         [HttpGet]
         public IActionResult GetAll()

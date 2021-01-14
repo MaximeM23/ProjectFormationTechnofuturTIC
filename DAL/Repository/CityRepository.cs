@@ -50,11 +50,23 @@ namespace DAL.Repository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<City> GetCityByCountryName(string Country)
+        public IEnumerable<string> GetCityByCountryName(string Country)
         {
             Connection.Command cmd = new Connection.Command("GetCitiesByCountryName", true);
             cmd.AddParameter("@name", Country);
-            return _con.ExecuteReader(cmd, Mapper.CityToDAO);
+            return _con.ExecuteReader(cmd, Mapper.CityStringToDAO);
+        }
+        public IEnumerable<string> GetCPByCityName(string City)
+        {
+            Connection.Command cmd = new Connection.Command("GetCPByCityName", true);
+            cmd.AddParameter("@name", City);
+            return _con.ExecuteReader(cmd, Mapper.CpToDAO);
+        }
+
+        public IEnumerable<string> GetCountries()
+        {
+            Connection.Command cmd = new Connection.Command("GetCountries", true);
+            return _con.ExecuteReader(cmd, Mapper.CountryToDAO);
         }
     }
 }
