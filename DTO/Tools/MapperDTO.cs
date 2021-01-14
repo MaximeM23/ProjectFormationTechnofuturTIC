@@ -97,6 +97,25 @@ namespace DTO.Tools
                 PostalCode = city.PostalCode
             };
         }
+
+        public static DTO.Models.ClientAddress ClientAddressDTOToDAO(this DAL.Models.ClientAddress CA)
+        {
+            return new DTO.Models.ClientAddress()
+            {
+                Id = CA.Id,
+                IdAddress = CA.IdAddress,
+                IdClient = CA.IdClient
+            };
+        }
+        public static DAL.Models.ClientAddress ClientAddressDAOToDTO(this DTO.Models.ClientAddress CA)
+        {
+            return new DAL.Models.ClientAddress()
+            {
+                Id = CA.Id,
+                IdAddress = CA.IdAddress,
+                IdClient = CA.IdClient
+            };
+        }
         public static DTO.Models.City CityDTOToCityDAO(this DAL.Models.City City)
         {
             return new DTO.Models.City(City.Id, City.CityName, City.PostalCode, City.Country);

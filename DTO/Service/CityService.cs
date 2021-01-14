@@ -36,9 +36,14 @@ namespace DTO.Service
             return _cityRepo.GetCPByCityName(City).Select(x => x);
         }
 
+        public int GetIdByValues(string country, string cp, string city)
+        {
+            return _cityRepo.GetIdByValues(country, cp, city);
+        }
+
         public int Insert(City Value)
         {
-            throw new NotImplementedException();
+            return _cityRepo.Insert(Value.CityDAOToCityDTO());
         }
     }
 }

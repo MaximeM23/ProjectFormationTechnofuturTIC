@@ -13,5 +13,6 @@ namespace DTO.Interface
         IEnumerable<string> GetCountries();
 
         IEnumerable<string> GetCPByCityName(string City);
+        int GetIdByValues(string country, string cp, string city);
     }
 }

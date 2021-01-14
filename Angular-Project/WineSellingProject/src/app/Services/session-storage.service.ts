@@ -13,7 +13,7 @@ export class SessionStorageService {
 
   constructor() { }
 
-  recoverIdUser() : string{
+  recoverIdUser() : number{
     if(sessionStorage.getItem("userInfo") != null)
     {
       let idUser;

@@ -68,5 +68,13 @@ namespace DAL.Repository
             Connection.Command cmd = new Connection.Command("GetCountries", true);
             return _con.ExecuteReader(cmd, Mapper.CountryToDAO);
         }
+        public int GetIdByValues(string country, string cp, string city)
+        {
+            Connection.Command cmd = new Connection.Command("GetCityIdByValues", true);
+            cmd.AddParameter("@country", country);
+            cmd.AddParameter("@cp", cp);
+            cmd.AddParameter("@city", city);
+            return (int)_con.ExecuteScalar(cmd);
+        }
     }
 }

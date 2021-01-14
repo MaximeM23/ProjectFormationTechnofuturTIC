@@ -12,5 +12,6 @@ namespace DAL.Interface
         IEnumerable<string> GetCPByCityName(string City);
 
         IEnumerable<string> GetCountries();
+        int GetIdByValues(string country, string cp, string city);
     }
 }

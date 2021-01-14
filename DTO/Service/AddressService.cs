@@ -9,7 +9,7 @@ using DTO.Tools;
 
 namespace DTO.Service
 {
-    class AddressService : IAddressService
+    public class AddressService : IAddressService
     {
         private IAddressRepository _addressRepo;
         private ICityRepository _cityRepo;
@@ -37,6 +37,16 @@ namespace DTO.Service
         public IEnumerable<Address> GetAll()
         {
             throw new NotImplementedException();
+        }
+
+        public Address GetOne(int Id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Insert(Address Value)
+        {
+            return _addressRepo.Insert(Value.AddressDAOToAddressDTO());
         }
 
         public bool Update(Address Value)

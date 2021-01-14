@@ -1,4 +1,3 @@
-import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Address } from 'src/app/Models/Address';
@@ -6,6 +5,7 @@ import { City } from 'src/app/Models/City';
 import { AddressService } from 'src/app/Services/AddressService/Address.service';
 import { CityService } from 'src/app/Services/AddressService/City.service';
 import { CityMapper } from 'src/app/Services/Mappers/Mapper';
+import { SessionStorageService } from 'src/app/Services/session-storage.service';
 
 @Component({
   selector: 'app-Address',
@@ -24,27 +24,9 @@ export class AddressComponent implements OnInit {
   Clicked: boolean = false;
   UpdateShown: boolean = false;
   ClickedIndex : number;
-  constructor(private _CityMapper: CityMapper,private _CityService : CityService, private _formBuilder: FormBuilder) { }
+  constructor(private _sessionService: SessionStorageService, private _addressService: AddressService,private _CityMapper: CityMapper,private _CityService : CityService, private _formBuilder: FormBuilder) { }
 
-  ngOnInit() {/*
-      this._CityService.getAll().subscribe(dt => {
-        this.cities = this._CityMapper.jsonToCity(dt);
-        for(let i = 0; i < this.cities.length;i++)
-        {
-          if(!this.countries.find(x => x == this.cities[i].Country))
-          {
-            this.countries.push(this.cities[i].Country);
-          }
-          /*
-          if(!this.citiesString.find(x => x == this.cities[i].CityName))
-          {
-            this.citiesString.push(this.cities[i].CityName);
-          }
-          /*
-          if(!this.citiesString.find(x => x == this.cities[i].CityName))
-          {
-            this.citiesString.push(this.cities[i].CityName);
-          }*/
+  ngOnInit() {
       this._CityService.getCountries().subscribe(dt => {
         this.countries = dt;
       })
@@ -91,10 +73,10 @@ export class AddressComponent implements OnInit {
   AddformInsert(): void {
     this.ClickedForInsert = true;    
     this.addressForm = this._formBuilder.group({
-      city: this._formBuilder.control('',[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),
-      country: this._formBuilder.control('',[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),
+      city: this._formBuilder.control('',[Validators.required]),
+      country: this._formBuilder.control('',[Validators.required]),
       street: this._formBuilder.control('',[Validators.required]),
-      number: this._formBuilder.control('',[Validators.required,Validators.minLength(8),Validators.maxLength(50)]),
+      number: this._formBuilder.control('',[Validators.required,Validators.minLength(1),Validators.maxLength(50)]),
       postalCode: this._formBuilder.control('',[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),                  
     });
 
@@ -104,16 +86,26 @@ export class AddressComponent implements OnInit {
 
   }
   setSelectedCountry(value: HTMLSelectElement): void {
-    this._CityService.getCities(value.value).subscribe(dt => {
+    this._CityService.getCities(value.value.slice(3,value.value.length)).subscribe(dt => {
       this.cities = dt;
     })
   }
   setSelectedCity(value :HTMLSelectElement) : void {
-    this._CityService.getCP(value.value).subscribe(dt => {
-      console.log(dt);
+    this._CityService.getCP(value.value.slice(3,value.value.length)).subscribe(dt => {
       this.postalCode = dt;
     })
   }
 
-
+  AddAddressToUser(value: NgForm): void {
+    console.log(value);
+    this._addressService.InsertAddressForUser(new Address(0,
+                                                          value.controls["street"].value,
+                                                          value.controls["number"].value,
+                                                          new City(0,value.controls["country"].value,
+                                                          value.controls["postalCode"].value,
+                                                          value.controls["city"].value)
+                                                          ),this._sessionService.recoverIdUser()).subscribe(dt =>{
+                                                            console.log(dt);
+                                                          })
+  }
 }

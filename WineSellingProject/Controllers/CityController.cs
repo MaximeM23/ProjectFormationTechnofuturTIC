@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DTO.Interface;
+using DTO.Models;
 
 namespace WineSellingProject.Controllers
 {
