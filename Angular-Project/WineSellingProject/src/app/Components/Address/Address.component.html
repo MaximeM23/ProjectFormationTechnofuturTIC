@@ -18,8 +18,8 @@
           </div>
           <!------------------------------------------------------------------------------------------------------------------------------->
           <div class="p-4" id="{{index}}" *ngIf="Clicked  && (ClickedIndex == address.Id || ClickedIndex == null)" >
-            <h6 class="mb-1 text-secondary text-center">Adresse n°{{index + 1}}</h6>
-            <form [formGroup]="addressForm" (ngSubmit)="OnUpdate(index,addressForm.value)">
+            <h6 class="mb-1 text-secondary text-center">Modification de l'adresse n°{{index + 1}}</h6>
+            <form [formGroup]="addressForm" (ngSubmit)="OnUpdate(address.Id,addressForm.value)">
               <div class="form-group">                           
                 <select class="browser-default custom-select" #selectCountry (change)="setSelectedCountry(selectCountry)" [formControl]="addressForm.controls['country']">  
                   <option selected disabled></option>            

@@ -26,7 +26,10 @@ constructor(private _http: HttpClient) { }
   }
 
   InsertAddressForUser(address : Address, userId: number) :Subscribable<any> {  
-    console.log(address);  
     return this._http.post(this.url + "Address/" + userId ,address);
+  }
+
+  UpdateAddress(address: Address) : Subscribable<any> {
+    return this._http.put(this.url + "Address/",address);
   }
 }

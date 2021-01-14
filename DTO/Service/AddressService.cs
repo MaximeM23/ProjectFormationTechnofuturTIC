@@ -51,7 +51,7 @@ namespace DTO.Service
 
         public bool Update(Address Value)
         {
-            throw new NotImplementedException();
+            return _addressRepo.Update(Value.AddressDAOToAddressDTO());
         }
     }
 }

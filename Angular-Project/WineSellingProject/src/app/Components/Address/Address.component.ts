@@ -41,7 +41,17 @@ export class AddressComponent implements OnInit {
   
 
   OnUpdate(id: number, form: NgForm) : void{
-    console.log(id, form);
+    console.log(id, form["country"]);
+    this._addressService.UpdateAddress(new Address(id,
+                                                    form["street"],
+                                                    form["number"],
+                                                    new City(0,form["country"],
+                                                    form["postalCode"],
+                                                    form["city"])
+                    )).subscribe(dt =>{
+                      console.log(dt);
+            });
+      location.reload();
   }
 
 
