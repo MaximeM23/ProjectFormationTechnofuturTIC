@@ -18,6 +18,7 @@ export class AddressComponent implements OnInit {
   cities: City[] = []
   ClickedForInsert: boolean = false;  
   Clicked: boolean = false;
+  UpdateShown: boolean;
   ClickedIndex : number;
   constructor(private _CityMapper: CityMapper,private _CityService : CityService, private _formBuilder: FormBuilder) { }
 
@@ -42,7 +43,8 @@ export class AddressComponent implements OnInit {
 
 
   toggleFormUpdate(address: Address) : void {
-
+    this.ClickedIndex = address.Id;
+    this.UpdateShown = true;
     this.addressForm = this._formBuilder.group({
       city: this._formBuilder.control(address.City.CityName,[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),
       country: this._formBuilder.control(address.City.Country,[Validators.required,Validators.minLength(3),Validators.maxLength(50)]),
