@@ -12,6 +12,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { TokenInterceptorService } from './Services/Interceptor/token-interceptor.service';
 import { AddressComponent } from './Components/Address/Address.component';
 import { DetailsWineComponent } from './Components/Details-Wine/Details-Wine.component';
+import { ShoopingCartComponent } from './Components/Shooping-Cart/Shooping-Cart.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem("jwt");
@@ -24,7 +25,8 @@ export function tokenGetter() {
       DetailsClientComponent,
       LoginComponent,
       AddressComponent,
-      DetailsWineComponent
+      DetailsWineComponent,
+      ShoopingCartComponent
    ],
   imports: [
     BrowserModule,

@@ -27,6 +27,4 @@ export class NavbarComponent implements OnInit {
     this._clientService.connectedClient = null;
     this._router.navigate(["/accueil"]);
   }
-
-
 }
