@@ -2,15 +2,19 @@ import { Price } from "./Price";
 
 export class Wine {
     id: number;
+    wineName: string;
     disabled: boolean;
     prices: Price[];
     year: number;
+    description: string;
 
-    constructor(id: number, disabled: boolean, prices: Price[], year) {
+    constructor(id: number,wineName: string, disabled: boolean, prices: Price[], year, description: string) {
         this.id = id;
         this.disabled = disabled;
         this.prices = prices;
         this.year = year;
+        this.wineName = wineName;
+        this.description = description;
     }
 }
 

@@ -13,6 +13,7 @@ import { TokenInterceptorService } from './Services/Interceptor/token-intercepto
 import { AddressComponent } from './Components/Address/Address.component';
 import { DetailsWineComponent } from './Components/Details-Wine/Details-Wine.component';
 import { ShoopingCartComponent } from './Components/Shooping-Cart/Shooping-Cart.component';
+import { AccueilComponent } from './Components/Accueil/Accueil.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem("jwt");
@@ -26,7 +27,8 @@ export function tokenGetter() {
       LoginComponent,
       AddressComponent,
       DetailsWineComponent,
-      ShoopingCartComponent
+      ShoopingCartComponent,
+      AccueilComponent
    ],
   imports: [
     BrowserModule,

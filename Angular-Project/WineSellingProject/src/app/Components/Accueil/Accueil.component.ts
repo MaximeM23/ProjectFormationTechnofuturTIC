@@ -15,6 +15,7 @@ export class AccueilComponent implements OnInit {
   ngOnInit() {  
     this._wineService.getAllWine().subscribe(dt => {
       this.wineList = this._wineMapper.jsonToWine(dt);
+      console.log(this.wineList);
     });
   }
 }

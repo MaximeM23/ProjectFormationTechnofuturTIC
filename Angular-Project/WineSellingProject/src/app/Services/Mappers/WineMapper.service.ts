@@ -20,7 +20,7 @@ public jsonToWine(dt: any): Wine[]
     {
       prices.push(new Price(dt[i]["prices"][j]["priceWine"],dt[i]["prices"][j]["dateOfPrice"]))
     }
-    wines.push(new Wine(dt[i]["id"],dt[i]["disabled"],prices,dt[i]["year"]))
+    wines.push(new Wine(dt[i]["id"],dt[i]["wineName"],dt[i]["disabled"],prices,dt[i]["year"],dt[i]["description"]))
     prices = []
   }
   return wines;
