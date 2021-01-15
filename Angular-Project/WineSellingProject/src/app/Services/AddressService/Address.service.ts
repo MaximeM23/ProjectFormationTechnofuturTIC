@@ -32,4 +32,8 @@ constructor(private _http: HttpClient) { }
   UpdateAddress(address: Address) : Subscribable<any> {
     return this._http.put(this.url + "Address/",address);
   }
+
+  DeleteAddress(id : number) : Subscribable<any> {
+    return this._http.delete(this.url + "Address/"+id);
+  }
 }

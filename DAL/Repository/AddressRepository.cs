@@ -28,8 +28,8 @@ namespace DAL.Repository
 
         public int Delete(int value)
         {
-            Connection.Command cmd = new Connection.Command("DeleteAddressRepositoryById", true);
-            cmd.AddParameter("@Id", value);
+            Connection.Command cmd = new Connection.Command("DeleteAddress", true);
+            cmd.AddParameter("@IdAddress", value);
             return _con.ExecuteNonQuery(cmd);
         }
 

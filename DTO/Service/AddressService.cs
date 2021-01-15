@@ -21,7 +21,11 @@ namespace DTO.Service
 
         public bool Delete(int Id)
         {
-            throw new NotImplementedException();
+            if (_addressRepo.Delete(Id) > 0)
+            {
+                return true;
+            }
+            return false;
         }
 
         public IEnumerable<Address> GetAddressesByIdUser(int id)

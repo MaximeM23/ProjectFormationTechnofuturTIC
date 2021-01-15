@@ -13,7 +13,8 @@
               </p>  
               <div class="d-flex flex-nowrap bd-highlight">
                 <div class="order-1 p-2 bd-highlight"><button class="btn btn-primary border-light" (click)="toggleFormUpdate(addresses[index])" *ngIf="!UpdateShown">Modifier</button></div>
-                <div class="order-2 p-2 bd-highlight"><button class="btn btn-danger border-light" *ngIf="!UpdateShown">Supprimer</button></div>
+                <div class="order-2 p-2 bd-highlight"><button class="btn btn-danger border-light" *ngIf="!UpdateShown" (click)="RemoveAddress(address.Id)">Supprimer</button></div>
+                <span *ngIf="isVisible" id="{{address.Id}}"></span>
               </div>
           </div>
           <!------------------------------------------------------------------------------------------------------------------------------->

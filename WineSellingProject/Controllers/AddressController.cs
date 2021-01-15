@@ -58,5 +58,10 @@ namespace WineSellingProject.Controllers
             return Ok(_addressService.Update(value));
             
         }
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            return Ok(_addressService.Delete(id));
+        }
     }
 }

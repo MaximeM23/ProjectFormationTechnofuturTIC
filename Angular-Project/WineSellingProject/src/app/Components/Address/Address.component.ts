@@ -19,6 +19,8 @@ export class AddressComponent implements OnInit {
   cities: string[] = []
   countries: string[] = []
   postalCode: string[] = []
+  errorDeleteAddress : string;
+  isVisible : boolean;
 
   ClickedForInsert: boolean = false;  
   Clicked: boolean = false;
@@ -126,4 +128,13 @@ export class AddressComponent implements OnInit {
                                                           });
     location.reload();
   }
+
+  RemoveAddress(id : number): void {
+    this._addressService.DeleteAddress(id).subscribe(dt => {      
+      this.addresses.splice(this.addresses.findIndex(x => x.Id == id),1);  
+    },er => {
+      // display error message here
+    });  
+  }
+
 }
