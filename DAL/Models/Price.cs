@@ -6,9 +6,8 @@ namespace DAL.Models
 {
     public class Price
     {
-        public int Id { get; private set; }
-        public DateTime DateOfPrice { get; private set; }
-        public decimal PriceWine { get; private set; }
+        public DateTime DateOfPrice { get; set; }
+        public decimal PriceWine { get; set; }
 
     }
 }

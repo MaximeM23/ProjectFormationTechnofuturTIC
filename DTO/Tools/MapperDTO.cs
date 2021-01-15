@@ -128,5 +128,25 @@ namespace DTO.Tools
         }
         #endregion
 
+
+        public static DTO.Models.Wine WineDTOToWineDAO(this DAL.Models.Wine wine)
+        {
+            return new DTO.Models.Wine()
+            {
+                Description = wine.Description,
+                Id = wine.Id,
+                WineName = wine.WineName,
+                Year = wine.Year
+            };
+        }
+
+        public static DTO.Models.Price PriceDTOToWineDAO(this DAL.Models.Price price)
+        {
+            return new DTO.Models.Price()
+            {
+                DateOfPrice = price.DateOfPrice,
+                PriceWine = price.PriceWine
+            };
+        }
     }
 }

@@ -126,5 +126,25 @@ namespace DAL.Tools
                 IdAddress = (int)reader["IdAddress"]
             };
         }
+
+        public static Wine WineToDAO(IDataReader reader)
+        {
+            return new Wine
+            {
+                Description = (string)reader["Description"],
+                Id = (int)reader["IdWine"],
+                WineName = (string)reader["WineName"],
+                Year = (int)reader["Year"]
+            };
+        }
+
+        public static Price PriceToDAO(IDataReader reader)
+        {
+            return new Price
+            {
+                DateOfPrice = (DateTime)reader["DateOfPrice"],
+                PriceWine = (decimal)reader["Price"]
+            };
+        }
     }
 }
