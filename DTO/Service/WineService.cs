@@ -12,9 +12,11 @@ namespace DTO.Service
     public class WineService : IWineService
     {
         IWineRepository _wineRepository;
-        public WineService(IWineRepository wineRepository)
+        ICategoryRepository _categoryRepository;
+        public WineService(IWineRepository wineRepository, ICategoryRepository categoryRepository)
         {
             _wineRepository = wineRepository;
+            _categoryRepository = categoryRepository;
         }
         public bool Delete(int Id)
         {
@@ -31,6 +33,7 @@ namespace DTO.Service
                 {
                     w.Prices.Add(p);
                 }
+                w.Category = _categoryRepository.GetAllWineTypeCategory(w.Id, 1).Select(x => x.CategoryDTOToCategoryDAO()).ToList();
                 ListOfWines.Add(w);
             }
             return ListOfWines;

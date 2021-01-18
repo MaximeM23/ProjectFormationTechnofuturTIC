@@ -146,5 +146,14 @@ namespace DAL.Tools
                 PriceWine = (decimal)reader["Price"]
             };
         }
+
+        public static Category CategoryToDAO(IDataReader reader)
+        {
+            return new Category
+            {
+                CategoryName = (string)reader["CategoryName"],
+                IdTag = (int)reader["IdTag"]
+            };
+        }
     }
 }

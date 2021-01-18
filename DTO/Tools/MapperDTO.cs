@@ -148,5 +148,15 @@ namespace DTO.Tools
                 PriceWine = price.PriceWine
             };
         }
+
+        public static DTO.Models.Category CategoryDTOToCategoryDAO(this DAL.Models.Category Category)
+        {
+            return new DTO.Models.Category()
+            {
+                CategoryName = Category.CategoryName,
+                Id = Category.Id,
+                Tag = new Models.Tag(Category.IdTag, "")
+            };
+        }
     }
 }

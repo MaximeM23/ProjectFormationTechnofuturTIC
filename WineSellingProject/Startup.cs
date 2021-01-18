@@ -58,6 +58,7 @@ namespace WineSellingProject
             services.AddScoped<IClientAddressService, ClientAddressService>();
             services.AddScoped<IAddressService, AddressService>();
             services.AddScoped<IWineService, WineService>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             #endregion
             #region Repositories
             services.AddScoped<IClientRepository, ClientRepository>();
