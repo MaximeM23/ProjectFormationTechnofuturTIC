@@ -21,6 +21,8 @@ export class LoginComponent implements OnInit {
   decrypted_token: any;
   errorMsg : string;
   emailExist: boolean;
+  isClient: boolean;
+  isProvider: boolean;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -52,6 +54,12 @@ export class LoginComponent implements OnInit {
         this.invalidLogin = true;      
         this.errorMsg = "Email ou mot de passe invalide";
       });
+    if(!this.isClient)
+    {
+      this.logService.logProvider(credentials).subscribe(response => {
+        this.EncodingTokenInSession(response);
+      })
+    }
   }
 
   OnRegister(insertedId: number): void {   

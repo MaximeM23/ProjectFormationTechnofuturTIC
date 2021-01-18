@@ -4,6 +4,7 @@ import { AccueilComponent } from './Components/Accueil/Accueil.component';
 import { DetailsClientComponent } from './Components/Details-Client/Details-Client.component';
 import { DetailsWineComponent } from './Components/Details-Wine/Details-Wine.component';
 import { LoginComponent } from './Components/Login/Login.component';
+import { ManageWinesComponent } from './Components/Manage-Wines/Manage-Wines.component';
 import { ShoopingCartComponent } from './Components/Shooping-Cart/Shooping-Cart.component';
 import { AuthGuardService } from './Guards/auth-guard.service';
 
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'shoopingCart',
     component: ShoopingCartComponent
+  },
+  {
+    path: 'wineProviderList',
+    component: ManageWinesComponent
   }
 ];
 

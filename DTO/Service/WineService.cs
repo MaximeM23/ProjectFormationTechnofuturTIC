@@ -61,6 +61,22 @@ namespace DTO.Service
             return wine;
         }
 
+        public IEnumerable<Wine> GetWineByProviderId(int idProvider)
+        {
+            List<Wine> ListOfWines = new List<Wine>();
+            foreach (Wine w in _wineRepository.GetWineByProviderId(idProvider).Select(x => x.WineDTOToWineDAO()))
+            {
+                w.Prices = new List<Price>();
+                foreach (Price p in _wineRepository.GetWinePrice(w.Id).Select(x => x.PriceDTOToWineDAO()))
+                {
+                    w.Prices.Add(p);
+                }
+                w.Category = _categoryRepository.GetAllWineTypeCategory(w.Id, 1).Select(x => x.CategoryDTOToCategoryDAO()).ToList();
+                ListOfWines.Add(w);
+            }
+            return ListOfWines;
+        }
+
         public int Insert(Wine Value)
         {
             throw new NotImplementedException();

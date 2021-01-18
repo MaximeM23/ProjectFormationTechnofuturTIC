@@ -6,8 +6,8 @@ using System.Text;
 
 namespace DTO.Interface
 {
-    public interface IWineService : IService<Wine>
+    public interface IProviderService : IService<Provider>
     {
-        IEnumerable<Wine> GetWineByProviderId(int idProvider);
+        Provider GetProviderByPasswordAndMailMatch(string mail, string password);
     }
 }

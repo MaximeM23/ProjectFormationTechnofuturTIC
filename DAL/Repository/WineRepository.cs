@@ -39,6 +39,13 @@ namespace DAL.Repository
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Wine> GetWineByProviderId(int idProvider)
+        {
+            Connection.Command cmd = new Connection.Command("GetWineByProviderId", true);
+            cmd.AddParameter("@IdProvider", idProvider);
+            return _con.ExecuteReader(cmd, Mapper.WineToDAO);
+        }
+
         public IEnumerable<Price> GetWinePrice(int idWine)
         {
             Connection.Command cmd = new Connection.Command("GetWinePrices", true);
