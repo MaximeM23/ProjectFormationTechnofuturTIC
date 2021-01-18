@@ -23,5 +23,11 @@ namespace WineSellingProject.Controllers
         {
             return Ok(_wineService.GetAll());
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetOne(int id)
+        {
+            return Ok(_wineService.GetOne(id));
+        }
     }
 }

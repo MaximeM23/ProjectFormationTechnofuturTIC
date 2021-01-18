@@ -4,6 +4,7 @@ using DAL.Tools;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Connection = Tools.Connection;
 
@@ -28,7 +29,9 @@ namespace DAL.Repository
 
         public Wine GetOne(int value)
         {
-            throw new NotImplementedException();
+            Connection.Command cmd = new Connection.Command("GetWineById", true);
+            cmd.AddParameter("@id", value);
+            return _con.ExecuteReader(cmd, Mapper.WineToDAO).SingleOrDefault();
         }
 
         public IEnumerable<Wine> GetWineByCategory(string category)

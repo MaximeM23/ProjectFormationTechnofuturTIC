@@ -13,10 +13,14 @@ namespace DTO.Service
     {
         IWineRepository _wineRepository;
         ICategoryRepository _categoryRepository;
-        public WineService(IWineRepository wineRepository, ICategoryRepository categoryRepository)
+        ICommentRepository _commentRepository;
+        IClientRepository _clientRepository;
+        public WineService(IWineRepository wineRepository, ICategoryRepository categoryRepository, ICommentRepository commentRepository, IClientRepository clientRepository)
         {
             _wineRepository = wineRepository;
             _categoryRepository = categoryRepository;
+            _commentRepository = commentRepository;
+            _clientRepository = clientRepository;
         }
         public bool Delete(int Id)
         {
@@ -41,7 +45,20 @@ namespace DTO.Service
 
         public Wine GetOne(int Id)
         {
-            throw new NotImplementedException();
+            Wine wine = _wineRepository.GetOne(Id).WineDTOToWineDAO();
+            wine.Prices = new List<Price>();
+            foreach (Price p in _wineRepository.GetWinePrice(wine.Id).Select(x => x.PriceDTOToWineDAO()))
+            {
+                wine.Prices.Add(p);
+            }
+            wine.Category = _categoryRepository.GetAllWineTypeCategory(wine.Id, 1).Select(x => x.CategoryDTOToCategoryDAO()).ToList();
+            wine.Comments = new List<Comment>();
+            foreach(Comment c in _commentRepository.GetCommentByWineId(wine.Id).Select(x => x.CommentDTOToCommentDAO()))
+            {
+                c.Client = _clientRepository.GetOne(c.idClient).ClientCommentDTOToClientCommentDAO();
+                wine.Comments.Add(c);
+            }
+            return wine;
         }
 
         public int Insert(Wine Value)

@@ -155,5 +155,16 @@ namespace DAL.Tools
                 IdTag = (int)reader["IdTag"]
             };
         }
+
+        public static Comment CommentToDAO(IDataReader reader)
+        {
+            return new Comment
+            {
+                CommentValue = (string)reader["Comment"],
+                Id = (int)reader["IdComment"],
+                IdClient = (int)reader["IdClient"],
+                Note = (byte)reader["Note"]
+            };
+        }
     }
 }

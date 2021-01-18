@@ -158,5 +158,19 @@ namespace DTO.Tools
                 Tag = new Models.Tag(Category.IdTag, "")
             };
         }
+        public static DTO.Models.Comment CommentDTOToCommentDAO(this DAL.Models.Comment Comment)
+        {
+            return new DTO.Models.Comment(Comment.Id, Comment.CommentValue, Comment.Note,Comment.IdClient);            
+        }
+
+
+        public static DTO.Models.ClientComment ClientCommentDTOToClientCommentDAO(this DAL.Models.Client Client)
+        {
+            return new DTO.Models.ClientComment()
+            {
+                Firstname = Client.Firstname,
+                Lastname = Client.Lastname
+            };
+        }
     }
 }
