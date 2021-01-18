@@ -2,9 +2,10 @@
   <div class="container">
 
     <div class="row text-center">
-      <a href="#" class="col-md-4 mt-4 mb-4 btn btn-outline-info">Vin rouge</a>
-      <a href="#" class="col-md-4 mt-4 mb-4 btn btn-outline-info">Vin blanc</a>
-      <a href="#" class="col-md-4 mt-4 mb-4 btn btn-outline-info">Vin rosé</a>
+      <a class="col-md-3 mt-4 mb-4 btn btn-outline-info" [ngClass]="noWineFilterActive ? 'filterActive' : ''" (click)="noWineFilter()">Tout les vins</a>
+      <a class="col-md-3 mt-4 mb-4 btn btn-outline-info" [ngClass]="redWineFilterActive ? 'filterActive' : ''" (click)="filterRedWine()">Vin rouge</a>
+      <a class="col-md-3 mt-4 mb-4 btn btn-outline-info" [ngClass]="whiteWineFilterActive ? 'filterActive' : ''" (click)="filterWhiteWine()">Vin blanc</a>
+      <a class="col-md-3 mt-4 mb-4 btn btn-outline-info" [ngClass]="roseWineFilterActive ? 'filterActive' : ''" (click)="filterRoseWine()">Vin rosé</a>
     </div>
 
     <div class="row">
@@ -13,9 +14,13 @@
 
         <div class="row">
 
-          <div class="col-lg-4 col-md-6 mb-4" *ngFor="let wine of wineList; let index = index">
+          <div class="col-lg-4 col-md-6 mb-4" *ngFor="let wine of filteredWineList; let index = index">
             <div class="card h-100">
-              <a class="text-center"><img class="card-img-top pt-4" src="../../../assets/bouteilleRouge.jpg"></a>
+              <a class="text-center">
+              <img class="card-img-top pt-4" src="../../../assets/bouteilleRouge.jpg" *ngIf="wine.category[0].categoryName == 'Vin rouge' ">
+              <img class="card-img-top pt-4" src="../../../assets/bouteilleBlanc.jpg" *ngIf="wine.category[0].categoryName == 'Vin blanc' ">
+              <img class="card-img-top pt-4" src="../../../assets/bouteilleRosé.jpg" *ngIf="wine.category[0].categoryName == 'Vin rosé' ">
+            </a>
               <div class="card-body">
                 <h4 class="card-title text-center">
                   <a href="#">{{wine.wineName}}</a>
