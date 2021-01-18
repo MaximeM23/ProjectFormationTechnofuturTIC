@@ -6,8 +6,11 @@
       <div class="col">
 
         <div class="card mt-4">
-          <img class="card-img-top img-fluid" src="../../../assets/bouteilleRouge.jpg" alt="">
-          <div class="card-body">
+            <img class="card-img-top pt-4" src="../../../assets/bouteilleRouge.jpg" *ngIf="wineDetails.category[0].categoryName == 'Vin rouge' ">
+            <img class="card-img-top pt-4" src="../../../assets/bouteilleBlanc.jpg" *ngIf="wineDetails.category[0].categoryName == 'Vin blanc' ">
+            <img class="card-img-top pt-4" src="../../../assets/bouteilleRosé.jpg" *ngIf="wineDetails.category[0].categoryName == 'Vin rosé' ">
+            <div class="card-body">
+            <h4 class="card-title text-center wineTextColor">{{wineDetails?.prices[0].price}}€</h4>
             <h3 class="card-title text-center wineTextColor">{{wineDetails?.wineName}}</h3>
             <p class="card-text">{{wineDetails?.description}}</p>
             <div class="text-center">              
