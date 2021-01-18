@@ -22,7 +22,7 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'detailsWine',
+    path: 'detailsWine/:id',
     component: DetailsWineComponent
   },
   {

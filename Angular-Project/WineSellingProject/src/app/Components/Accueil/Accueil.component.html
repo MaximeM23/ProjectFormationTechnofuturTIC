@@ -17,13 +17,13 @@
           <div class="col-lg-4 col-md-6 mb-4" *ngFor="let wine of filteredWineList; let index = index">
             <div class="card h-100">
               <a class="text-center">
-              <img class="card-img-top pt-4" src="../../../assets/bouteilleRouge.jpg" *ngIf="wine.category[0].categoryName == 'Vin rouge' ">
-              <img class="card-img-top pt-4" src="../../../assets/bouteilleBlanc.jpg" *ngIf="wine.category[0].categoryName == 'Vin blanc' ">
-              <img class="card-img-top pt-4" src="../../../assets/bouteilleRosé.jpg" *ngIf="wine.category[0].categoryName == 'Vin rosé' ">
-            </a>
+              <img class="card-img-top pt-4" src="../../../assets/bouteilleRouge.jpg" (click)="goToDetailsPage(wine.id)" *ngIf="wine.category[0].categoryName == 'Vin rouge' ">
+              <img class="card-img-top pt-4" src="../../../assets/bouteilleBlanc.jpg" (click)="goToDetailsPage(wine.id)" *ngIf="wine.category[0].categoryName == 'Vin blanc' ">
+              <img class="card-img-top pt-4" src="../../../assets/bouteilleRosé.jpg" (click)="goToDetailsPage(wine.id)" *ngIf="wine.category[0].categoryName == 'Vin rosé' ">
+              </a>
               <div class="card-body">
                 <h4 class="card-title text-center">
-                  <a href="#">{{wine.wineName}}</a>
+                  <a class="card-link" (click)="goToDetailsPage(wine.id)">{{wine.wineName}}</a>
                 </h4>
                 <h5 class="text-center">{{wine.prices[0].price}} €</h5>
                 <p class="card-text">{{wine.description}}</p>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Wine } from 'src/app/Models/Wine';
 import { WineMapperService } from 'src/app/Services/Mappers/WineMapper.service';
 import { WineService } from 'src/app/Services/WineService/Wine.service';
@@ -18,7 +19,7 @@ export class AccueilComponent implements OnInit {
   roseWineFilterActive : boolean = false;
   noWineFilterActive : boolean = true;
 
-  constructor(private _wineService: WineService, private _wineMapper : WineMapperService) { }
+  constructor(private _wineService: WineService, private _wineMapper : WineMapperService,private _router : Router) { }
 
   ngOnInit() {  
     this._wineService.getAllWine().subscribe(dt => {
@@ -66,5 +67,9 @@ export class AccueilComponent implements OnInit {
     this.whiteWineFilterActive = false;
     this.roseWineFilterActive = false;
     this.noWineFilterActive = true;
+  }
+
+  goToDetailsPage(id: number) : void {
+    this._router.navigateByUrl('detailsWine/'+id);
   }
 }
