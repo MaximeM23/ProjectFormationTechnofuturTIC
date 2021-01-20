@@ -1,4 +1,5 @@
 ﻿using DTO.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -28,6 +29,15 @@ namespace WineSellingProject.Controllers
         public IActionResult GetOne(int id)
         {
             return Ok(_wineService.GetOne(id));
+        }
+
+
+        [HttpGet("{id}")]
+        [Route("provider/{id}")]
+        [Authorize(Roles = "Provider")]
+        public IActionResult GetAllByProviderId(int id)
+        {
+            return Ok(_wineService.GetWineByProviderId(id));
         }
     }
 }

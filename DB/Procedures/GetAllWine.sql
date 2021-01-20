@@ -6,7 +6,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT IdWine,WineName,[Description],[Year], IdProvider
+	SELECT IdWine,WineName,[Description],[Year], IdProvider, [Disabled]
 	FROM Wine
 	WHERE [Disabled] = 1 
 END

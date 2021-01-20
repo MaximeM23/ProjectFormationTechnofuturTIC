@@ -19,4 +19,8 @@ export class WineService {
   getWineByWineId(id: string) : Subscribable<any> {
     return this._http.get(this.url + "wine/"+id);
   }
+
+  getWineByProviderId(id: number): Subscribable<any> {
+    return this._http.get(this.url + "wine/provider/"+id);
+  }
 }

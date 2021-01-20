@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Wine } from 'src/app/Models/Wine';
+import { SessionStorageService } from 'src/app/Services/session-storage.service';
+import { WineService } from 'src/app/Services/WineService/Wine.service';
 
 @Component({
   selector: 'app-Manage-Wines',
@@ -8,11 +10,15 @@ import { Wine } from 'src/app/Models/Wine';
 })
 export class ManageWinesComponent implements OnInit {
 
-  wine: Wine[] = []
+  wines: Wine[] = []
 
-  constructor() { }
+  constructor(private _wineService : WineService, private _sessionService: SessionStorageService) { }
 
   ngOnInit() {
+    this._wineService.getWineByProviderId(this._sessionService.recoverIdUser()).subscribe(dt=>{
+      this.wines.push(dt);
+      console.log(this.wines);
+    });
   }
 
 }

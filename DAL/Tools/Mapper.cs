@@ -134,7 +134,8 @@ namespace DAL.Tools
                 Description = (string)reader["Description"],
                 Id = (int)reader["IdWine"],
                 WineName = (string)reader["WineName"],
-                Year = (int)reader["Year"]
+                Year = (int)reader["Year"],
+                Disabled = (bool)reader["Disabled"]
             };
         }
 

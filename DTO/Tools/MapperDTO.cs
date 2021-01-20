@@ -136,7 +136,8 @@ namespace DTO.Tools
                 Description = wine.Description,
                 Id = wine.Id,
                 WineName = wine.WineName,
-                Year = wine.Year
+                Year = wine.Year,
+                Disabled = wine.Disabled
             };
         }
 
@@ -182,7 +183,7 @@ namespace DTO.Tools
                 Id = Provider.Id,
                 Name = Provider.Name,
                 Password = Provider.Password,
-                PhoneNumber = Provider.PhoneNumber,                
+                PhoneNumber = Provider.PhoneNumber,                        
             };
         }
     }
