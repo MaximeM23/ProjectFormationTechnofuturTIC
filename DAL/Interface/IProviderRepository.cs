@@ -7,5 +7,6 @@ namespace DAL.Interface
 {
     public interface IProviderRepository: IRepository<Provider>
     {
+        Provider GetProviderByMailAndPasswordMatch(string email, string password);
     }
 }

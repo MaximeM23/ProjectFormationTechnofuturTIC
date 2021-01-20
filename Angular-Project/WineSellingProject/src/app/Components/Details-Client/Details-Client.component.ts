@@ -25,7 +25,7 @@ export class DetailsClientComponent implements OnInit {
   }
 
   successUpdate: boolean;
-  constructor(private _sessionService: SessionStorageService,private _clientService: ClientService, private _clientMapper: ClientMapperService, private _formBuilder: FormBuilder, private _datepipe: DatePipe) { }
+  constructor(private _sessionService: SessionStorageService, private _clientService: ClientService, private _clientMapper: ClientMapperService, private _formBuilder: FormBuilder, private _datepipe: DatePipe) { }
   profileForm: FormGroup;
   ngOnInit() {
     this.profileForm = this._formBuilder.group({

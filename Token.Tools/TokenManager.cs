@@ -18,7 +18,7 @@ namespace Token.Tools
             _config = config;
         }
 
-        public string GenerateToken(TokenData dt)
+        public string GenerateToken(TokenData dt, bool IsProvider = false)
         {
             if (dt == null)
             {
@@ -32,7 +32,8 @@ namespace Token.Tools
             {
                 new Claim(ClaimTypes.Name,dt.Username),
                 new Claim("UserId", dt.UserId.ToString()),
-                new Claim(ClaimTypes.Role,dt.Role)
+                (!IsProvider) ? new Claim(ClaimTypes.Role,dt.Role) : new Claim("NotAClient","true"),
+                (IsProvider) ? new Claim("IsProvider", "true"): new Claim("NotAProvider","true")
             };
 
             JwtSecurityToken token = new JwtSecurityToken(

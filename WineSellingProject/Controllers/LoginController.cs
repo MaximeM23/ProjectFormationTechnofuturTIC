@@ -33,22 +33,36 @@ namespace WineSellingProject.Controllers
             }
 
             Client clientFound = _clientService.GetClientByMailAndPasswordMatch(dt.emailAddress,dt.password);
-            
-            if(clientFound == null)
+            Provider providerFound = null;
+            if (clientFound == null)
             {
-                //TODO : Provider providerFound = _providerService.GetOne()
+                providerFound = _providerService.GetProviderByPasswordAndMailMatch(dt.emailAddress,dt.password);
             }
-            if(clientFound == null)
+            if ((clientFound == null)&&(providerFound == null))
             {
                 return StatusCode(401);
             }
-
-            string token = _tokenManager.GenerateToken(new TokenData()
+            string token = "";
+            if (clientFound != null)
+            {                
+                token = _tokenManager.GenerateToken(new TokenData()
+                {
+                    UserId = clientFound.Id,
+                    Username = clientFound.EmailAddress,
+                    Role = clientFound.Role.RoleName
+                });
+            }
+            if (providerFound != null)
             {
-                UserId = clientFound.Id,
-                Username = clientFound.EmailAddress,
-                Role = clientFound.Role.RoleName
-            });
+
+                token = _tokenManager.GenerateToken(new TokenData()
+                {
+                    UserId = providerFound.Id,
+                    Username = providerFound.EmailAddress,
+                    Role = "Provider"
+                });
+            }
+
             return Ok(new { token });
         }
     }

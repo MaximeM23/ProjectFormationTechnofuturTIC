@@ -13,10 +13,10 @@
             <a class="nav-link text-white" routerLink="/accueil">Accueil</a>
           </li>
           <li class="nav-item">        
-            <a class="nav-link text-white" routerLink="/details" *ngIf="userIsConnected()">Mon compte</a>
+            <a class="nav-link text-white" routerLink="/details" *ngIf="userIsConnected() && !userIsProvider()">Mon compte</a>
           </li>
           <li class="nav-item">        
-            <a class="nav-link text-white" routerLink="/wineProviderList" *ngIf="userIsConnected()">Mes vins</a>
+            <a class="nav-link text-white" routerLink="/wineProviderList" *ngIf="userIsConnected() && userIsProvider()">Mes vins</a>
           </li>
         </ul>
         <ul class="navbar-nav">

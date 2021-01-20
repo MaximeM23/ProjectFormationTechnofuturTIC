@@ -166,5 +166,16 @@ namespace DAL.Tools
                 Note = (byte)reader["Note"]
             };
         }
+        public static Provider ProviderToDAO(IDataReader reader)
+        {
+            return new Provider
+            {
+                Id = (int)reader["IdProvider"],
+                Description = (string)reader["Description"],
+                EmailAddress = (string)reader["EmailAddress"],
+                Name = (string)reader["ProviderName"],
+                PhoneNumber = (string)reader["PhoneNumber"]
+            };
+        }
     }
 }

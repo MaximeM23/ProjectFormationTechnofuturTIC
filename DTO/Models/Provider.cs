@@ -6,15 +6,17 @@ namespace DTO.Models
 {
     public class Provider
     {
-        public string Name { get; private set; }
-        public string Description { get; private set; }
-        public string Password { get; private set; }
-        public string EmailAddress { get; private set; }
-        public string PhoneNumber { get; private set; }
-        public List<Picture> Pictures{ get; set; }
-        public List<Advertisement> Advertisements{ get; set; }
-        public Provider(string name, string description, string password, string emailAddress, string phoneNumber)
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Password { get; set; }
+        public string EmailAddress { get; set; }
+        public string PhoneNumber { get; set; }
+        public List<Picture>? Pictures{ get; set; }
+        public List<Advertisement>? Advertisements{ get; set; }
+        public Provider(int id, string name, string description, string password, string emailAddress, string phoneNumber)
         {
+            Id = id;
             Name = name;
             Description = description;
             Password = password;
@@ -22,5 +24,8 @@ namespace DTO.Models
             PhoneNumber = phoneNumber;
         }
 
+        public Provider()
+        {
+        }
     }
 }

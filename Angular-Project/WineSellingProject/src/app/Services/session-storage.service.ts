@@ -22,6 +22,23 @@ export class SessionStorageService {
     }
     return null;
   }
+  recoverRoleUser() : string{
+    if(sessionStorage.getItem("userInfo") != null)
+    {
+      let role;
+      role = JSON.parse(sessionStorage.getItem("userInfo"))
+      return role["role"];
+    }
+    return null;
+  }
+
+  private _connectedUser : LoggedInformation;
+  get connectedUser(): LoggedInformation{
+    return this._connectedUser;
+  }
+  set connectedUser(value: LoggedInformation){
+    this._connectedUser = value;
+  }
 
   updateSessionInformation(response : any) {
     //TODO: need to recover the full use in order to regenerate the token
