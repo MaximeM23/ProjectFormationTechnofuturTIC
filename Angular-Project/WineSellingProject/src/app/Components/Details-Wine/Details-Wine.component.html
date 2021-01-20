@@ -1,0 +1,63 @@
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <div class="row">
+      <div class="col">
+
+        <div class="card mt-4">
+            <img class="card-img-top pt-4" src="../../../assets/bouteilleRouge.jpg" *ngIf="wineDetails.category[0].categoryName == 'Vin rouge' ">
+            <img class="card-img-top pt-4" src="../../../assets/bouteilleBlanc.jpg" *ngIf="wineDetails.category[0].categoryName == 'Vin blanc' ">
+            <img class="card-img-top pt-4" src="../../../assets/bouteilleRosé.jpg" *ngIf="wineDetails.category[0].categoryName == 'Vin rosé' ">
+            <div class="card-body">
+            <h4 class="card-title text-center wineTextColor">{{wineDetails?.prices[0].price}}€</h4>
+            <h3 class="card-title text-center wineTextColor">{{wineDetails?.wineName}}</h3>
+            <p class="card-text">{{wineDetails?.description}}</p>
+            <div class="text-center">              
+              <span class="text-warning" *ngIf="AvgWine == 1">&#9733; &#9734; &#9734; &#9734; &#9734;</span>
+              <span class="text-warning" *ngIf="AvgWine == 2">&#9733; &#9733; &#9734; &#9734; &#9734;</span>
+              <span class="text-warning" *ngIf="AvgWine == 3">&#9733; &#9733; &#9733; &#9734; &#9734;</span>
+              <span class="text-warning" *ngIf="AvgWine == 4">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+              <span class="text-warning" *ngIf="AvgWine == 5">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
+            </div>
+          </div>
+        </div>
+        <!-- /.card -->
+
+        <div class="card card-outline-secondary my-4">
+          <div class="card-header text-center wineTextColor">
+            Commentaires
+          </div>
+          <div class="card-body" *ngFor="let comment of wineDetails?.comment">
+            <p>{{comment?.comment}}</p>
+            <small class="text-muted">Commentaire de {{comment?.firstname}} {{comment?.lastname}}</small>
+            <div class="text-right">
+              <span class="text-warning" *ngIf="comment?.note == 1">&#9733; &#9734; &#9734; &#9734; &#9734;</span>
+              <span class="text-warning" *ngIf="comment?.note == 2">&#9733; &#9733; &#9734; &#9734; &#9734;</span>
+              <span class="text-warning" *ngIf="comment?.note == 3">&#9733; &#9733; &#9733; &#9734; &#9734;</span>
+              <span class="text-warning" *ngIf="comment?.note == 4">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+              <span class="text-warning" *ngIf="comment?.note == 5">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
+            </div>            
+            <hr>
+          </div>
+            <div class="text-center">
+              <a href="#" class="btn btn-success">Laisser un commentaire</a>
+            </div>
+        </div>
+        <!-- /.card -->
+
+      </div>
+      <!-- /.col-lg-9 -->
+
+    </div>
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-2 wineBackGroundColor">
+    <div class="container">
+      <p class="m-0 text-center text-white">&copy; Projet formation TechnofuturTIC - Net / Angular</p>
+    </div>
+    <!-- /.container -->
+  </footer>

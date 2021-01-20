@@ -1,0 +1,21 @@
+.logo {
+    width: 200px;  
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+}
+
+li > a {
+    font-size: 18px;
+}
+
+@media (max-width: 769px) {
+    li > a {
+        text-align: center;
+    }
+    li > a > span > svg {
+        text-align: center;
+    }
+  }

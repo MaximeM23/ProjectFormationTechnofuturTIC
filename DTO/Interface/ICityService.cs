@@ -8,6 +8,11 @@ namespace DTO.Interface
 {
     public interface ICityService : IGetAllService<City>, IInsertService<City>
     {
-        IEnumerable<City> GetCitiesByCountry(string Country);
+        IEnumerable<string> GetCitiesByCountry(string Country);
+
+        IEnumerable<string> GetCountries();
+
+        IEnumerable<string> GetCPByCityName(string City);
+        int GetIdByValues(string country, string cp, string city);
     }
 }

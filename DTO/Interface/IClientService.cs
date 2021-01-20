@@ -14,6 +14,6 @@ namespace DTO.Interface
 
         bool UpdateClientWithoutPassword(Client client);
 
-        bool FindEmail(string email);
+        bool FindEmail(string email, int idUser);
     }
 }

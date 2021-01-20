@@ -25,7 +25,7 @@ export class DetailsClientComponent implements OnInit {
   }
 
   successUpdate: boolean;
-  constructor(private _sessionService: SessionStorageService,private _clientService: ClientService, private _clientMapper: ClientMapperService, private _formBuilder: FormBuilder, private _datepipe: DatePipe) { }
+  constructor(private _sessionService: SessionStorageService, private _clientService: ClientService, private _clientMapper: ClientMapperService, private _formBuilder: FormBuilder, private _datepipe: DatePipe) { }
   profileForm: FormGroup;
   ngOnInit() {
     this.profileForm = this._formBuilder.group({
@@ -52,8 +52,7 @@ export class DetailsClientComponent implements OnInit {
     });
   }
 
-  OnProfilChangeSubmit(value: NgForm): boolean{
-    if(this.profileForm.valid){     
+  OnProfilChangeSubmit(value: NgForm): boolean{  
       if((this.profileForm.controls["password"].dirty) && (this.profileForm.controls["confirmPassword"].dirty))
       {
         if(value['password'] != value['confirmPassword']) return false;
@@ -86,6 +85,7 @@ export class DetailsClientComponent implements OnInit {
         this.client.Firstname =   value["firstname"];
         this._clientService.UpdateClientInformation(this.client).subscribe(dt =>
           {
+            console.log(dt);
             if(dt != null)
             {
               this._sessionService.updateSessionInformation(dt);
@@ -94,9 +94,7 @@ export class DetailsClientComponent implements OnInit {
           }
           );      
       }
-      return true;
-    }
-    return false;
+      return true;    
   }
   
 }

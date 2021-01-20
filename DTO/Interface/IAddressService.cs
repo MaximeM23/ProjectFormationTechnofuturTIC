@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DTO.Interface
 {
-    public interface IAddressService : IGetAllService<Address>,IUpdateService<Address>,IDeleteService<Address>
+    public interface IAddressService : IService<Address>
     {
         IEnumerable<Address> GetAddressesByIdUser(int id);
     }

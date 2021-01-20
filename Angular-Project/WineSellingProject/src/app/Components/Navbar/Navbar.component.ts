@@ -11,22 +11,30 @@ import { SessionStorageService } from 'src/app/Services/session-storage.service'
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private _clientService: ClientService,
-              private _router: Router,
+  constructor(private _router: Router,
               private _sessionService : SessionStorageService) { }
-
+  isProvider: boolean;
   ngOnInit() {
+    
   }
 
-  userIsConnected(): boolean {
+  userIsProvider() : boolean {
+    if(this._sessionService.recoverRoleUser() == "Provider")
+    {
+      return this.isProvider = true;
+    }
+    else 
+    {
+      return this.isProvider = false;
+    }
+  }
+  userIsConnected(): boolean {    
     return this._sessionService.recoverIdUser() != null;
   }
 
   userLoggout() : void {
     sessionStorage.clear();
-    this._clientService.connectedClient = null;
+    this._sessionService.connectedUser = null;
     this._router.navigate(["/accueil"]);
   }
-
-
 }

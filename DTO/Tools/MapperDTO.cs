@@ -97,10 +97,30 @@ namespace DTO.Tools
                 PostalCode = city.PostalCode
             };
         }
+
+        public static DTO.Models.ClientAddress ClientAddressDTOToDAO(this DAL.Models.ClientAddress CA)
+        {
+            return new DTO.Models.ClientAddress()
+            {
+                Id = CA.Id,
+                IdAddress = CA.IdAddress,
+                IdClient = CA.IdClient
+            };
+        }
+        public static DAL.Models.ClientAddress ClientAddressDAOToDTO(this DTO.Models.ClientAddress CA)
+        {
+            return new DAL.Models.ClientAddress()
+            {
+                Id = CA.Id,
+                IdAddress = CA.IdAddress,
+                IdClient = CA.IdClient
+            };
+        }
         public static DTO.Models.City CityDTOToCityDAO(this DAL.Models.City City)
         {
             return new DTO.Models.City(City.Id, City.CityName, City.PostalCode, City.Country);
         }
+        
 
         public static DTO.Models.Role RoleDTOToRoleDAO(this DAL.Models.Role role)
         {
@@ -108,5 +128,63 @@ namespace DTO.Tools
         }
         #endregion
 
+
+        public static DTO.Models.Wine WineDTOToWineDAO(this DAL.Models.Wine wine)
+        {
+            return new DTO.Models.Wine()
+            {
+                Description = wine.Description,
+                Id = wine.Id,
+                WineName = wine.WineName,
+                Year = wine.Year,
+                Disabled = wine.Disabled
+            };
+        }
+
+        public static DTO.Models.Price PriceDTOToWineDAO(this DAL.Models.Price price)
+        {
+            return new DTO.Models.Price()
+            {
+                DateOfPrice = price.DateOfPrice,
+                PriceWine = price.PriceWine
+            };
+        }
+
+        public static DTO.Models.Category CategoryDTOToCategoryDAO(this DAL.Models.Category Category)
+        {
+            return new DTO.Models.Category()
+            {
+                CategoryName = Category.CategoryName,
+                Id = Category.Id,
+                Tag = new Models.Tag(Category.IdTag, "")
+            };
+        }
+        public static DTO.Models.Comment CommentDTOToCommentDAO(this DAL.Models.Comment Comment)
+        {
+            return new DTO.Models.Comment(Comment.Id, Comment.CommentValue, Comment.Note,Comment.IdClient);            
+        }
+
+
+        public static DTO.Models.ClientComment ClientCommentDTOToClientCommentDAO(this DAL.Models.Client Client)
+        {
+            return new DTO.Models.ClientComment()
+            {
+                Firstname = Client.Firstname,
+                Lastname = Client.Lastname
+            };
+        }
+
+        public static DTO.Models.Provider ProviderDTOToProviderDAO(this DAL.Models.Provider Provider)
+        {
+            return new DTO.Models.Provider()
+            {
+                Description = Provider.Description,
+                EmailAddress = Provider.EmailAddress,
+                Id = Provider.Id,
+                Name = Provider.Name,
+                Password = Provider.Password,
+                PhoneNumber = Provider.PhoneNumber,                        
+            };
+        }
     }
 }

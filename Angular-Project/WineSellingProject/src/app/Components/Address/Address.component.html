@@ -3,7 +3,7 @@
       <h4 class="text-center mb-4">Vos adresses</h4>
       
       <div *ngFor="let address of addresses; let index = index" class="bg-white card mb-4 border shadow">
-          <div class="p-4" id="{{address.Id}}" *ngIf="!Clicked">
+          <div class="p-4" id="{{address.Id}}" *ngIf="!Clicked || UpdateShown">
               <h6 class="mb-1 text-secondary text-center">Adresse n°{{index + 1}}</h6>
               <p>
                 {{address.Street}}, {{address.Number}}
@@ -12,18 +12,32 @@
                 {{address.City.Country}},{{address.City.CityName}}, {{address.City.PostalCode}}
               </p>  
               <div class="d-flex flex-nowrap bd-highlight">
-                <div class="order-1 p-2 bd-highlight"><button class="btn btn-primary border-light" (click)="toggleFormUpdate(address)">Modifier</button></div>
-                <div class="order-2 p-2 bd-highlight"><button class="btn btn-danger border-light">Supprimer</button></div>
+                <div class="order-1 p-2 bd-highlight"><button class="btn btn-primary border-light" (click)="toggleFormUpdate(addresses[index])" *ngIf="!UpdateShown">Modifier</button></div>
+                <div class="order-2 p-2 bd-highlight"><button class="btn btn-danger border-light" *ngIf="!UpdateShown" (click)="RemoveAddress(address.Id)">Supprimer</button></div>
+                <span *ngIf="isVisible" id="{{address.Id}}"></span>
               </div>
           </div>
-          <div class="p-4" id="{{index}}" *ngIf="Clicked">
-            <h6 class="mb-1 text-secondary text-center">Adresse n°{{index + 1}}</h6>
-            <form [formGroup]="addressForm" (ngSubmit)="OnUpdate(index,addressForm.value)">
-              <div class="form-group">           
-                <input type="text" class="form-control" [formControl]="addressForm.controls['country']" placeholder="Pays" value="" />
+          <!------------------------------------------------------------------------------------------------------------------------------->
+          <div class="p-4" id="{{index}}" *ngIf="Clicked  && (ClickedIndex == address.Id || ClickedIndex == null)" >
+            <h6 class="mb-1 text-secondary text-center">Modification de l'adresse n°{{index + 1}}</h6>
+            <form [formGroup]="addressForm" (ngSubmit)="OnUpdate(address.Id,addressForm.value)">
+              <div class="form-group">                           
+                <select class="browser-default custom-select" #selectCountry (change)="setSelectedCountry(selectCountry)" [formControl]="addressForm.controls['country']">  
+                  <option selected disabled></option>            
+                  <option *ngFor="let country of countries" [ngValue]="country">{{country}}</option>
+                </select>
               </div>
               <div class="form-group"> 
-                <input type="text" class="form-control" [formControl]="addressForm.controls['city']" placeholder="Ville" value="" />   
+                <select class="browser-default custom-select" #selectCity (change)="setSelectedCity(selectCity)" [formControl]="addressForm.controls['city']">
+                  <option selected disabled></option>             
+                  <option *ngFor="let city of cities" [ngValue]="city">{{city}}</option>
+                </select>   
+              </div>
+              <div class="form-group">           
+                <select class="browser-default custom-select" [formControl]="addressForm.controls['postalCode']">        
+                  <option selected disabled></option>      
+                  <option *ngFor="let cp of postalCode" [ngValue]="cp">{{cp}}</option>
+                </select>
               </div>
               <div class="form-group">           
                 <input type="text" class="form-control" [formControl]="addressForm.controls['street']" placeholder="Rue" value="" />
@@ -31,16 +45,15 @@
               <div class="form-group"> 
                 <input type="text" class="form-control" [formControl]="addressForm.controls['number']" placeholder="Numéro" value="" />   
               </div>
-              <div class="form-group">           
-                <input type="text" class="form-control" [formControl]="addressForm.controls['postalCode']" placeholder="Code postal" value="" />
-              </div>
               <div class="form-group centered">
-                  <input type="submit" class="btnSubmit btn btn-success ml-4 border-light" value="Modifier" />                       
+                  <input type="submit" class="btnSubmit btn btn-success ml-4 border-light" value="Modifier"/>                       
                   <input type="button" class="btn btn-danger ml-4 border-light" value="Annuler" (click)="removeFormUpdate()"/>                
               </div>                        
             </form>
           </div>     
     </div>
+
+    <!----------------------------------------------------------------------------------------------------------------->
           
     <div class="text-center">
       <button class="btn btn-success border-light" (click)="AddformInsert()" *ngIf="!ClickedForInsert">Ajouter une nouvelle adresse</button> 
@@ -48,10 +61,22 @@
         <h4 class="mb-1 text-secondary text-center p-4">Nouvelle adresse</h4>        
         <form [formGroup]="addressForm" (ngSubmit)="OnAdd()">
           <div class="form-group">           
-            <input type="text" class="form-control" [formControl]="addressForm.controls['country']" placeholder="Pays" value="" />
+            <select class="browser-default custom-select" #selectCountry (change)="setSelectedCountry(selectCountry)" [formControl]="addressForm.controls['country']">  
+              <option selected disabled></option>            
+              <option *ngFor="let country of countries" [ngValue]="country">{{country}}</option>
+            </select>
           </div>
-          <div class="form-group"> 
-            <input type="text" class="form-control" [formControl]="addressForm.controls['city']" placeholder="Ville" value="" />   
+          <div class="form-group">
+            <select class="browser-default custom-select" #selectCity (change)="setSelectedCity(selectCity)" [formControl]="addressForm.controls['city']">
+              <option selected disabled></option>             
+              <option *ngFor="let city of cities" [ngValue]="city">{{city}}</option>
+            </select>
+          </div>          
+          <div class="form-group">            
+            <select class="browser-default custom-select" [formControl]="addressForm.controls['postalCode']">        
+              <option selected disabled></option>      
+              <option *ngFor="let cp of postalCode" [ngValue]="cp">{{cp}}</option>
+            </select>
           </div>
           <div class="form-group">           
             <input type="text" class="form-control" [formControl]="addressForm.controls['street']" placeholder="Rue" value="" />
@@ -59,11 +84,8 @@
           <div class="form-group"> 
             <input type="text" class="form-control" [formControl]="addressForm.controls['number']" placeholder="Numéro" value="" />   
           </div>
-          <div class="form-group">           
-            <input type="text" class="form-control" [formControl]="addressForm.controls['postalCode']" placeholder="Code postal" value="" />
-          </div>
           <div class="form-group centered">
-              <input type="submit" class="btnSubmit btn btn-success ml-4 border-light" value="Ajouter" />                       
+              <input type="submit" class="btnSubmit btn btn-success ml-4 border-light" value="Ajouter" (click)="AddAddressToUser(addressForm)" />                       
               <input type="button" class="btn btn-danger ml-4 border-light" value="Annuler" (click)="RemoveFormInsert()"/>                
           </div>                        
         </form>

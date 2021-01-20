@@ -6,8 +6,8 @@ namespace DTO.Models
 {
     public class Category
     {
-        public int Id { get; private set; }
-        public string CategoryName { get; private set; }
-        public Tag Tag { get; private set; }
+        public int Id { get; set; }
+        public string CategoryName { get; set; }
+        public Tag Tag { get; set; }
     }
 }

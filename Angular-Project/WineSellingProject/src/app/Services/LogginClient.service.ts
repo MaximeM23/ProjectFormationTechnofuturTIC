@@ -17,5 +17,4 @@ logClient(credentials: any) : Subscribable<any>
 {        
   return this._http.post<any>(this.url +"Login/",credentials);  
 }
-
 }

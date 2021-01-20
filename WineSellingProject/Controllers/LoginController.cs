@@ -14,12 +14,14 @@ namespace WineSellingProject.Controllers
     public class LoginController : Controller
     {
         protected TokenManager _tokenManager { get; }
-        IClientService _clientService; 
+        IClientService _clientService;
+        IProviderService _providerService;
 
-        public LoginController(TokenManager tokenManager, IClientService clientService)
+        public LoginController(TokenManager tokenManager, IClientService clientService, IProviderService providerService)
         {
             _tokenManager = tokenManager;
             _clientService = clientService;
+            _providerService = providerService;
         }
 
         [HttpPost]
@@ -31,18 +33,36 @@ namespace WineSellingProject.Controllers
             }
 
             Client clientFound = _clientService.GetClientByMailAndPasswordMatch(dt.emailAddress,dt.password);
-
-            if(clientFound == null)
+            Provider providerFound = null;
+            if (clientFound == null)
+            {
+                providerFound = _providerService.GetProviderByPasswordAndMailMatch(dt.emailAddress,dt.password);
+            }
+            if ((clientFound == null)&&(providerFound == null))
             {
                 return StatusCode(401);
             }
-
-            string token = _tokenManager.GenerateToken(new TokenData()
+            string token = "";
+            if (clientFound != null)
+            {                
+                token = _tokenManager.GenerateToken(new TokenData()
+                {
+                    UserId = clientFound.Id,
+                    Username = clientFound.EmailAddress,
+                    Role = clientFound.Role.RoleName
+                });
+            }
+            if (providerFound != null)
             {
-                UserId = clientFound.Id,
-                Username = clientFound.EmailAddress,
-                Role = clientFound.Role.RoleName
-            });
+
+                token = _tokenManager.GenerateToken(new TokenData()
+                {
+                    UserId = providerFound.Id,
+                    Username = providerFound.EmailAddress,
+                    Role = "Provider"
+                });
+            }
+
             return Ok(new { token });
         }
     }

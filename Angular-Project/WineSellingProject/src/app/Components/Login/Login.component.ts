@@ -5,6 +5,7 @@ import { LoggedInformation } from 'src/app/Models/LoggedInformation';
 import { RegisterClient } from 'src/app/Models/RegisterClient';
 import { ClientService } from 'src/app/Services/ClientService/Client.service';
 import { LogginClientService } from 'src/app/Services/LogginClient.service';
+import { SessionStorageService } from 'src/app/Services/session-storage.service';
 import { PasswordValidatorMaxLength, PasswordValidatorMinLength } from 'src/app/Services/Validators/passwordValidator';
 import jwt_decode from "../../../../node_modules/jwt-decode"
 
@@ -21,10 +22,13 @@ export class LoginComponent implements OnInit {
   decrypted_token: any;
   errorMsg : string;
   emailExist: boolean;
+  isClient: boolean;
+  isProvider: boolean;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               private clientService: ClientService,
+              private sessionService: SessionStorageService,
               private logService: LogginClientService) { }
 
   ngOnInit(): void {
@@ -54,9 +58,6 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  OnRegister(insertedId: number): void {   
-  }
-
   OnRegisterSubmit(form : NgForm) : void{   
     this.clientService.RegisterClient(new RegisterClient(form['emailRegister'],form['passwordRegister'])).subscribe(
       dt => {            
@@ -82,13 +83,14 @@ export class LoginComponent implements OnInit {
     sessionStorage.setItem("jwt",token);
     this.invalidLogin = false;
     this.decrypted_token = jwt_decode(token);
-    this.clientService.connectedClient = new LoggedInformation(
+    this.
+    sessionService.connectedUser = new LoggedInformation(
       this.decrypted_token["UserId"],
       this.decrypted_token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
       this.decrypted_token["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],
       this.decrypted_token["exp"]
       );           
-    sessionStorage.setItem("userInfo",JSON.stringify(this.clientService.connectedClient));
+    sessionStorage.setItem("userInfo",JSON.stringify(this.sessionService.connectedUser));
     this.router.navigate(["/accueil"]);
   }
 

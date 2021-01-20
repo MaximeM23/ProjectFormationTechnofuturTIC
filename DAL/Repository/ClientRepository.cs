@@ -77,10 +77,11 @@ namespace DAL.Repository
             return _con.ExecuteReader(cmd, Mapper.ClientToDAO).SingleOrDefault();
         }
 
-        public bool FindEmail(string email)
+        public bool FindEmail(string email, int idUser)
         {
             Connection.Command cmd = new Connection.Command("FindEmail", true);
             cmd.AddParameter("@email", email);
+            cmd.AddParameter("@idUser", idUser);
             int? exist = (int?)_con.ExecuteScalar(cmd);
             if (exist > 0) return true;
             return false;

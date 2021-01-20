@@ -9,10 +9,10 @@ export class Address implements IAddress{
     City: City;
 
  
-    constructor(Id: number, Street: string, Number: number, City: City) {
+    constructor(Id: number, Street: string, number: number, City: City) {
         this.Id = Id;
         this.Street = Street;
-        this.Number = Number;
+        this.Number = number;
         this.City = City;
     }
     

@@ -9,7 +9,7 @@ using DTO.Tools;
 
 namespace DTO.Service
 {
-    class AddressService : IAddressService
+    public class AddressService : IAddressService
     {
         private IAddressRepository _addressRepo;
         private ICityRepository _cityRepo;
@@ -21,7 +21,11 @@ namespace DTO.Service
 
         public bool Delete(int Id)
         {
-            throw new NotImplementedException();
+            if (_addressRepo.Delete(Id) > 0)
+            {
+                return true;
+            }
+            return false;
         }
 
         public IEnumerable<Address> GetAddressesByIdUser(int id)
@@ -39,9 +43,19 @@ namespace DTO.Service
             throw new NotImplementedException();
         }
 
-        public bool Update(Address Value)
+        public Address GetOne(int Id)
         {
             throw new NotImplementedException();
+        }
+
+        public int Insert(Address Value)
+        {
+            return _addressRepo.Insert(Value.AddressDAOToAddressDTO());
+        }
+
+        public bool Update(Address Value)
+        {
+            return _addressRepo.Update(Value.AddressDAOToAddressDTO());
         }
     }
 }

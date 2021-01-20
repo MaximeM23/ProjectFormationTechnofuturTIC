@@ -15,13 +15,6 @@ import { SessionStorageService } from '../session-storage.service';
 export class ClientService {
 
   private url = environment.apiUrl;
-  private _connectedClient : LoggedInformation;
-  get connectedClient(): LoggedInformation{
-    return this._connectedClient;
-  }
-  set connectedClient(value: LoggedInformation){
-    this._connectedClient = value;
-  }
 
   constructor(private _http: HttpClient, private _sessionService: SessionStorageService) { 
 

@@ -55,14 +55,22 @@ namespace WineSellingProject
             #region Services
             services.AddScoped<IClientService, ClientService>();
             services.AddScoped<ICityService, CityService>();
+            services.AddScoped<IClientAddressService, ClientAddressService>();
+            services.AddScoped<IAddressService, AddressService>();
+            services.AddScoped<IWineService, WineService>();
+            services.AddScoped<IProviderService, ProviderService>();
             #endregion
             #region Repositories
+            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IAddressRepository, AddressRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
             services.AddScoped<IClientAddressRepository, ClientAddressRepository>();
             services.AddScoped<ICityRepository, CityRepository>();
+            services.AddScoped<IWineRepository, WineRepository>();
+            services.AddScoped<IProviderRepository, ProviderRepository>();
             #endregion
             services.AddSwaggerGen(c =>
             {

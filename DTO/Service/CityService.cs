@@ -21,14 +21,29 @@ namespace DTO.Service
             return _cityRepo.GetAll().Select(x => x.CityDTOToCityDAO());
         }
 
-        public IEnumerable<City> GetCitiesByCountry(string Country)
+        public IEnumerable<string> GetCitiesByCountry(string Country)
         {
-            return _cityRepo.GetCityByCountryName(Country).Select(x => x.CityDTOToCityDAO());
+            return _cityRepo.GetCityByCountryName(Country).Select(x => x);
+        }
+
+        public IEnumerable<string> GetCountries()
+        {
+            return _cityRepo.GetCountries().Select(x => x);
+        }
+
+        public IEnumerable<string> GetCPByCityName(string City)
+        {
+            return _cityRepo.GetCPByCityName(City).Select(x => x);
+        }
+
+        public int GetIdByValues(string country, string cp, string city)
+        {
+            return _cityRepo.GetIdByValues(country, cp, city);
         }
 
         public int Insert(City Value)
         {
-            throw new NotImplementedException();
+            return _cityRepo.Insert(Value.CityDAOToCityDTO());
         }
     }
 }

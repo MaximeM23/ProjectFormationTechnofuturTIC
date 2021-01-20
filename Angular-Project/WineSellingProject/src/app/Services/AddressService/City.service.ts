@@ -16,4 +16,16 @@ export class CityService {
     return this._http.get(this.url+"City");
   }
 
+  getCountries() : Subscribable<any> {
+    return this._http.get(this.url+ "Countries")
+  }
+
+  getCities(country: string): Subscribable<any> {
+    return this._http.get(this.url + "City/" + country)
+  }
+
+  getCP(city: string): Subscribable<any> {
+    return this._http.get(this.url+"PostalCode/"+city)
+  }
+
 }
