@@ -21,18 +21,3 @@ export class CityMapper {
         return Cities;
     }
 }
-/*
-if(!Cities.find(x => x.Country == dt[i]["country"]))
-{
-    Cities.push(new City(dt[i]["id"],
-                    dt[i]["country"],
-                    dt[i]["postalCode"],
-                    dt[i]["cityName"]));
-}
-else if(Cities.length == 0)
-{
-    Cities.push(new City(dt[i]["id"],
-                    dt[i]["country"],
-                    dt[i]["postalCode"],
-                    dt[i]["cityName"]));
-}*/

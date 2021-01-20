@@ -11,5 +11,6 @@ namespace DAL.Models
         public string Description { get; set; }
         public int Year { get; set; }
         public bool? Disabled { get; set; }
+        public int IdProvider { get; set; }
     }
 }

@@ -15,6 +15,7 @@ import { DetailsWineComponent } from './Components/Details-Wine/Details-Wine.com
 import { ShoopingCartComponent } from './Components/Shooping-Cart/Shooping-Cart.component';
 import { AccueilComponent } from './Components/Accueil/Accueil.component';
 import { ManageWinesComponent } from './Components/Manage-Wines/Manage-Wines.component';
+import { AddWineComponent } from './Components/Add-Wine/Add-Wine.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem("jwt");
@@ -30,7 +31,8 @@ export function tokenGetter() {
       DetailsWineComponent,
       ShoopingCartComponent,
       AccueilComponent,
-      ManageWinesComponent
+      ManageWinesComponent,
+      AddWineComponent
    ],
   imports: [
     BrowserModule,

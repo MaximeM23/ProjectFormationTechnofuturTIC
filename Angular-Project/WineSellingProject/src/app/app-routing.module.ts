@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AccueilComponent } from './Components/Accueil/Accueil.component';
+import { AddWineComponent } from './Components/Add-Wine/Add-Wine.component';
 import { DetailsClientComponent } from './Components/Details-Client/Details-Client.component';
 import { DetailsWineComponent } from './Components/Details-Wine/Details-Wine.component';
 import { LoginComponent } from './Components/Login/Login.component';
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'wineProviderList',
     component: ManageWinesComponent
+  },
+  {
+    path: 'addWine',
+    component: AddWineComponent
   }
 ];
 

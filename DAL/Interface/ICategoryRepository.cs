@@ -8,5 +8,9 @@ namespace DAL.Interface
     public interface ICategoryRepository : IRepository<Category>
     {
         IEnumerable<Category> GetAllWineTypeCategory(int IdWine, int IdTag);
+
+        IEnumerable<Category> GetAllCategoriesByType(int IdType);
+
+        int InsertNewWineCategory(int IdWine, int IdCategory);
     }
 }

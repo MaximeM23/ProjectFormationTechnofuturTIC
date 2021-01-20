@@ -26,6 +26,13 @@ namespace DAL.Repository
             throw new NotImplementedException();
         }
 
+        public IEnumerable<Category> GetAllCategoriesByType(int IdType)
+        {
+            Connection.Command cmd = new Connection.Command("GetAllCategoriesByIdType", true);
+            cmd.AddParameter("@IdType", IdType);// Categoy tag
+            return _con.ExecuteReader(cmd, Mapper.CategoryToDAO);
+        }
+
         public IEnumerable<Category> GetAllWineTypeCategory(int IdWine,int IdTag)
         {
             Connection.Command cmd = new Connection.Command("GetAllWineTypeCategory", true);
@@ -44,9 +51,19 @@ namespace DAL.Repository
             throw new NotImplementedException();
         }
 
+        public int InsertNewWineCategory(int IdWine, int IdCategory)
+        {
+            Connection.Command cmd = new Connection.Command("InsertWineCategory", true);
+            cmd.AddParameter("@IdWine", IdWine);
+            cmd.AddParameter("@IdCategory", IdCategory);
+            return _con.ExecuteNonQuery(cmd);
+        }
+
         public bool Update(Category newValue)
         {
             throw new NotImplementedException();
         }
+
+
     }
 }

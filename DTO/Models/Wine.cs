@@ -14,5 +14,6 @@ namespace DTO.Models
         public List<Category> Category { get; set; }
         public List<Price> Prices { get; set; }
         public List<Comment> Comments { get; set; }
+        public int IdProvider { get; set; }
     }
 }

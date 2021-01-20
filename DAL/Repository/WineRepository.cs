@@ -55,7 +55,20 @@ namespace DAL.Repository
 
         public int Insert(Wine value)
         {
-            throw new NotImplementedException();
+            Connection.Command cmd = new Connection.Command("InsertNewWine", true);
+            cmd.AddParameter("@WineName", value.WineName);
+            cmd.AddParameter("@Description", value.Description);
+            cmd.AddParameter("@Year", value.Year);
+            cmd.AddParameter("@IdProvider", value.IdProvider);
+            return (int)_con.ExecuteScalar(cmd);
+        }
+
+        public int InsertPriceForwine(Price price)
+        {
+            Connection.Command cmd = new Connection.Command("InsertNewWinePrice", true);
+            cmd.AddParameter("@IdWine",price.IdWine);
+            cmd.AddParameter("@Price", price.PriceWine);
+            return _con.ExecuteNonQuery(cmd);
         }
 
         public bool Update(Wine newValue)

@@ -1,4 +1,5 @@
 ﻿using DTO.Interface;
+using DTO.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,12 +33,27 @@ namespace WineSellingProject.Controllers
         }
 
 
-        [HttpGet("{id}")]
         [Route("provider/{id}")]
         [Authorize(Roles = "Provider")]
         public IActionResult GetAllByProviderId(int id)
         {
             return Ok(_wineService.GetWineByProviderId(id));
         }
+
+        [HttpGet]
+        [Route("categories/{id}")]
+        [Authorize(Roles = "Provider")]
+        public IActionResult GetAllCategories(int id)
+        {
+            return Ok(_wineService.GetAllCategoriesByTagId(id));
+        }
+        
+        [HttpPost]
+        [Authorize(Roles = "Provider")]
+        public IActionResult InsertNewWine([FromBody] Wine wine)
+        {
+            return Ok(_wineService.Insert(wine));
+        }
+
     }
 }

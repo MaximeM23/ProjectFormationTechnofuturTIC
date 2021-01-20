@@ -137,16 +137,40 @@ namespace DTO.Tools
                 Id = wine.Id,
                 WineName = wine.WineName,
                 Year = wine.Year,
-                Disabled = wine.Disabled
+                Disabled = wine.Disabled                
             };
         }
 
-        public static DTO.Models.Price PriceDTOToWineDAO(this DAL.Models.Price price)
+        public static DAL.Models.Wine WineDAOToWineDTO(this DTO.Models.Wine wine)
+        {
+            return new DAL.Models.Wine()
+            {
+                Description = wine.Description,
+                Id = wine.Id,
+                WineName = wine.WineName,
+                Year = wine.Year,
+                Disabled = wine.Disabled,
+                IdProvider = wine.IdProvider
+            };
+        }
+
+        public static DAL.Models.Price PriceDALToPriceDTO(this DTO.Models.Price price)
+        {
+            return new DAL.Models.Price()
+            {
+                DateOfPrice = price.DateOfPrice,
+                PriceWine = price.PriceWine,
+                IdWine = price.IdWine
+            };
+        }
+
+        public static DTO.Models.Price PriceDTOToPriceDAO(this DAL.Models.Price price)
         {
             return new DTO.Models.Price()
             {
                 DateOfPrice = price.DateOfPrice,
-                PriceWine = price.PriceWine
+                PriceWine = price.PriceWine,
+                IdWine = price.IdWine
             };
         }
 

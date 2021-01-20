@@ -33,7 +33,7 @@ namespace DTO.Service
             foreach(Wine w in _wineRepository.GetAll().Select(x => x.WineDTOToWineDAO()))
             {
                 w.Prices = new List<Price>();
-                foreach(Price p in _wineRepository.GetWinePrice(w.Id).Select(x => x.PriceDTOToWineDAO()))
+                foreach(Price p in _wineRepository.GetWinePrice(w.Id).Select(x => x.PriceDTOToPriceDAO()))
                 {
                     w.Prices.Add(p);
                 }
@@ -47,7 +47,7 @@ namespace DTO.Service
         {
             Wine wine = _wineRepository.GetOne(Id).WineDTOToWineDAO();
             wine.Prices = new List<Price>();
-            foreach (Price p in _wineRepository.GetWinePrice(wine.Id).Select(x => x.PriceDTOToWineDAO()))
+            foreach (Price p in _wineRepository.GetWinePrice(wine.Id).Select(x => x.PriceDTOToPriceDAO()))
             {
                 wine.Prices.Add(p);
             }
@@ -67,7 +67,7 @@ namespace DTO.Service
             foreach (Wine w in _wineRepository.GetWineByProviderId(idProvider).Select(x => x.WineDTOToWineDAO()))
             {
                 w.Prices = new List<Price>();
-                foreach (Price p in _wineRepository.GetWinePrice(w.Id).Select(x => x.PriceDTOToWineDAO()))
+                foreach (Price p in _wineRepository.GetWinePrice(w.Id).Select(x => x.PriceDTOToPriceDAO()))
                 {
                     w.Prices.Add(p);
                 }
@@ -79,12 +79,31 @@ namespace DTO.Service
 
         public int Insert(Wine Value)
         {
-            throw new NotImplementedException();
+            int newWineId = _wineRepository.Insert(Value.WineDAOToWineDTO());
+            if (newWineId > 0)
+            {
+                foreach(Category c in Value.Category)
+                {
+                    _categoryRepository.InsertNewWineCategory(newWineId, c.Id);
+                }
+                foreach(Price p in Value.Prices)
+                {
+                    p.IdWine = newWineId;
+                    _wineRepository.InsertPriceForwine(p.PriceDALToPriceDTO());
+                }
+                return 1;
+            }
+            return 0;
         }
 
         public bool Update(Wine Value)
         {
             throw new NotImplementedException();
+        }
+
+        public IEnumerable<Category> GetAllCategoriesByTagId(int IdTag)
+        {
+            return _categoryRepository.GetAllCategoriesByType(IdTag).Select(x => x.CategoryDTOToCategoryDAO());
         }
     }
 }
