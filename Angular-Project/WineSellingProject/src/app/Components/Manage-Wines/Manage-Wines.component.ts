@@ -17,7 +17,6 @@ export class ManageWinesComponent implements OnInit {
   ngOnInit() {
     this._wineService.getWineByProviderId(this._sessionService.recoverIdUser()).subscribe(dt=>{
       this.wines.push(dt);
-      console.log(this.wines);
     });
   }
 
