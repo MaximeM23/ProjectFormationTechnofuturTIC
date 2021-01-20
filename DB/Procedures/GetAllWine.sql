@@ -8,6 +8,6 @@ BEGIN
     -- Insert statements for procedure here
 	SELECT IdWine,WineName,[Description],[Year], IdProvider, [Disabled]
 	FROM Wine
-	WHERE [Disabled] = 1 
+	WHERE [Disabled] = 0
 END
 GO

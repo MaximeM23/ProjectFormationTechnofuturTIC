@@ -19,12 +19,12 @@
                 <td>{{wine.wineName}}</td>
                 <td>{{wine.category[0].categoryName}}</td>
                 <td>{{wine.prices[0].priceWine}} €</td>
-                <td *ngIf="(wine.disabled)">
+                <td *ngIf="(!wine.disabled)">
                   <svg xmlns="http://www.w3.org/2000/svg" class="svgAvailable">
                     <circle cx="5" cy="5" r="5" fill="green" />
                   </svg>
                 </td>
-                <td *ngIf="(!wine.disabled)">
+                <td *ngIf="(wine.disabled)">
                   <svg xmlns="http://www.w3.org/2000/svg" class="svgAvailable">
                     <circle cx="5" cy="5" r="5" fill="red" />
                   </svg>
