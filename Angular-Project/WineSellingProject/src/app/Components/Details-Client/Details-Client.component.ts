@@ -55,11 +55,10 @@ export class DetailsClientComponent implements OnInit {
     });
   }
 
-  OnProfilChangeSubmit(value: NgForm): boolean{  
+  OnProfilChangeSubmit(value: NgForm): boolean{      
       if((this.profileForm.controls["password"].dirty) && (this.profileForm.controls["confirmPassword"].dirty))
       {
         if(value['password'] != value['confirmPassword']) return false;
-        console.log(value['password'])
         this.client.Firstname =   value["firstname"];
         this.client.Lastname =    value["lastname"];
         this.client.BirthDate =   value["birthDate"];      
@@ -80,6 +79,8 @@ export class DetailsClientComponent implements OnInit {
       }
       else {
         // modification without password  
+        this.profileForm.controls["password"].markAsUntouched();
+        this.profileForm.controls["confirmPassword"].markAsUntouched();
         this.client.Firstname =   value["firstname"];
         this.client.Lastname =    value["lastname"];
         this.client.BirthDate =   value["birthDate"];      

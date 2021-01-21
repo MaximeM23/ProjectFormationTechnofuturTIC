@@ -17,10 +17,8 @@ import jwt_decode from "../../../../node_modules/jwt-decode"
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  registerForm: FormGroup;
-  invalidLogin: boolean;
+  registerForm: FormGroup;;
   decrypted_token: any;
-  errorMsg : string;
   emailExist: boolean;
   isClient: boolean;
   isProvider: boolean;
@@ -44,44 +42,48 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  OnLoginSubmit(form: NgForm): void {    
-    const credentials = {
-      'emailAddress': form["emailLog"],
-      'password': form["passwordLog"]      
+  OnLoginSubmit(form: NgForm): void {  
+    this.loginForm.markAllAsTouched();
+    if(this.loginForm.valid)
+    {
+      const credentials = {
+        'emailAddress': form["emailLog"],
+        'password': form["passwordLog"]      
+      }
+      this.logService.logClient(credentials).subscribe(response =>
+        {
+          this.EncodingTokenInSession(response);
+        });
     }
-    this.logService.logClient(credentials).subscribe(response =>
-      {
-        this.EncodingTokenInSession(response);
-      }, err =>{
-        this.invalidLogin = true;      
-        this.errorMsg = "Email ou mot de passe invalide";
-      });
   }
 
   OnRegisterSubmit(form : NgForm) : void{   
-    this.clientService.RegisterClient(new RegisterClient(form['emailRegister'],form['passwordRegister'])).subscribe(
-      dt => {            
-        const credentials = {
-          'emailAddress': form["emailRegister"],
-          'password': form["passwordRegister"]      
+    this.registerForm.markAllAsTouched();
+    console.log(this.registerForm);
+    if(this.registerForm.valid){
+      this.clientService.RegisterClient(new RegisterClient(form['emailRegister'],form['passwordRegister'])).subscribe(
+        dt => {            
+          const credentials = {
+            'emailAddress': form["emailRegister"],
+            'password': form["passwordRegister"]      
+          }
+          this.logService.logClient(credentials).subscribe(response =>
+            {
+              this.EncodingTokenInSession(response);
+            });
+        },
+        error => {
+          if(error["error"]["text"]){
+            this.emailExist = true;
+          }
         }
-        this.logService.logClient(credentials).subscribe(response =>
-          {
-            this.EncodingTokenInSession(response);
-          });
-      },
-      error => {
-        if(error["error"]["text"]){
-          this.emailExist = true;
-        }
-      }
-    );
+      );
+    }
   }
 
   private EncodingTokenInSession(response: any) : void {    
     const token = (<any>response).token;
     sessionStorage.setItem("jwt",token);
-    this.invalidLogin = false;
     this.decrypted_token = jwt_decode(token);
     this.
     sessionService.connectedUser = new LoggedInformation(

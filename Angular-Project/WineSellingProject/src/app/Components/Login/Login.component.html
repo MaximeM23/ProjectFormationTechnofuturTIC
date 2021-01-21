@@ -6,17 +6,30 @@
           <form [formGroup]="loginForm" (ngSubmit)="OnLoginSubmit(loginForm.value)">
               <div class="form-group">
                   <input type="text" class="form-control" [formControl]="loginForm.controls['emailLog']" placeholder="Adresse email" value="" />
+                  <div *ngIf="loginForm.controls['emailLog'].invalid && (loginForm.controls['emailLog'].dirty || loginForm.controls['emailLog'].touched)">
+                    <div *ngIf="loginForm.controls['emailLog'].errors?.minlength" class="alert alert-danger">
+                        L'email doit comprendre au minimum 3 caractères.
+                    </div>  
+                    <div *ngIf="loginForm.controls['emailLog'].errors?.maxLength" class="alert alert-danger">
+                        L'email doit comprendre au maximum 50 caractères.
+                    </div>                            
+                    <div *ngIf="loginForm.controls['emailLog'].value.length == 0" class="alert alert-danger">
+                        L'email doit être indiqué
+                    </div>                  
+                </div>
               </div>
               <div class="form-group">
-                  <input type="password" class="form-control" [formControl]="loginForm.controls['passwordLog']" placeholder="Mot de passe" value="" />
+                <input type="password" class="form-control" [formControl]="loginForm.controls['passwordLog']" placeholder="Mot de passe" value="" />
+                <div *ngIf="loginForm.controls['passwordLog'].invalid && (loginForm.controls['passwordLog'].dirty || loginForm.controls['passwordLog'].touched)">                    
+                    <div *ngIf="loginForm.controls['passwordLog'].value.length == 0" class="alert alert-danger">
+                        Le mot de passe doit être indiqué
+                    </div>        
+                </div>
               </div>
               <div class="form-group centered">
                   <input type="submit" class="btnSubmit" value="Se connecter" />                  
               </div>
               <div>
-                <span class="text-danger" *ngIf="invalidLogin">{{errorMsg}}</span>
-              </div>
-              <div class="form-group centered">
                   <a href="#" class="ForgetPwd">Mot de passe oublié</a>
               </div>
           </form>
@@ -27,7 +40,7 @@
             <div class="form-group">
                 <input type="text" class="form-control" [formControl]="registerForm.controls['emailRegister']" placeholder="Adresse email" value="" />
                  <!-- Here goes validations errors messages -->
-                <div *ngIf="(registerForm.controls['emailRegister'].dirty)">
+                <div *ngIf="registerForm.controls['emailRegister'].invalid && (registerForm.controls['emailRegister'].dirty || registerForm.controls['emailRegister'].touched)">                    
                     <div *ngIf="registerForm.controls['emailRegister'].errors?.minlength" class="alert alert-danger">
                         L'email doit comprendre au minimum 3 caractères.
                     </div>  
@@ -37,40 +50,49 @@
                     <div *ngIf="emailExist" class="alert alert-danger">
                         L'email existe déjà, veuillez en choisir une autre
                     </div>
+                    <div *ngIf="registerForm.controls['emailRegister'].value.length == 0" class="alert alert-danger">
+                        L'email doit être compris entre 3 et 50 caractères
+                    </div>
+                    <div *ngIf="registerForm.controls['emailRegister'].errors?.email" class="alert alert-danger">
+                        L'email doit être au format xx@yy.com
+                    </div>
                 </div>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" [formControl]="registerForm.controls['passwordRegister']" placeholder="Mot de passe" value="" />
                  <!-- Here goes validations errors messages -->
-                <div *ngIf="(registerForm.controls['passwordRegister'].dirty)">
+                <div *ngIf="registerForm.controls['passwordRegister'].invalid && (registerForm.controls['passwordRegister'].dirty || registerForm.controls['passwordRegister'].touched)">
                     <div *ngIf="registerForm.controls['passwordRegister'].errors?.minlength" class="alert alert-danger">
-                    Le mot de passe doit comprendre au minimum 3 caractères.
+                        Le mot de passe doit comprendre au minimum 3 caractères.
                     </div>  
                     <div *ngIf="registerForm.controls['passwordRegister'].errors?.maxLength" class="alert alert-danger">
-                    Le mot de passe doit comprendre au maximum 50 caractères.
-                    </div>                          
+                        Le mot de passe doit comprendre au maximum 50 caractères.
+                    </div>                            
+                    <div *ngIf="registerForm.controls['passwordRegister'].value.length == 0" class="alert alert-danger">
+                        Le mot de passe doit être indiqué
+                    </div>                  
                 </div>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control" [formControl]="registerForm.controls['confPwdRegister']" placeholder="Confirmation du mot de passe" value="" />
                  <!-- Here goes validations errors messages -->
-                <div *ngIf="(registerForm.controls['confPwdRegister'].dirty)">
+                <div *ngIf="registerForm.controls['confPwdRegister'].invalid && (registerForm.controls['confPwdRegister'].dirty || registerForm.controls['confPwdRegister'].touched)">
                     <div *ngIf="registerForm.controls['confPwdRegister'].errors?.minlength" class="alert alert-danger">
-                    La confirmation du mot de passe doit comprendre au minimum 3 caractères.
+                        La confirmation du mot de passe doit comprendre au minimum 3 caractères.
                     </div>  
                     <div *ngIf="registerForm.controls['confPwdRegister'].errors?.maxLength" class="alert alert-danger">
-                    La confirmation du mot de passe doit comprendre au maximum 50 caractères.
+                        La confirmation du mot de passe doit comprendre au maximum 50 caractères.
                     </div>      
                     <div *ngIf="((registerForm.controls['confPwdRegister'].value != registerForm.controls['passwordRegister'].value) && (registerForm.controls['confPwdRegister'].value.length >= 1))" class="alert alert-danger">
-                    La confirmation du mot de passe doit correspondre au mot de passe.
-                    </div>   
+                        La confirmation du mot de passe doit correspondre au mot de passe.
+                    </div>                       
+                    <div *ngIf="registerForm.controls['confPwdRegister'].value.length == 0" class="alert alert-danger">
+                       Vous devez confirmer votre mot de passe
+                    </div>
                 </div>
             </div>
             <div class="form-group centered">
                 <input type="submit" class="btnSubmit" value="S'inscrire" />
-            </div>
-            <div class="form-group centered">
-                <a href="#" class="ForgetPwd">Mot de passe oublié</a>
             </div>
         </form>
       </div>

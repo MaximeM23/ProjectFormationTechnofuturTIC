@@ -152,6 +152,7 @@ namespace DAL.Tools
         {
             return new Category
             {
+                Id = (int)reader["IdCategory"],
                 CategoryName = (string)reader["CategoryName"],
                 IdTag = (int)reader["IdTag"]
             };

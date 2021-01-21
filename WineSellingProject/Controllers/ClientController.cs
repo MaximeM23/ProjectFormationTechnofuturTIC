@@ -39,6 +39,7 @@ namespace WineSellingProject.Controllers
         }
 
         [HttpPost]    
+        [AllowAnonymous]
         public IActionResult Insert([FromBody] Client client)
         {
             if (_service.FindEmail(client.EmailAddress,client.Id)) return Ok("Email address already exist");

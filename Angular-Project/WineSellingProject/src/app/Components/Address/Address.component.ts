@@ -117,16 +117,20 @@ export class AddressComponent implements OnInit {
   }
 
   AddAddressToUser(value: NgForm): void {
-    this._addressService.InsertAddressForUser(new Address(0,
-                                                          value.controls["street"].value,
-                                                          value.controls["number"].value,
-                                                          new City(0,value.controls["country"].value,
-                                                          value.controls["postalCode"].value,
-                                                          value.controls["city"].value)
-                                                          ),this._sessionService.recoverIdUser()).subscribe(dt =>{
-                                                            console.log(dt);
-                                                          });
-    location.reload();
+    this.addressForm.markAllAsTouched();
+    if(this.addressForm.valid)
+    {
+      let x = new Address(0,
+        value.controls["street"].value,
+        value.controls["number"].value,
+        new City(0,value.controls["country"].value,
+        value.controls["postalCode"].value,
+        value.controls["city"].value));
+      this._addressService.InsertAddressForUser(x,this._sessionService.recoverIdUser()).subscribe(dt =>{
+                                                              this.addresses.push(x);
+                                                            });
+    }
+    
   }
 
   RemoveAddress(id : number): void {
