@@ -23,13 +23,18 @@ export class DetailsWineComponent implements OnInit {
 
     this._wineService.getWineByWineId(this.idWine).subscribe(dt => {
       this.wineDetails = this._mapperService.jsonToDetailsWine(dt);
+
       for(let i = 0; i < this.wineDetails.comment.length; i++)
       {        
         this.AvgWine += this.wineDetails.comment[i].note;
       }
-      this.AvgWine = Math.round(this.AvgWine / this.wineDetails.comment.length);
+      this.AvgWine = Math.round(this.AvgWine / this.wineDetails.comment.length);      
     })
 
   }
 
+    IsNaN(value: number): boolean {
+      if(Number.isNaN(value)) return true;
+      return false;
+    }
 }

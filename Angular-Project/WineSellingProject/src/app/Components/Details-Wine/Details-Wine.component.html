@@ -14,6 +14,8 @@
             <h3 class="card-title text-center wineTextColor">{{wineDetails?.wineName}}</h3>
             <p class="card-text">{{wineDetails?.description}}</p>
             <div class="text-center">              
+              
+              <span class="text-warning" *ngIf="AvgWine == 0 || IsNaN(AvgWine)">&#9734; &#9734; &#9734; &#9734; &#9734;</span>
               <span class="text-warning" *ngIf="AvgWine == 1">&#9733; &#9734; &#9734; &#9734; &#9734;</span>
               <span class="text-warning" *ngIf="AvgWine == 2">&#9733; &#9733; &#9734; &#9734; &#9734;</span>
               <span class="text-warning" *ngIf="AvgWine == 3">&#9733; &#9733; &#9733; &#9734; &#9734;</span>
