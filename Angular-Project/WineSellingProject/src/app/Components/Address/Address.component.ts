@@ -128,6 +128,7 @@ export class AddressComponent implements OnInit {
         value.controls["city"].value));
       this._addressService.InsertAddressForUser(x,this._sessionService.recoverIdUser()).subscribe(dt =>{
                                                               this.addresses.push(x);
+                                                              this.ClickedForInsert = false;
                                                             });
     }
     

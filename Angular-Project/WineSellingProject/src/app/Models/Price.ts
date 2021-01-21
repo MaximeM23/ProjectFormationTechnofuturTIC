@@ -1,9 +1,9 @@
 export class Price {
-    price: number;
+    priceWine: number;
     dateOfPrice?: Date;
     
     constructor(price: number, dateOfPrice?: Date) {
-        this.price = price;
+        this.priceWine = price;
         this.dateOfPrice = dateOfPrice
     }
 }

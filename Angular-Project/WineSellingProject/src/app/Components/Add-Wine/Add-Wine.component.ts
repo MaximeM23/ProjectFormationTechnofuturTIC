@@ -40,22 +40,25 @@ export class AddWineComponent implements OnInit {
   }
 
   OnSubmit(form: NgForm) : void {
-    this.wineForm.markAllAsTouched();
-    let categoriesToAdd: Category[] = [];
-    let prices : Price[] = [];
-    console.log(form);
-    categoriesToAdd.push(new Category(form["category"]["id"],form["category"]["categoryName"],form["category"]["tag"]["id"]));
-    prices.push(new Price(form["price"]))
-    let x = new WineToInsert(form["wineName"],
-          prices,
-          form["year"],
-          form["description"],
-          categoriesToAdd,
-          this._sessionService.recoverIdUser())
-          console.log(form);
-    this._wineService.insertNewWine(x).subscribe(dt =>{
-            this._router.navigateByUrl("/wineProviderList");
-          });
+    this.wineForm.markAllAsTouched();    
+    if(this.wineForm.valid){
+      let categoriesToAdd: Category[] = [];
+      let prices : Price[] = [];
+      console.log(form);
+      categoriesToAdd.push(new Category(form["category"]["id"],form["category"]["categoryName"],form["category"]["tag"]["id"]));
+      prices.push(new Price(form["price"]))
+      let x = new WineToInsert(form["wineName"],
+            prices,
+            form["year"],
+            form["description"],
+            categoriesToAdd,
+            this._sessionService.recoverIdUser())
+            console.log(x);
+            
+      this._wineService.insertNewWine(x).subscribe(dt =>{
+              this._router.navigateByUrl("/wineProviderList");
+            });
+    }
   }
 
   setSelectedCategory(cat: HTMLSelectElement): void {
