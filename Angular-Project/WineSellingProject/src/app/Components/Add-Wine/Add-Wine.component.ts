@@ -18,6 +18,7 @@ export class AddWineComponent implements OnInit {
   actualYear: number; 
   wineForm: FormGroup;
   categories: Category[] = [];
+  selectedIdListCategory: number;
 
   ngOnInit() {
     this.actualYear = ((new Date()).getFullYear());
@@ -35,9 +36,17 @@ export class AddWineComponent implements OnInit {
   }
 
   OnSubmit(form: NgForm) : void {
-    console.group(form);
+    console.log(form);
     let categoriesToAdd: Category[] = [];
-    this.categories.push(form.control["category"]);
+    console.log(this.selectedIdListCategory);
+    this.categories.push(new Category(this.selectedIdListCategory,form.control["category"],null));
+    console.log(categoriesToAdd);
+    let x = new WineToInsert(form.control["wineName"].value,
+          new Price(form.control["price"]),
+          form.control["year"],
+          form.control["description"],
+          categoriesToAdd)
+    console.log(x);
     this._wineService.insertNewWine(
       new WineToInsert(form.control["wineName"].value,
           new Price(form.control["price"]),
@@ -46,8 +55,8 @@ export class AddWineComponent implements OnInit {
           categoriesToAdd));
   }
 
-  setSelectedCategory(cat: Category): void {
-
+  setSelectedCategory(cat: HTMLSelectElement): void {
+    this.selectedIdListCategory = parseInt(cat.value[0]);
   }
 
 }

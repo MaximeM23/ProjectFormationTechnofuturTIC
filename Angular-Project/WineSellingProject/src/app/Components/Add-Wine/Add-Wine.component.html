@@ -37,7 +37,7 @@
 
           <label for="category">La catégorie du vin</label>
           <select class="browser-default custom-select" #selectCategory (change)="setSelectedCategory(selectCategory)" [formControl]="wineForm.controls['category']">  
-            <option selected disabled></option>            
+            <option selected disabled></option>
             <option *ngFor="let category of categories" [ngValue]="category">{{category.categoryName}}</option>
           </select>              
           <div *ngIf="wineForm.controls['category'].invalid && (wineForm.controls['category'].dirty || wineForm.controls['category'].touched)" class="alert alert-danger">

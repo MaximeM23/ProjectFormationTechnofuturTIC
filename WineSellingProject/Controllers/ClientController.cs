@@ -14,6 +14,7 @@ namespace WineSellingProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Client")]
     public class ClientController : ControllerBase
     {
         IClientService _service;

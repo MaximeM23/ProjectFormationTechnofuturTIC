@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Address } from 'src/app/Models/Address';
 import { Client } from 'src/app/Models/Client';
 import { ClientService } from 'src/app/Services/ClientService/Client.service';
@@ -19,13 +20,13 @@ export class DetailsClientComponent implements OnInit {
     
   client: Client;
   get getClientAddresses(): Address[] {
-    if(this.client.Addresses !== undefined){
+    if(this.client?.Addresses !== undefined){
       return this.client.Addresses;
     }
   }
 
   successUpdate: boolean;
-  constructor(private _sessionService: SessionStorageService, private _clientService: ClientService, private _clientMapper: ClientMapperService, private _formBuilder: FormBuilder, private _datepipe: DatePipe) { }
+  constructor(private _router : Router, private _sessionService: SessionStorageService, private _clientService: ClientService, private _clientMapper: ClientMapperService, private _formBuilder: FormBuilder, private _datepipe: DatePipe) { }
   profileForm: FormGroup;
   ngOnInit() {
     this.profileForm = this._formBuilder.group({
@@ -49,6 +50,8 @@ export class DetailsClientComponent implements OnInit {
         password: this._formBuilder.control('',[PasswordUpdateValidatorMaxLength, PasswordUpdateValidatorMinLength]),
         confirmPassword: this._formBuilder.control('',[PasswordValidatorMaxLength, PasswordValidatorMinLength])
       });      
+    },err => {
+      this._router.navigateByUrl("/accueil");
     });
   }
 
