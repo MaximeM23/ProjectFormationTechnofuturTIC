@@ -34,4 +34,8 @@ export class WineService {
   insertNewWine(wine : WineToInsert) : Subscribable<Wine>{
     return this._http.post(this.url + "wine",wine);
   }
+
+  disableWine(id: number) :Subscribable<any>{
+    return this._http.delete(this.url + "wine/" + id);
+  }
 }

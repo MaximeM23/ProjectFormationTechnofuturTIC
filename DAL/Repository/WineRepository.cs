@@ -18,7 +18,9 @@ namespace DAL.Repository
 
         public int Delete(int value)
         {
-            throw new NotImplementedException();
+            Connection.Command cmd = new Connection.Command("DisableWine", true);
+            cmd.AddParameter("@IdWine", value);
+            return _con.ExecuteNonQuery(cmd);
         }
 
         public IEnumerable<Wine> GetAll()

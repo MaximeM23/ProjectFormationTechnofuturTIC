@@ -24,7 +24,7 @@ namespace DTO.Service
         }
         public bool Delete(int Id)
         {
-            throw new NotImplementedException();
+            return (_wineRepository.Delete(Id) != -1);
         }
 
         public IEnumerable<Wine> GetAll()

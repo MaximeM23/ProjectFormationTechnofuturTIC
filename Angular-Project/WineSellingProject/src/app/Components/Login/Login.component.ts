@@ -59,7 +59,6 @@ export class LoginComponent implements OnInit {
 
   OnRegisterSubmit(form : NgForm) : void{   
     this.registerForm.markAllAsTouched();
-    console.log(this.registerForm);
     if(this.registerForm.valid){
       this.clientService.RegisterClient(new RegisterClient(form['emailRegister'],form['passwordRegister'])).subscribe(
         dt => {            

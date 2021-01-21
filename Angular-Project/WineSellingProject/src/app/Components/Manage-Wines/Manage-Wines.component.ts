@@ -17,10 +17,22 @@ export class ManageWinesComponent implements OnInit {
 
   ngOnInit() {
     this._wineService.getWineByProviderId(this._sessionService.recoverIdUser()).subscribe(dt=>{
-      this.wines.push(dt);
+      for(let i = 0; i < dt.length; i++)
+      {
+        this.wines.push(dt[i]);
+      }
     },err => {
       this._route.navigateByUrl("/accueil");
     });
+  }
+
+  DisableWine(id: number) : void {
+    if(id>0)
+    {
+      this._wineService.disableWine(id).subscribe(dt => {
+        this.wines[this.wines.findIndex(x => x.id == id)].disabled = true;
+      });
+    }
   }
 
 }
