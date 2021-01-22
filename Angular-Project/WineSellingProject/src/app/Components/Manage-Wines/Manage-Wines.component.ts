@@ -35,4 +35,13 @@ export class ManageWinesComponent implements OnInit {
     }
   }
 
+  EnableWine(id: number) : void {
+    if(id>0)
+    {
+      this._wineService.enableWine(id).subscribe(dt => {
+        this.wines[this.wines.findIndex(x => x.id = id)].disabled = false;
+      })
+    }
+  }
+
 }

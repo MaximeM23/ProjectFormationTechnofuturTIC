@@ -23,6 +23,13 @@ namespace DAL.Repository
             return _con.ExecuteNonQuery(cmd);
         }
 
+        public int EnableWine(int id)
+        {
+            Connection.Command cmd = new Connection.Command("EnableWineById", true);
+            cmd.AddParameter("@Id", id);
+            return _con.ExecuteNonQuery(cmd);
+        }
+
         public IEnumerable<Wine> GetAll()
         {
             Connection.Command cmd = new Connection.Command("GetAllWine", true);

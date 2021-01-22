@@ -55,6 +55,15 @@ namespace WineSellingProject.Controllers
             return Ok(_wineService.Insert(wine));
         }
 
+
+        [HttpPut]
+        [Route("enable")]
+        [Authorize(Roles = "Provider")]
+        public IActionResult Enable([FromBody] int id)
+        {
+            return Ok(_wineService.EnableWine(id));
+        }
+
         [HttpDelete("{id}")]
         [Authorize(Roles = "Provider")]
         public IActionResult DeleteWine(int id)

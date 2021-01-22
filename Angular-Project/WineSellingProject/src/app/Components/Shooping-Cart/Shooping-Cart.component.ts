@@ -33,7 +33,7 @@ export class ShoopingCartComponent implements OnInit {
 
   recoverAddress(e : any) : void {
     if(e != undefined){
-      
+      // TODO
     }
   }
 

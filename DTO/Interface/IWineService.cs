@@ -12,5 +12,7 @@ namespace DTO.Interface
 
         public IEnumerable<Category> GetAllCategoriesByTagId(int IdTag);
 
+        public int EnableWine(int id);
+
     }
 }

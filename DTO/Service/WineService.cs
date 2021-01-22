@@ -105,5 +105,10 @@ namespace DTO.Service
         {
             return _categoryRepository.GetAllCategoriesByType(IdTag).Select(x => x.CategoryDTOToCategoryDAO());
         }
+
+        public int EnableWine(int id)
+        {
+            return _wineRepository.EnableWine(id);
+        }
     }
 }

@@ -38,4 +38,8 @@ export class WineService {
   disableWine(id: number) :Subscribable<any>{
     return this._http.delete(this.url + "wine/" + id);
   }
+  
+  enableWine(id: number) :Subscribable<any>{
+    return this._http.put(this.url + "wine/enable/", id);
+  }
 }

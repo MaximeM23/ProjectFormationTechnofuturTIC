@@ -11,5 +11,6 @@ namespace DAL.Interface
         IEnumerable<Price> GetWinePrice(int idWine);
         IEnumerable<Wine> GetWineByProviderId(int idProvider);
         int InsertPriceForwine(Price price);
+        int EnableWine(int id);
     }
 }
