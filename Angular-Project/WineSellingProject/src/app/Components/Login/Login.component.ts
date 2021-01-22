@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   emailExist: boolean;
   isClient: boolean;
   isProvider: boolean;
+  noUserFound: boolean;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -53,6 +54,9 @@ export class LoginComponent implements OnInit {
       this.logService.logClient(credentials).subscribe(response =>
         {
           this.EncodingTokenInSession(response);
+        },
+        err => {
+          this.noUserFound = true;          
         });
     }
   }

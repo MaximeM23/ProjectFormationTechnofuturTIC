@@ -27,7 +27,10 @@
                 </div>
               </div>
               <div class="form-group centered">
-                  <input type="submit" class="btnSubmit" value="Se connecter" />                  
+                  <input type="submit" class="btnSubmit" value="Se connecter" />     
+                  <div *ngIf="noUserFound" class="text-danger">
+                        Email ou mot de passe invalide
+                </div>        
               </div>
               <div>
                   <a href="#" class="ForgetPwd">Mot de passe oublié</a>

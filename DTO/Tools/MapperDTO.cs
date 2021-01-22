@@ -200,15 +200,19 @@ namespace DTO.Tools
 
         public static DTO.Models.Provider ProviderDTOToProviderDAO(this DAL.Models.Provider Provider)
         {
-            return new DTO.Models.Provider()
+            if(Provider != null)
             {
-                Description = Provider.Description,
-                EmailAddress = Provider.EmailAddress,
-                Id = Provider.Id,
-                Name = Provider.Name,
-                Password = Provider.Password,
-                PhoneNumber = Provider.PhoneNumber,                        
-            };
+                return new DTO.Models.Provider()
+                {
+                    Description = Provider.Description,
+                    EmailAddress = Provider.EmailAddress,
+                    Id = Provider.Id,
+                    Name = Provider.Name,
+                    Password = Provider.Password,
+                    PhoneNumber = Provider.PhoneNumber,                        
+                };
+            }
+            return null;
         }
     }
 }
