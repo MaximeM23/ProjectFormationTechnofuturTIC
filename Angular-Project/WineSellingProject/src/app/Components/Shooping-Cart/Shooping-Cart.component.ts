@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Address } from 'src/app/Models/Address';
 import { Cart } from 'src/app/Models/Cart';
 import { Wine } from 'src/app/Models/Wine';
 import { SessionStorageService } from 'src/app/Services/session-storage.service';
@@ -27,6 +28,12 @@ export class ShoopingCartComponent implements OnInit {
   payCart() : void {
     if(this._sessionService.recoverIdUser() == undefined){
       this._router.navigateByUrl("/login");
+    }
+  }
+
+  recoverAddress(e : any) : void {
+    if(e != undefined){
+      
     }
   }
 

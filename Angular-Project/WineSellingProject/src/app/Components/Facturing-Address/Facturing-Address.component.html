@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 pl-4">    
+        <h4 class="text-center mb-4 mt-4 wineTextColor">Veuillez choisir votre adresse de facturation</h4>    
+        <div class="row">            
+          <div *ngFor="let address of addresses; let index = index" class="card mb-4 border shadow mr-4">
+              
+                <div class="card-header">
+                  <h6 class="mb-1 text-secondary text-center">Adresse n°{{index + 1}}</h6>
+                </div>
+                <div class="card-body">
+
+                  <p class="text-center">
+                    {{address.street}}, {{address.number}}
+                  </p>
+                  <p class="text-center">
+                    {{address.city.country}},{{address.city.cityName}}, {{address.city.postalCode}}
+                  </p>  
+                  <div class="d-flex flex-nowrap bd-highlight">
+                    <div class="order-1 p-2 bd-highlight mx-auto">
+                      <a class="btn btn-outline-primary" (click)="choosedAddress(address)">
+                        Choisir
+                      </a>
+                    </div>                
+                  </div>
+                </div>
+              
+          </div>
+        </div> 
+    </div>
+  </div>
+</div>

@@ -26,6 +26,12 @@ namespace WineSellingProject.Controllers
             _cityService = cityService;
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetAllByIdUser(int id)
+        {
+            return Ok(_addressService.GetAddressesByIdUser(id));
+        }
+
         [HttpPost]
         [Route("{idClient}")]
         public IActionResult Insert([FromBody] Address value, int IdClient)

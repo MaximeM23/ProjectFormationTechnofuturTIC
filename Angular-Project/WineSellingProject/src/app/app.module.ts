@@ -16,6 +16,7 @@ import { ShoopingCartComponent } from './Components/Shooping-Cart/Shooping-Cart.
 import { AccueilComponent } from './Components/Accueil/Accueil.component';
 import { ManageWinesComponent } from './Components/Manage-Wines/Manage-Wines.component';
 import { AddWineComponent } from './Components/Add-Wine/Add-Wine.component';
+import { FacturingAddressComponent } from './Components/Facturing-Address/Facturing-Address.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem("jwt");
@@ -32,7 +33,8 @@ export function tokenGetter() {
       ShoopingCartComponent,
       AccueilComponent,
       ManageWinesComponent,
-      AddWineComponent
+      AddWineComponent,
+      FacturingAddressComponent
    ],
   imports: [
     BrowserModule,

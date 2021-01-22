@@ -2,6 +2,7 @@
 <div class="container mb-4">
   <div class="row">
       <div class="col-12">
+        <h4 class="text-center wineTextColor pt-4 mb-4">Votre panier</h4>
           <div class="table-responsive">
               <table class="table table-striped">
                   <thead>
@@ -60,6 +61,9 @@
           </div>
       </div>
       <div class="col mb-2">
+        <hr>
+          <app-Facturing-Address (ChosenAddress)="recoverAddress($event)"></app-Facturing-Address>
+          <hr>
           <div class="row">
               <div class="col-sm-12  col-md-6">
                   <a routerLink="/accueil" class="btn btn-block btn-outline-info">Continuer les achats</a>
