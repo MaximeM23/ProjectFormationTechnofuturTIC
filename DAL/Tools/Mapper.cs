@@ -179,5 +179,27 @@ namespace DAL.Tools
                 PhoneNumber = (string)reader["PhoneNumber"]
             };
         }
+        
+        public static Command CommandToDAO(IDataReader reader)
+        {
+            return new Command
+            {
+                DateCommand = (reader["DateOfCommand"] != DBNull.Value) ? (DateTime)reader["DateOfCommand"] : DateTime.MaxValue,
+                Id = (int)reader["IdCommand"],
+                IdAddress = (int)reader["IdClientAddress"],
+                IdClient = (int)reader["IdClient"]
+            };
+        }
+
+        public static CommandWine CommandWineToDAO(IDataReader reader)
+        {
+            return new CommandWine
+            {
+                Id = (int)reader["IdCommandWine"],
+                IdCommand = (int)reader["IdCommand"],
+                IdWine = (int)reader["IdWine"],
+                Quantity = (int)reader["Quantity"]
+            };
+        }
     }
 }

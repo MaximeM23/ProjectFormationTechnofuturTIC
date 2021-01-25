@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DTO.Interface
 {
-    public interface ICommandService: IInsertService<Command>
+    public interface ICommandService: IInsertService<Command>, IGetOneService<DetailsCommand>, IGetAllService<Command>
     {
     }
 }

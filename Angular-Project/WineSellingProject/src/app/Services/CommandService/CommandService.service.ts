@@ -10,12 +10,14 @@ import { environment } from 'src/environments/environment';
 export class CommandService {
 
   private url = environment.apiUrl;
-  
-constructor(private _http: HttpClient) { }
+    
+  constructor(private _http: HttpClient) { }
 
-sendCommandToApi(cmd: Command) : Subscribable<any>{
-  console.log(JSON.stringify(cmd));
-  return this._http.post(this.url + "Command",cmd);
-}
+  sendCommandToApi(cmd: Command) : Subscribable<any>{
+    return this._http.post(this.url + "Command",cmd);
+  }
 
+  getDetailsByIdCommand(idCommand: number) : Subscribable<any> {
+    return this._http.get(this.url + "Command/" + idCommand);
+  }
 }

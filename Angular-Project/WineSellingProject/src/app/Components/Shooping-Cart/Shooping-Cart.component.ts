@@ -41,7 +41,9 @@ export class ShoopingCartComponent implements OnInit {
       }
       let cmd : Command;
       cmd = new Command(0,this._sessionService.recoverIdUser(),this.idAddressSelected,cmdWine);      
-      this._commandService.sendCommandToApi(cmd);
+      this._commandService.sendCommandToApi(cmd).subscribe(dt => {
+        this._router.navigateByUrl("/detailsCommand/"+dt);
+      });
     }
   }
 

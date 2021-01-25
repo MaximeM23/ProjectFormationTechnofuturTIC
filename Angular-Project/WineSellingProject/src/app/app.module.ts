@@ -17,6 +17,7 @@ import { AccueilComponent } from './Components/Accueil/Accueil.component';
 import { ManageWinesComponent } from './Components/Manage-Wines/Manage-Wines.component';
 import { AddWineComponent } from './Components/Add-Wine/Add-Wine.component';
 import { FacturingAddressComponent } from './Components/Facturing-Address/Facturing-Address.component';
+import { DetailsCommandComponent } from './Components/DetailsCommand/DetailsCommand.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem("jwt");
@@ -34,7 +35,8 @@ export function tokenGetter() {
       AccueilComponent,
       ManageWinesComponent,
       AddWineComponent,
-      FacturingAddressComponent
+      FacturingAddressComponent,
+      DetailsCommandComponent
    ],
   imports: [
     BrowserModule,

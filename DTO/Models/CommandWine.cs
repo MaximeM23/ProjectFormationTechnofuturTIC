@@ -10,5 +10,7 @@ namespace DTO.Models
         public int Quantity { get; set; }
         public int IdWine { get; set; }
         public int IdCommand { get; set; }
+        public string? wineName { get; set; }
+        public decimal? winePrice { get; set; }
     }
 }

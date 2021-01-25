@@ -26,5 +26,11 @@ namespace WineSellingProject.Controllers
         {
             return Ok(_commandService.Insert(cmd));
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetCommandByIdCommand(int id)
+        {
+            return Ok(_commandService.GetOne(id));
+        }
     }
 }

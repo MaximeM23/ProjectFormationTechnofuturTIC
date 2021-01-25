@@ -5,8 +5,10 @@ using System.Text;
 
 namespace DAL.Interface
 {
-    public interface ICommandRepository: IInsertRepository<Command>
+    public interface ICommandRepository: IInsertRepository<Command>, IGetOneRepository<Command>, IGetAllRepository<Command>
     {
         int InsertCommandWine(CommandWine cw);
+
+        IEnumerable<CommandWine> GetAllCommandWineByCommandId(int id);
     }
 }

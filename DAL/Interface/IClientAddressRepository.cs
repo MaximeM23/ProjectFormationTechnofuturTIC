@@ -8,5 +8,6 @@ namespace DAL.Interface
     public interface IClientAddressRepository
     {
         int Insert(ClientAddress Value);
+
     }
 }

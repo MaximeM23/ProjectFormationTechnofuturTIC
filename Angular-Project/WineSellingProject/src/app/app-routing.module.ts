@@ -4,6 +4,7 @@ import { AccueilComponent } from './Components/Accueil/Accueil.component';
 import { AddWineComponent } from './Components/Add-Wine/Add-Wine.component';
 import { DetailsClientComponent } from './Components/Details-Client/Details-Client.component';
 import { DetailsWineComponent } from './Components/Details-Wine/Details-Wine.component';
+import { DetailsCommandComponent } from './Components/DetailsCommand/DetailsCommand.component';
 import { FacturingAddressComponent } from './Components/Facturing-Address/Facturing-Address.component';
 import { LoginComponent } from './Components/Login/Login.component';
 import { ManageWinesComponent } from './Components/Manage-Wines/Manage-Wines.component';
@@ -47,6 +48,10 @@ const routes: Routes = [
   {
     path: 'FactAddress',
     component: FacturingAddressComponent
+  },
+  {
+    path: 'detailsCommand/:id',
+    component: DetailsCommandComponent
   }
 ];
 

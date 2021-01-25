@@ -7,39 +7,6 @@ namespace DTO.Tools
     public static class MapperDTO
     {
         #region Client and adresses mapper
-        //public static DTO.Models.City CityDAOToCityDTO(this DAL.Models.City city)
-        //{
-        //    return new DTO.Models.City(city.Id, city.CityName, city.PostalCode, city.Country);
-        //}
-        //public static List<DTO.Models.Address> AddressDAOToClientDTO(this List<DAL.Models.Address> address)
-        //{
-        //    if (address == null) return null;
-        //    List<DTO.Models.Address> dtoAddress = null;
-        //    if(address.Count > 0)
-        //    {
-        //        dtoAddress = new List<DTO.Models.Address>();
-        //        foreach(DAL.Models.Address ad in address)
-        //        {
-        //            dtoAddress.Add(new DTO.Models.Address(ad.Id, ad.Street, ad.Number, ad.City.CityDAOToCityDTO()));
-        //        }
-        //    }
-        //    return dtoAddress;
-        //}
-        //public static DTO.Models.Client ClientDTOToClientDAO(this DAL.Models.Client client)
-        //{
-        //    return new DTO.Models.Client
-        //    {
-        //        Id = client.Id,
-        //        Addresses = client.Addresses.AddressDAOToClientDTO(),
-        //        BirthDate = client.BirthDate,
-        //        Disabled = client.Disabled,
-        //        EmailAddress = client.EmailAddress,
-        //        Firstname = client.Firstname,
-        //        Lastname = client.Lastname,
-        //        PhoneNumber = client.PhoneNumber
-        //    };
-        //}
-
         public static DTO.Models.Client ClientDTOToClientDAO(this DAL.Models.Client client)
         {
             if (client == null) return null;
@@ -230,11 +197,34 @@ namespace DTO.Tools
             return null;
         }
 
+        public static DTO.Models.Command CommandDTOToCommanDAO(this DAL.Models.Command Command)
+        {
+            if (Command != null)
+            {
+                return new DTO.Models.Command(Command.Id, Command.IdAddress, Command.IdClient, new List<Models.CommandWine>(),Command.DateCommand);
+            }
+            return null;
+        }
+
         public static DAL.Models.CommandWine CommandWineDAOToCommandWineDTO(this DTO.Models.CommandWine CommandWine)
         {
             if(CommandWine != null)
             {
                 return new DAL.Models.CommandWine()
+                {
+                    Id = CommandWine.Id,
+                    IdCommand = CommandWine.IdCommand,
+                    IdWine = CommandWine.IdWine,
+                    Quantity = CommandWine.Quantity,
+                };
+            }
+            return null;
+        }
+        public static DTO.Models.CommandWine CommandWineDAOToCommandWineDTO(this DAL.Models.CommandWine CommandWine)
+        {
+            if (CommandWine != null)
+            {
+                return new DTO.Models.CommandWine()
                 {
                     Id = CommandWine.Id,
                     IdCommand = CommandWine.IdCommand,

@@ -63,5 +63,12 @@ namespace DAL.Repository
             if(_con.ExecuteNonQuery(cmd) > 0) return true;
             return false;
         }
+
+        public Address GetAddressByClientAddress(int id)
+        {
+            Connection.Command cmd = new Connection.Command("GetAddressByClientAddressId", true);
+            cmd.AddParameter("@IdClientAddress", id);
+            return _con.ExecuteReader(cmd, Mapper.AddressToDAO).SingleOrDefault();
+        }
     }
 }
