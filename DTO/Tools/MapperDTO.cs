@@ -214,5 +214,35 @@ namespace DTO.Tools
             }
             return null;
         }
+
+        public static DAL.Models.Command CommandDAOToCommanDTO(this DTO.Models.Command Command)
+        {
+            if(Command != null)
+            {
+                return new DAL.Models.Command()
+                {
+                    Id = Command.Id,
+                    DateCommand = DateTime.Now,
+                    IdClient = Command.IdClient,
+                    IdAddress = Command.IdAddress
+                };
+            }
+            return null;
+        }
+
+        public static DAL.Models.CommandWine CommandWineDAOToCommandWineDTO(this DTO.Models.CommandWine CommandWine)
+        {
+            if(CommandWine != null)
+            {
+                return new DAL.Models.CommandWine()
+                {
+                    Id = CommandWine.Id,
+                    IdCommand = CommandWine.IdCommand,
+                    IdWine = CommandWine.IdWine,
+                    Quantity = CommandWine.Quantity,
+                };
+            }
+            return null;
+        }
     }
 }

@@ -39,8 +39,8 @@ export class ManageWinesComponent implements OnInit {
     if(id>0)
     {
       this._wineService.enableWine(id).subscribe(dt => {
-        this.wines[this.wines.findIndex(x => x.id = id)].disabled = false;
-      })
+        this.wines[this.wines.findIndex(x => x.id == id)].disabled = false;
+      });
     }
   }
 

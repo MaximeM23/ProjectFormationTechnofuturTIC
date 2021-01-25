@@ -43,4 +43,10 @@ export class NavbarComponent implements OnInit {
     if(qt == null) return 0;
     else return qt;
   }
+
+  userNotLogged() : void {
+    if(this._sessionService.recoverIdUser() == undefined){
+      this._router.navigateByUrl("/login");
+    }
+  }
 }

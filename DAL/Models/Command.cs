@@ -8,7 +8,7 @@ namespace DAL.Models
     {
         public int Id { get; set; }
         public DateTime DateCommand { get; set; }
-        public int IdFacturationAddress { get; set; }
+        public int IdAddress { get; set; }
         public int IdClient { get; set; }
     }
 }
