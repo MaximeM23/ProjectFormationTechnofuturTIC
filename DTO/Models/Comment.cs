@@ -12,12 +12,14 @@ namespace DTO.Models
         public int Note { get; set; }
         public ClientComment Client { get; set; }
         public int idClient { get; set; }
-        public Comment(int id, string commentValue, int note, int idC)
+        public int IdWine { get; set; }
+        public Comment(int id, string commentValue, int note, int idC,int Idw)
         {
             Id = id;
             CommentValue = commentValue;
             Note = note;
             idClient = idC;
+            IdWine = Idw;
         }
 
     }

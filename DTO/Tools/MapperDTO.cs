@@ -152,9 +152,19 @@ namespace DTO.Tools
         }
         public static DTO.Models.Comment CommentDTOToCommentDAO(this DAL.Models.Comment Comment)
         {
-            return new DTO.Models.Comment(Comment.Id, Comment.CommentValue, Comment.Note,Comment.IdClient);            
+            return new DTO.Models.Comment(Comment.Id, Comment.CommentValue, Comment.Note,Comment.IdClient,Comment.IdWine);            
         }
 
+        public static DAL.Models.Comment CommentDALToCommentDTO(this DTO.Models.Comment Comment)
+        {
+            return new DAL.Models.Comment()
+            {
+                CommentValue = Comment.CommentValue,
+                IdClient = Comment.idClient,
+                IdWine = Comment.IdWine,
+                Note = Comment.Note
+            };
+        }
 
         public static DTO.Models.ClientComment ClientCommentDTOToClientCommentDAO(this DAL.Models.Client Client)
         {

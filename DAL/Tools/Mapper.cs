@@ -165,7 +165,8 @@ namespace DAL.Tools
                 CommentValue = (string)reader["Comment"],
                 Id = (int)reader["IdComment"],
                 IdClient = (int)reader["IdClient"],
-                Note = (byte)reader["Note"]
+                Note = (byte)reader["Note"],
+                IdWine = (int)reader["IdWine"]
             };
         }
         public static Provider ProviderToDAO(IDataReader reader)

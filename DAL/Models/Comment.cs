@@ -11,6 +11,7 @@ namespace DAL.Models
         public string CommentValue { get; set; }
         public int Note { get; set; }
         public int IdClient { get; set; }
+        public int IdWine { get; set; }
 
     }
 }

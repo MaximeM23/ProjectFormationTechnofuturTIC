@@ -39,7 +39,12 @@ namespace DAL.Repository
 
         public int Insert(Comment value)
         {
-            throw new NotImplementedException();
+            Connection.Command cmd = new Connection.Command("InsertNewComment", true);
+            cmd.AddParameter("@Note", value.Note);
+            cmd.AddParameter("@Comment", value.CommentValue);
+            cmd.AddParameter("@IdClient", value.IdClient);
+            cmd.AddParameter("@IdWine", value.IdWine);
+            return _con.ExecuteNonQuery(cmd);
         }
 
         public bool Update(Comment newValue)
