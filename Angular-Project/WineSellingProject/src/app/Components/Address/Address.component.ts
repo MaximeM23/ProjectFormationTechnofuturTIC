@@ -134,9 +134,7 @@ export class AddressComponent implements OnInit {
   }
 
   RemoveAddress(id : number): void {
-    console.log(id);
     this._addressService.DeleteAddress(id).subscribe(dt => { 
-      console.log(dt);     
       if(dt == true) this.addresses.splice(this.addresses.findIndex(x => x.Id == id),1);  
     },er => {
       // display error message here

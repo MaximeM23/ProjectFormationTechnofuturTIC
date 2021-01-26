@@ -89,7 +89,6 @@ export class DetailsClientComponent implements OnInit {
         this.client.Firstname =   value["firstname"];
         this._clientService.UpdateClientInformation(this.client).subscribe(dt =>
           {
-            console.log(dt);
             if(dt != null)
             {
               this._sessionService.updateSessionInformation(dt);

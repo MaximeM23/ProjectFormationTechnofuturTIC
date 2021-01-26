@@ -26,7 +26,6 @@ export class DetailsCommandComponent implements OnInit {
     })
 
     this._commandService.getDetailsByIdCommand(this.idCommand).subscribe(dt => {
-      console.log(dt);
       this.details = this._commandMapper.jsonToDetailsCommand(dt);
       for(let i = 0 ; i < this.details.winedetails.length;i++){
         this.prixTotal = parseInt(this.prixTotal.toString()) + (this.details.winedetails[i].winePrice * this.details.winedetails[i].quantity);

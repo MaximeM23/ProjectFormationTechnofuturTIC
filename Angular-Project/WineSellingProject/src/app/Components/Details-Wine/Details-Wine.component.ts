@@ -68,7 +68,6 @@ export class DetailsWineComponent implements OnInit {
       this.commentForm.controls['note'].markAsTouched();
       if(this.commentForm.valid){
         let commentToSend = new CommentToSend(0,this.commentForm.controls['comment'].value,this.commentForm.controls['note'].value,this._sessionService.recoverIdUser(),parseInt(this.idWine))
-        console.log(commentToSend);
         this._commentService.insertNewComment(commentToSend).subscribe(dt => {          
           this.commentForm.reset();          
           this._wineService.getWineByWineId(this.idWine).subscribe(dt => {

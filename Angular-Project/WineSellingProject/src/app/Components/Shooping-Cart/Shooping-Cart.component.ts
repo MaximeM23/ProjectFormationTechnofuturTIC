@@ -55,4 +55,14 @@ export class ShoopingCartComponent implements OnInit {
     }
   }
 
+  removeFromCart(idWine : number){  
+    let tmpcart : Cart[] = this._sessionService.getTempCart();
+    let cartToRemove : Cart = tmpcart.find(x => x.id == idWine);
+    tmpcart.splice(tmpcart.findIndex(x => x.id == idWine),1);
+    sessionStorage.setItem("tmpCart",JSON.stringify(tmpcart));
+    this.cart.splice(tmpcart.findIndex(x => x.id == idWine),1);
+    this.total = parseInt(this.total.toString()) - (cartToRemove.price * cartToRemove.quantity);
+    
+  }
+
 }

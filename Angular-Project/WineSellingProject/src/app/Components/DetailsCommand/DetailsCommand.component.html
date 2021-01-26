@@ -37,11 +37,11 @@
             <div class="card-body">
 
               <p class="text-center">
-                Prénom : {{details.firstname}}
+                Prénom : {{details?.firstname}}
               </p>
-              <p class="text-center">Nom :{{details.lastname}}</p>
+              <p class="text-center">Nom :{{details?.lastname}}</p>
               <p class="text-center">
-                Email : {{details.emailAddress}}
+                Email : {{details?.emailAddress}}
               </p>  
             </div>
           
@@ -66,7 +66,7 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <tr *ngFor="let wine of details.winedetails">
+                      <tr *ngFor="let wine of details?.winedetails">
                           <td></td>
                           <td>{{wine.wineName}}</td>
                           <td class="text-center">{{wine.quantity}}</td>
