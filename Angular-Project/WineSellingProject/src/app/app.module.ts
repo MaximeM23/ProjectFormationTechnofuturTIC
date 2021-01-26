@@ -18,6 +18,7 @@ import { ManageWinesComponent } from './Components/Manage-Wines/Manage-Wines.com
 import { AddWineComponent } from './Components/Add-Wine/Add-Wine.component';
 import { FacturingAddressComponent } from './Components/Facturing-Address/Facturing-Address.component';
 import { DetailsCommandComponent } from './Components/DetailsCommand/DetailsCommand.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 export function tokenGetter() {
   return sessionStorage.getItem("jwt");
@@ -50,7 +51,8 @@ export function tokenGetter() {
         allowedDomains:["localhost:4200"],
         disallowedRoutes:[]
       }
-    })
+    }),
+    NgbModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
