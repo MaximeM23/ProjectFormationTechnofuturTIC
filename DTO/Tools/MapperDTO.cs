@@ -160,7 +160,7 @@ namespace DTO.Tools
             return new DAL.Models.Comment()
             {
                 CommentValue = Comment.CommentValue,
-                IdClient = Comment.idClient,
+                IdClient = Comment.IdClient,
                 IdWine = Comment.IdWine,
                 Note = Comment.Note
             };

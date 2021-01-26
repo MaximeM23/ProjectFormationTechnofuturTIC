@@ -7,7 +7,7 @@ using DTO.Tools;
 
 namespace DTO.Service
 {
-    class CommentService : ICommentService
+    public class CommentService : ICommentService
     {
         ICommentRepository _commentRepo;
         public CommentService(ICommentRepository commentRepo)

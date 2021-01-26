@@ -55,7 +55,7 @@ namespace DTO.Service
             wine.Comments = new List<Comment>();
             foreach(Comment c in _commentRepository.GetCommentByWineId(wine.Id).Select(x => x.CommentDTOToCommentDAO()))
             {
-                c.Client = _clientRepository.GetOne(c.idClient).ClientCommentDTOToClientCommentDAO();
+                c.Client = _clientRepository.GetOne(c.IdClient).ClientCommentDTOToClientCommentDAO();
                 wine.Comments.Add(c);
             }
             return wine;

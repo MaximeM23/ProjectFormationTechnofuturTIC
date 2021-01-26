@@ -60,6 +60,7 @@ namespace WineSellingProject
             services.AddScoped<IWineService, WineService>();
             services.AddScoped<IProviderService, ProviderService>();
             services.AddScoped<ICommandService, CommandService>();
+            services.AddScoped<ICommentService, CommentService>();
             #endregion
             #region Repositories
             services.AddScoped<ICommentRepository, CommentRepository>();
