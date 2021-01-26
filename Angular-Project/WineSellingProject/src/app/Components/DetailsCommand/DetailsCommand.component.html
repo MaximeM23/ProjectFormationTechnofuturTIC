@@ -14,13 +14,13 @@
                 <div class="card-body">
 
                   <p class="text-center">
-                    {{details.address.Street}}, {{details.address.Number}}
+                    {{details?.address.Street}}, {{details?.address.Number}}
                   </p>
                   <p class="text-center">
-                    {{details.address.City.CityName}}, {{details.address.City.PostalCode}}
+                    {{details?.address.City.CityName}}, {{details?.address.City.PostalCode}}
                   </p>  
                   <p class="text-center">
-                    {{details.address.City.Country}}
+                    {{details?.address.City.Country}}
                   </p>
                 </div>             
           </div>
@@ -83,12 +83,12 @@
                           <td></td>
                           <td></td>
                           <td class="text-right"><strong>Total</strong></td>
-                          <td class="text-right"><strong> €</strong></td>
+                          <td class="text-right"><strong>{{prixTotal}} €</strong></td>
                       </tr>
                       <tr>
                         <td></td>
                         <td></td>
-                        <td class="text-right"><strong>Status</strong></td>
+                        <td class="text-right"><strong>Statut</strong></td>
                         <td class="text-right"><strong>Payé</strong></td>
                     </tr>
                   </tbody>

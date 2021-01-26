@@ -66,6 +66,11 @@ export class SessionStorageService {
     sessionStorage.setItem("tmpCart", JSON.stringify(tmpCart));
   }
 
+  emptyCart(): void {        
+    sessionStorage.removeItem("tmpCart");
+    sessionStorage.removeItem("cart");
+  }
+
   removeTempCartData(wine: Cart) : void{    
     let tmpCart : Cart[] = JSON.parse(sessionStorage.getItem("tmpCart"));
     tmpCart.splice(tmpCart.findIndex(x => x.id == wine.id));
@@ -77,7 +82,17 @@ export class SessionStorageService {
   }
 
   getCartQt() : number {
-    return JSON.parse(sessionStorage.getItem("tmpCart"))?.length;
+    let jsonQt = sessionStorage.getItem("tmpCart");
+    if(jsonQt == undefined || jsonQt == null) {
+      return 0;
+    }
+    else {
+      let qt = JSON.parse(sessionStorage.getItem("tmpCart"))?.length;
+      if(qt != undefined || qt != null){
+        return qt
+      }
+      return 0;
+    }
   }
 
 }

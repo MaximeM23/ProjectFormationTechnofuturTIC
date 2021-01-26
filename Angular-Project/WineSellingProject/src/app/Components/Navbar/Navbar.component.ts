@@ -48,5 +48,8 @@ export class NavbarComponent implements OnInit {
     if(this._sessionService.recoverIdUser() == undefined){
       this._router.navigateByUrl("/login");
     }
+    else if(this._sessionService.getCartQt() == 0){
+      this._router.navigateByUrl("/accueil");
+    }
   }
 }

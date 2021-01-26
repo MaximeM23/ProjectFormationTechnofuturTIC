@@ -40,8 +40,9 @@ export class ShoopingCartComponent implements OnInit {
         cmdWine.push(new CommandWine(this.cart[i].quantity,this.cart[i].id));
       }
       let cmd : Command;
-      cmd = new Command(0,this._sessionService.recoverIdUser(),this.idAddressSelected,cmdWine);      
+      cmd = new Command(0,this._sessionService.recoverIdUser(),this.idAddressSelected,cmdWine);   
       this._commandService.sendCommandToApi(cmd).subscribe(dt => {
+        this._sessionService.emptyCart();
         this._router.navigateByUrl("/detailsCommand/"+dt);
       });
     }

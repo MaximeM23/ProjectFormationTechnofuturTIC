@@ -14,6 +14,7 @@ export class DetailsCommandComponent implements OnInit {
 
   details: DetailsCommand;
   idCommand: number;
+  prixTotal: number = 0;
 
   constructor(private _commandService: CommandService, private _route: ActivatedRoute, private _commandMapper: CommandMapperService) { }
 
@@ -25,9 +26,13 @@ export class DetailsCommandComponent implements OnInit {
     })
 
     this._commandService.getDetailsByIdCommand(this.idCommand).subscribe(dt => {
+      console.log(dt);
       this.details = this._commandMapper.jsonToDetailsCommand(dt);
-      console.log(this.details);
+      for(let i = 0 ; i < this.details.winedetails.length;i++){
+        this.prixTotal = parseInt(this.prixTotal.toString()) + (this.details.winedetails[i].winePrice * this.details.winedetails[i].quantity);
+      }
     });
+
   }
 
 }
