@@ -25,6 +25,7 @@ export class DetailsWineComponent implements OnInit {
   commentForm: FormGroup;
   currentRate = 0;
   displayCommentform : boolean = false;
+  successAddedWineCart: boolean = false;
 
   ngOnInit() {
 
@@ -60,6 +61,7 @@ export class DetailsWineComponent implements OnInit {
 
     AddToCart(wine: Wine, qt:NgForm){
       this._sessionService.storeTempCart(new Cart(wine.id,wine.wineName,wine.disabled,wine.prices[0].priceWine,qt["qt"]));
+      this.successAddedWineCart = true;
     }
 
     leaveAComment() : void{
