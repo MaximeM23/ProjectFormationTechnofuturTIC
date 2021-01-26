@@ -76,20 +76,23 @@ export class LoginComponent implements OnInit {
             });
         },
         error => {
-          if(error["error"]["text"]){
-            this.emailExist = true;
+          if(error["error"]["text"] == "Email address already exist"){
+            this.emailExist = !this.emailExistError();                        
           }
         }
       );
     }
   }
 
+  emailExistError() : boolean {
+    return this.emailExist;
+  }
+
   private EncodingTokenInSession(response: any) : void {    
     const token = (<any>response).token;
     sessionStorage.setItem("jwt",token);
     this.decrypted_token = jwt_decode(token);
-    this.
-    sessionService.connectedUser = new LoggedInformation(
+    this.sessionService.connectedUser = new LoggedInformation(
       this.decrypted_token["UserId"],
       this.decrypted_token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
       this.decrypted_token["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],

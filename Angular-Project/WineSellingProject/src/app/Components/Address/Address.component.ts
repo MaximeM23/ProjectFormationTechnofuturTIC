@@ -125,6 +125,7 @@ export class AddressComponent implements OnInit {
         value.controls["postalCode"].value,
         value.controls["city"].value));
       this._addressService.InsertAddressForUser(x,this._sessionService.recoverIdUser()).subscribe(dt =>{
+                                                              x.Id = dt;
                                                               this.addresses.push(x);
                                                               this.ClickedForInsert = false;
                                                             });
@@ -133,8 +134,10 @@ export class AddressComponent implements OnInit {
   }
 
   RemoveAddress(id : number): void {
-    this._addressService.DeleteAddress(id).subscribe(dt => {      
-      this.addresses.splice(this.addresses.findIndex(x => x.Id == id),1);  
+    console.log(id);
+    this._addressService.DeleteAddress(id).subscribe(dt => { 
+      console.log(dt);     
+      if(dt == true) this.addresses.splice(this.addresses.findIndex(x => x.Id == id),1);  
     },er => {
       // display error message here
     });  

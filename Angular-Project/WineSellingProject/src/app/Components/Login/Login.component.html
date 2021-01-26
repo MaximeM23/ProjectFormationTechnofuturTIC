@@ -50,17 +50,18 @@
                     <div *ngIf="registerForm.controls['emailRegister'].errors?.maxLength" class="alert alert-danger">
                         L'email doit comprendre au maximum 50 caractères.
                     </div>
-                    <div *ngIf="emailExist" class="alert alert-danger">
-                        L'email existe déjà, veuillez en choisir une autre
-                    </div>
                     <div *ngIf="registerForm.controls['emailRegister'].value.length == 0" class="alert alert-danger">
                         L'email doit être compris entre 3 et 50 caractères
                     </div>
                     <div *ngIf="registerForm.controls['emailRegister'].errors?.email" class="alert alert-danger">
                         L'email doit être au format xx@yy.com
                     </div>
+                </div>                
+                <div *ngIf="emailExistError()" class="alert alert-danger">
+                    L'email existe déjà, veuillez en choisir une autre
                 </div>
             </div>
+            
             <div class="form-group">
                 <input type="password" class="form-control" [formControl]="registerForm.controls['passwordRegister']" placeholder="Mot de passe" value="" />
                  <!-- Here goes validations errors messages -->
