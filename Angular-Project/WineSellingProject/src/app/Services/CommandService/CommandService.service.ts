@@ -20,4 +20,5 @@ export class CommandService {
   getDetailsByIdCommand(idCommand: number) : Subscribable<any> {
     return this._http.get(this.url + "Command/" + idCommand);
   }
+  
 }
