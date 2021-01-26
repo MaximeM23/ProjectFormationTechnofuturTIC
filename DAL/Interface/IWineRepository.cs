@@ -9,7 +9,8 @@ namespace DAL.Interface
     {
         IEnumerable<Wine> GetWineByCategory(string category);
         IEnumerable<Price> GetWinePrice(int idWine);
-
         IEnumerable<Wine> GetWineByProviderId(int idProvider);
+        int InsertPriceForwine(Price price);
+        int EnableWine(int id);
     }
 }

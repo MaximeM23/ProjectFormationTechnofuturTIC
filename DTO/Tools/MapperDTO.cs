@@ -7,39 +7,6 @@ namespace DTO.Tools
     public static class MapperDTO
     {
         #region Client and adresses mapper
-        //public static DTO.Models.City CityDAOToCityDTO(this DAL.Models.City city)
-        //{
-        //    return new DTO.Models.City(city.Id, city.CityName, city.PostalCode, city.Country);
-        //}
-        //public static List<DTO.Models.Address> AddressDAOToClientDTO(this List<DAL.Models.Address> address)
-        //{
-        //    if (address == null) return null;
-        //    List<DTO.Models.Address> dtoAddress = null;
-        //    if(address.Count > 0)
-        //    {
-        //        dtoAddress = new List<DTO.Models.Address>();
-        //        foreach(DAL.Models.Address ad in address)
-        //        {
-        //            dtoAddress.Add(new DTO.Models.Address(ad.Id, ad.Street, ad.Number, ad.City.CityDAOToCityDTO()));
-        //        }
-        //    }
-        //    return dtoAddress;
-        //}
-        //public static DTO.Models.Client ClientDTOToClientDAO(this DAL.Models.Client client)
-        //{
-        //    return new DTO.Models.Client
-        //    {
-        //        Id = client.Id,
-        //        Addresses = client.Addresses.AddressDAOToClientDTO(),
-        //        BirthDate = client.BirthDate,
-        //        Disabled = client.Disabled,
-        //        EmailAddress = client.EmailAddress,
-        //        Firstname = client.Firstname,
-        //        Lastname = client.Lastname,
-        //        PhoneNumber = client.PhoneNumber
-        //    };
-        //}
-
         public static DTO.Models.Client ClientDTOToClientDAO(this DAL.Models.Client client)
         {
             if (client == null) return null;
@@ -137,16 +104,40 @@ namespace DTO.Tools
                 Id = wine.Id,
                 WineName = wine.WineName,
                 Year = wine.Year,
-                Disabled = wine.Disabled
+                Disabled = wine.Disabled                
             };
         }
 
-        public static DTO.Models.Price PriceDTOToWineDAO(this DAL.Models.Price price)
+        public static DAL.Models.Wine WineDAOToWineDTO(this DTO.Models.Wine wine)
+        {
+            return new DAL.Models.Wine()
+            {
+                Description = wine.Description,
+                Id = wine.Id,
+                WineName = wine.WineName,
+                Year = wine.Year,
+                Disabled = wine.Disabled,
+                IdProvider = wine.IdProvider
+            };
+        }
+
+        public static DAL.Models.Price PriceDALToPriceDTO(this DTO.Models.Price price)
+        {
+            return new DAL.Models.Price()
+            {
+                DateOfPrice = price.DateOfPrice,
+                PriceWine = price.PriceWine,
+                IdWine = price.IdWine
+            };
+        }
+
+        public static DTO.Models.Price PriceDTOToPriceDAO(this DAL.Models.Price price)
         {
             return new DTO.Models.Price()
             {
                 DateOfPrice = price.DateOfPrice,
-                PriceWine = price.PriceWine
+                PriceWine = price.PriceWine,
+                IdWine = price.IdWine
             };
         }
 
@@ -161,9 +152,19 @@ namespace DTO.Tools
         }
         public static DTO.Models.Comment CommentDTOToCommentDAO(this DAL.Models.Comment Comment)
         {
-            return new DTO.Models.Comment(Comment.Id, Comment.CommentValue, Comment.Note,Comment.IdClient);            
+            return new DTO.Models.Comment(Comment.Id, Comment.CommentValue, Comment.Note,Comment.IdClient,Comment.IdWine);            
         }
 
+        public static DAL.Models.Comment CommentDALToCommentDTO(this DTO.Models.Comment Comment)
+        {
+            return new DAL.Models.Comment()
+            {
+                CommentValue = Comment.CommentValue,
+                IdClient = Comment.IdClient,
+                IdWine = Comment.IdWine,
+                Note = Comment.Note
+            };
+        }
 
         public static DTO.Models.ClientComment ClientCommentDTOToClientCommentDAO(this DAL.Models.Client Client)
         {
@@ -176,15 +177,72 @@ namespace DTO.Tools
 
         public static DTO.Models.Provider ProviderDTOToProviderDAO(this DAL.Models.Provider Provider)
         {
-            return new DTO.Models.Provider()
+            if(Provider != null)
             {
-                Description = Provider.Description,
-                EmailAddress = Provider.EmailAddress,
-                Id = Provider.Id,
-                Name = Provider.Name,
-                Password = Provider.Password,
-                PhoneNumber = Provider.PhoneNumber,                        
-            };
+                return new DTO.Models.Provider()
+                {
+                    Description = Provider.Description,
+                    EmailAddress = Provider.EmailAddress,
+                    Id = Provider.Id,
+                    Name = Provider.Name,
+                    Password = Provider.Password,
+                    PhoneNumber = Provider.PhoneNumber,                        
+                };
+            }
+            return null;
+        }
+
+        public static DAL.Models.Command CommandDAOToCommanDTO(this DTO.Models.Command Command)
+        {
+            if(Command != null)
+            {
+                return new DAL.Models.Command()
+                {
+                    Id = Command.Id,
+                    DateCommand = DateTime.Now,
+                    IdClient = Command.IdClient,
+                    IdAddress = Command.IdAddress
+                };
+            }
+            return null;
+        }
+
+        public static DTO.Models.Command CommandDTOToCommanDAO(this DAL.Models.Command Command)
+        {
+            if (Command != null)
+            {
+                return new DTO.Models.Command(Command.Id, Command.IdAddress, Command.IdClient, new List<Models.CommandWine>(),Command.DateCommand);
+            }
+            return null;
+        }
+
+        public static DAL.Models.CommandWine CommandWineDAOToCommandWineDTO(this DTO.Models.CommandWine CommandWine)
+        {
+            if(CommandWine != null)
+            {
+                return new DAL.Models.CommandWine()
+                {
+                    Id = CommandWine.Id,
+                    IdCommand = CommandWine.IdCommand,
+                    IdWine = CommandWine.IdWine,
+                    Quantity = CommandWine.Quantity,
+                };
+            }
+            return null;
+        }
+        public static DTO.Models.CommandWine CommandWineDAOToCommandWineDTO(this DAL.Models.CommandWine CommandWine)
+        {
+            if (CommandWine != null)
+            {
+                return new DTO.Models.CommandWine()
+                {
+                    Id = CommandWine.Id,
+                    IdCommand = CommandWine.IdCommand,
+                    IdWine = CommandWine.IdWine,
+                    Quantity = CommandWine.Quantity,
+                };
+            }
+            return null;
         }
     }
 }

@@ -17,13 +17,12 @@ import jwt_decode from "../../../../node_modules/jwt-decode"
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  registerForm: FormGroup;
-  invalidLogin: boolean;
+  registerForm: FormGroup;;
   decrypted_token: any;
-  errorMsg : string;
   emailExist: boolean;
   isClient: boolean;
   isProvider: boolean;
+  noUserFound: boolean;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
@@ -44,47 +43,56 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  OnLoginSubmit(form: NgForm): void {    
-    const credentials = {
-      'emailAddress': form["emailLog"],
-      'password': form["passwordLog"]      
+  OnLoginSubmit(form: NgForm): void {  
+    this.loginForm.markAllAsTouched();
+    if(this.loginForm.valid)
+    {
+      const credentials = {
+        'emailAddress': form["emailLog"],
+        'password': form["passwordLog"]      
+      }
+      this.logService.logClient(credentials).subscribe(response =>
+        {
+          this.EncodingTokenInSession(response);
+        },
+        err => {
+          this.noUserFound = true;          
+        });
     }
-    this.logService.logClient(credentials).subscribe(response =>
-      {
-        this.EncodingTokenInSession(response);
-      }, err =>{
-        this.invalidLogin = true;      
-        this.errorMsg = "Email ou mot de passe invalide";
-      });
   }
 
   OnRegisterSubmit(form : NgForm) : void{   
-    this.clientService.RegisterClient(new RegisterClient(form['emailRegister'],form['passwordRegister'])).subscribe(
-      dt => {            
-        const credentials = {
-          'emailAddress': form["emailRegister"],
-          'password': form["passwordRegister"]      
+    this.registerForm.markAllAsTouched();
+    if(this.registerForm.valid){
+      this.clientService.RegisterClient(new RegisterClient(form['emailRegister'],form['passwordRegister'])).subscribe(
+        dt => {            
+          const credentials = {
+            'emailAddress': form["emailRegister"],
+            'password': form["passwordRegister"]      
+          }
+          this.logService.logClient(credentials).subscribe(response =>
+            {
+              this.EncodingTokenInSession(response);
+            });
+        },
+        error => {
+          if(error["error"]["text"] == "Email address already exist"){
+            this.emailExist = !this.emailExistError();                        
+          }
         }
-        this.logService.logClient(credentials).subscribe(response =>
-          {
-            this.EncodingTokenInSession(response);
-          });
-      },
-      error => {
-        if(error["error"]["text"]){
-          this.emailExist = true;
-        }
-      }
-    );
+      );
+    }
+  }
+
+  emailExistError() : boolean {
+    return this.emailExist;
   }
 
   private EncodingTokenInSession(response: any) : void {    
     const token = (<any>response).token;
     sessionStorage.setItem("jwt",token);
-    this.invalidLogin = false;
     this.decrypted_token = jwt_decode(token);
-    this.
-    sessionService.connectedUser = new LoggedInformation(
+    this.sessionService.connectedUser = new LoggedInformation(
       this.decrypted_token["UserId"],
       this.decrypted_token["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
       this.decrypted_token["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"],

@@ -26,6 +26,12 @@ namespace WineSellingProject.Controllers
             _cityService = cityService;
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetAllByIdUser(int id)
+        {
+            return Ok(_addressService.GetAddressesByIdUser(id));
+        }
+
         [HttpPost]
         [Route("{idClient}")]
         public IActionResult Insert([FromBody] Address value, int IdClient)
@@ -38,11 +44,12 @@ namespace WineSellingProject.Controllers
             int insertedAddressId = _addressService.Insert(value);
             if (insertedAddressId > 0)
             {
-                return Ok(_clientAddressService.Insert(new ClientAddress()
+                _clientAddressService.Insert(new ClientAddress()
                 {
                     IdAddress = insertedAddressId,
                     IdClient = IdClient
-                }));
+                });
+                return Ok(insertedAddressId);
             }
             return Ok("Error while inserting data");
         }

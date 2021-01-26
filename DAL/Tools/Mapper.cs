@@ -152,6 +152,7 @@ namespace DAL.Tools
         {
             return new Category
             {
+                Id = (int)reader["IdCategory"],
                 CategoryName = (string)reader["CategoryName"],
                 IdTag = (int)reader["IdTag"]
             };
@@ -164,7 +165,8 @@ namespace DAL.Tools
                 CommentValue = (string)reader["Comment"],
                 Id = (int)reader["IdComment"],
                 IdClient = (int)reader["IdClient"],
-                Note = (byte)reader["Note"]
+                Note = (byte)reader["Note"],
+                IdWine = (int)reader["IdWine"]
             };
         }
         public static Provider ProviderToDAO(IDataReader reader)
@@ -176,6 +178,28 @@ namespace DAL.Tools
                 EmailAddress = (string)reader["EmailAddress"],
                 Name = (string)reader["ProviderName"],
                 PhoneNumber = (string)reader["PhoneNumber"]
+            };
+        }
+        
+        public static Command CommandToDAO(IDataReader reader)
+        {
+            return new Command
+            {
+                DateCommand = (reader["DateOfCommand"] != DBNull.Value) ? (DateTime)reader["DateOfCommand"] : DateTime.MaxValue,
+                Id = (int)reader["IdCommand"],
+                IdAddress = (int)reader["IdClientAddress"],
+                IdClient = (int)reader["IdClient"]
+            };
+        }
+
+        public static CommandWine CommandWineToDAO(IDataReader reader)
+        {
+            return new CommandWine
+            {
+                Id = (int)reader["IdCommandWine"],
+                IdCommand = (int)reader["IdCommand"],
+                IdWine = (int)reader["IdWine"],
+                Quantity = (int)reader["Quantity"]
             };
         }
     }

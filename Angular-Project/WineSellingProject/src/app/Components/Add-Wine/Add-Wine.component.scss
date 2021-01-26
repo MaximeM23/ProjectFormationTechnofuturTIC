@@ -1,0 +1,15 @@
+input[type=submit], input[type=button] {
+    max-width: 250px;
+    min-width: 250px;
+}
+
+@media (max-width: 769px) {
+    input[type=submit] {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+    input[type=button] {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+  }

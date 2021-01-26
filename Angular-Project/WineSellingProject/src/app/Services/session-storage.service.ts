@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Subscribable } from 'rxjs';
 import jwt_decode from "../../../node_modules/jwt-decode";
+import { Cart } from '../Models/Cart';
 import { LoggedInformation } from '../Models/LoggedInformation';
+import { Wine } from '../Models/Wine';
 import { ClientService } from './ClientService/Client.service';
 
 @Injectable({
@@ -52,6 +54,45 @@ export class SessionStorageService {
       this.decrypted_token["exp"]
       );           
     sessionStorage.setItem("userInfo",JSON.stringify(dt));
+  }
+
+  storeTempCart(wine: Cart) : void{ 
+    let tmpCart : Cart[] = JSON.parse(sessionStorage.getItem("tmpCart"));
+    if(tmpCart == null || tmpCart == undefined) 
+    {
+      tmpCart = [];
+    }
+    tmpCart.push(wine);
+    sessionStorage.setItem("tmpCart", JSON.stringify(tmpCart));
+  }
+
+  emptyCart(): void {        
+    sessionStorage.removeItem("tmpCart");
+    sessionStorage.removeItem("cart");
+  }
+
+  removeTempCartData(wine: Cart) : void{    
+    let tmpCart : Cart[] = JSON.parse(sessionStorage.getItem("tmpCart"));
+    tmpCart.splice(tmpCart.findIndex(x => x.id == wine.id));
+    sessionStorage.setItem("tmpCart", JSON.stringify(tmpCart));
+  }
+
+  getTempCart() : Cart[] {
+    return JSON.parse(sessionStorage.getItem("tmpCart"));
+  }
+
+  getCartQt() : number {
+    let jsonQt = sessionStorage.getItem("tmpCart");
+    if(jsonQt == undefined || jsonQt == null) {
+      return 0;
+    }
+    else {
+      let qt = JSON.parse(sessionStorage.getItem("tmpCart"))?.length;
+      if(qt != undefined || qt != null){
+        return qt
+      }
+      return 0;
+    }
   }
 
 }

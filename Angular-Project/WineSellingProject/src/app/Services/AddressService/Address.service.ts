@@ -25,6 +25,10 @@ constructor(private _http: HttpClient) { }
     return this._http.get(this.url+ "Address/")
   }
 
+  getAddressesByIdUser(id: number) : Subscribable<Address[]>{
+    return this._http.get(this.url+"Address/"+id)
+  }
+
   InsertAddressForUser(address : Address, userId: number) :Subscribable<any> {  
     return this._http.post(this.url + "Address/" + userId ,address);
   }

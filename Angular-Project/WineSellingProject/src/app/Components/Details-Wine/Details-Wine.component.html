@@ -6,23 +6,33 @@
       <div class="col">
 
         <div class="card mt-4">
-            <img class="card-img-top pt-4" src="../../../assets/bouteilleRouge.jpg" *ngIf="wineDetails.category[0].categoryName == 'Vin rouge' ">
-            <img class="card-img-top pt-4" src="../../../assets/bouteilleBlanc.jpg" *ngIf="wineDetails.category[0].categoryName == 'Vin blanc' ">
-            <img class="card-img-top pt-4" src="../../../assets/bouteilleRosé.jpg" *ngIf="wineDetails.category[0].categoryName == 'Vin rosé' ">
+            <img class="card-img-top pt-4" src="../../../assets/bouteilleRouge.jpg" *ngIf="wineDetails?.category[0].categoryName == 'Vin rouge' ">
+            <img class="card-img-top pt-4" src="../../../assets/bouteilleBlanc.jpg" *ngIf="wineDetails?.category[0].categoryName == 'Vin blanc' ">
+            <img class="card-img-top pt-4" src="../../../assets/bouteilleRosé.jpg" *ngIf="wineDetails?.category[0].categoryName == 'Vin rosé' ">
             <div class="card-body">
-            <h4 class="card-title text-center wineTextColor">{{wineDetails?.prices[0].price}}€</h4>
+            <h4 class="card-title text-center wineTextColor">{{wineDetails?.prices[0]?.priceWine}}€</h4>
             <h3 class="card-title text-center wineTextColor">{{wineDetails?.wineName}}</h3>
             <p class="card-text">{{wineDetails?.description}}</p>
-            <div class="text-center">              
-              <span class="text-warning" *ngIf="AvgWine == 1">&#9733; &#9734; &#9734; &#9734; &#9734;</span>
-              <span class="text-warning" *ngIf="AvgWine == 2">&#9733; &#9733; &#9734; &#9734; &#9734;</span>
-              <span class="text-warning" *ngIf="AvgWine == 3">&#9733; &#9733; &#9733; &#9734; &#9734;</span>
-              <span class="text-warning" *ngIf="AvgWine == 4">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-              <span class="text-warning" *ngIf="AvgWine == 5">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
+            <div class="text-center">                            
+              <span class="text-warning" *ngIf="getAvgWine() == 0 || IsNaN(AvgWine)">&#9734; &#9734; &#9734; &#9734; &#9734;</span>
+              <span class="text-warning" *ngIf="getAvgWine() == 1">&#9733; &#9734; &#9734; &#9734; &#9734;</span>
+              <span class="text-warning" *ngIf="getAvgWine() == 2">&#9733; &#9733; &#9734; &#9734; &#9734;</span>
+              <span class="text-warning" *ngIf="getAvgWine() == 3">&#9733; &#9733; &#9733; &#9734; &#9734;</span>
+              <span class="text-warning" *ngIf="getAvgWine() == 4">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
+              <span class="text-warning" *ngIf="getAvgWine() == 5">&#9733; &#9733; &#9733; &#9733; &#9733;</span>
             </div>
           </div>
+          <div class="text-center">
+            <form [formGroup]="qtForm" (ngSubmit)="AddToCart(wineDetails,qtForm.value)">
+              <label for="qt">Quantité</label>
+              <input type="number" id="qt" class="form-control" [formControl]="qtForm.controls['qt']" max="99" min="1"/>              
+              <input type="submit" value="Ajouter au panier" class="btn btn-outline-primary mb-4">
+              <div class="text-center mb-4">
+                <span class=" centered text-center successAddToCart" *ngIf="successAddedWineCart">Le vin {{wineDetails.wineName}} a bien été ajouté au panier avec une quantité de {{qtForm.controls['qt'].value}}</span>      
+              </div>
+            </form>
+          </div>
         </div>
-        <!-- /.card -->
 
         <div class="card card-outline-secondary my-4">
           <div class="card-header text-center wineTextColor">
@@ -41,23 +51,24 @@
             <hr>
           </div>
             <div class="text-center">
-              <a href="#" class="btn btn-success">Laisser un commentaire</a>
+              <a class="btn btn-outline-success mb-4" (click)="showCommentForm()" *ngIf="!displayCommentform && userIsConnected()">Laisser un commentaire</a>
+              <form [formGroup]="commentForm" (ngSubmit)="leaveAComment()" *ngIf="displayCommentform">
+                <div class="form-group">
+                  <label for="note">Note : </label>
+                  <ngb-rating class="text-warning pt-2" [(rate)]="currentRate" max=5 [formControl]="commentForm.controls['note']"></ngb-rating>                    
+                  <div *ngIf="commentForm.controls['note'].errors?.required && commentForm.controls['note'].touched" class="text-danger">
+                    La note est obligatoire
+                  </div>                  
+                </div>
+                <div class="form-group pr-4 pl-4">
+                  <label for="comment">Commentaire</label>
+                  <textarea class="form-control" [formControl]="commentForm.controls['comment']" row=5 ></textarea>                    
+                </div>
+                <input type="submit" class="btn btn-outline-primary mb-4" value="Ajouter le commentaire">
+              </form>
             </div>
         </div>
-        <!-- /.card -->
-
       </div>
-      <!-- /.col-lg-9 -->
-
     </div>
 
   </div>
-  <!-- /.container -->
-
-  <!-- Footer -->
-  <footer class="py-2 wineBackGroundColor">
-    <div class="container">
-      <p class="m-0 text-center text-white">&copy; Projet formation TechnofuturTIC - Net / Angular</p>
-    </div>
-    <!-- /.container -->
-  </footer>

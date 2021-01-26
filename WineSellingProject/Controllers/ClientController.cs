@@ -14,6 +14,7 @@ namespace WineSellingProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Client")]
     public class ClientController : ControllerBase
     {
         IClientService _service;
@@ -38,6 +39,7 @@ namespace WineSellingProject.Controllers
         }
 
         [HttpPost]    
+        [AllowAnonymous]
         public IActionResult Insert([FromBody] Client client)
         {
             if (_service.FindEmail(client.EmailAddress,client.Id)) return Ok("Email address already exist");

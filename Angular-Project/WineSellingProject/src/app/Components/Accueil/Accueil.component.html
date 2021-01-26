@@ -25,32 +25,14 @@
                 <h4 class="card-title text-center">
                   <a class="card-link" (click)="goToDetailsPage(wine.id)">{{wine.wineName}}</a>
                 </h4>
-                <h5 class="text-center">{{wine.prices[0].price}} €</h5>
+                <h5 class="text-center">{{wine.prices[0].priceWine}} €</h5>
                 <p class="card-text">{{wine.description}}</p>
-              </div>
-              <div class="card-footer text-center">
-                <div class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</div>
               </div>
             </div>
           </div>
 
 
         </div>
-        <!-- /.row -->
-
       </div>
-      <!-- /.col-lg-9 -->
-
     </div>
-    <!-- /.row -->
-
   </div>
-  <!-- /.container -->
-
-  <!-- Footer -->
-  <footer class="py-2 wineBackGroundColor">
-    <div class="container">
-      <p class="m-0 text-center text-white">&copy; Projet formation TechnofuturTIC - Net / Angular</p>
-    </div>
-    <!-- /.container -->
-  </footer>

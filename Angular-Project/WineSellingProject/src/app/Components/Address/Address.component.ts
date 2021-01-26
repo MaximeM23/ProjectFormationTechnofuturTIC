@@ -43,7 +43,6 @@ export class AddressComponent implements OnInit {
   
 
   OnUpdate(id: number, form: NgForm) : void{
-    console.log(id, form["country"]);
     this._addressService.UpdateAddress(new Address(id,
                                                     form["street"],
                                                     form["number"],
@@ -51,7 +50,6 @@ export class AddressComponent implements OnInit {
                                                     form["postalCode"],
                                                     form["city"])
                     )).subscribe(dt =>{
-                      console.log(dt);
             });
       location.reload();
   }
@@ -117,21 +115,27 @@ export class AddressComponent implements OnInit {
   }
 
   AddAddressToUser(value: NgForm): void {
-    this._addressService.InsertAddressForUser(new Address(0,
-                                                          value.controls["street"].value,
-                                                          value.controls["number"].value,
-                                                          new City(0,value.controls["country"].value,
-                                                          value.controls["postalCode"].value,
-                                                          value.controls["city"].value)
-                                                          ),this._sessionService.recoverIdUser()).subscribe(dt =>{
-                                                            console.log(dt);
-                                                          });
-    location.reload();
+    this.addressForm.markAllAsTouched();
+    if(this.addressForm.valid)
+    {
+      let x = new Address(0,
+        value.controls["street"].value,
+        value.controls["number"].value,
+        new City(0,value.controls["country"].value,
+        value.controls["postalCode"].value,
+        value.controls["city"].value));
+      this._addressService.InsertAddressForUser(x,this._sessionService.recoverIdUser()).subscribe(dt =>{
+                                                              x.Id = dt;
+                                                              this.addresses.push(x);
+                                                              this.ClickedForInsert = false;
+                                                            });
+    }
+    
   }
 
   RemoveAddress(id : number): void {
-    this._addressService.DeleteAddress(id).subscribe(dt => {      
-      this.addresses.splice(this.addresses.findIndex(x => x.Id == id),1);  
+    this._addressService.DeleteAddress(id).subscribe(dt => { 
+      if(dt == true) this.addresses.splice(this.addresses.findIndex(x => x.Id == id),1);  
     },er => {
       // display error message here
     });  

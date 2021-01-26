@@ -52,12 +52,13 @@ public jsonToDetailsWine(dt: any): WineDetails
   }
   for(let i = 0; i < dt["comments"].length; i++)
   {
-    comments.push(new Comment(dt["comments"][i]["commentValue"],dt["comments"][i]["note"],dt["comments"][i]["client"]["firstname"],dt["comments"][i]["client"]["lastname"]))
+    comments.push(new Comment(dt["comments"][i]["id"],dt["comments"][i]["commentValue"],dt["comments"][i]["note"],dt["comments"][i]["client"]["firstname"],dt["comments"][i]["client"]["lastname"],dt["comments"][i]["idWine"]))
   }
   wine = new WineDetails(dt["id"],dt["wineName"],dt["disabled"],prices,dt["year"],dt["description"],categories,comments)
   prices = []
   categories= []    
   return wine;
 }
+
 
 }

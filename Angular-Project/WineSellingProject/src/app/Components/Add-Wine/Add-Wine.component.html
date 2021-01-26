@@ -1,0 +1,73 @@
+<div class="container pt-4 pr-4">
+  <div class="row">
+    <div class="col">        
+      <h4 class="text-center mb-4 wineTextColor">Ajouter un nouveau vin</h4>
+      <form [formGroup]="wineForm" (ngSubmit)="OnSubmit(wineForm.value)">
+        <div class="form-group">
+
+          <label for="wineName">Nom du vin</label>
+          <input type="text" class="form-control" [formControl]="wineForm.controls['wineName']" placeholder="Nom du vin" value="" />              
+          <div *ngIf="wineForm.controls['wineName'].invalid && (wineForm.controls['wineName'].dirty || wineForm.controls['wineName'].touched)" class="alert alert-danger">
+            <div *ngIf="wineForm.controls['wineName'].errors.required">
+              Le nom du vin est requis
+            </div>
+            <div *ngIf="wineForm.controls['wineName'].errors.minlength">
+              Le nom du vin doit comprendre au minimum {{wineForm.controls['wineName'].errors.minlength.requiredLength}} caractères.
+            </div>  
+            <div *ngIf="wineForm.controls['wineName'].errors.maxlength">
+              Le prénom doit comprendre au maximum {{wineForm.controls['wineName'].errors.maxlength.requiredLength }} caractères.
+            </div>        
+          </div>  
+
+          <label for="price">Prix du vin</label>
+          <input type="number" class="form-control" [formControl]="wineForm.controls['price']" min="1" max="2000"/>              
+          <div *ngIf="wineForm.controls['price'].invalid && (wineForm.controls['price'].dirty || wineForm.controls['price'].touched)" class="alert alert-danger">
+            <div *ngIf="wineForm.controls['price'].errors.required">
+              Le prix du vin est requis
+            </div>
+          </div> 
+
+          <label for="year">L'année du vin</label>
+          <input type="number" class="form-control" [formControl]="wineForm.controls['year']" min="1900" max="{{actualYear}}"/>              
+          <div *ngIf="wineForm.controls['year'].invalid && (wineForm.controls['year'].dirty || wineForm.controls['year'].touched)" class="alert alert-danger">
+            <div *ngIf="wineForm.controls['year'].errors.required">
+              L'année du vin est requise
+            </div>
+          </div>
+
+          <label for="category">La catégorie du vin</label>
+          <select class="browser-default custom-select" #selectCategory (change)="setSelectedCategory(selectCategory)" [formControl]="wineForm.controls['category']">  
+            <option selected disabled></option>
+            <option *ngFor="let category of categories" [ngValue]="category">{{category.categoryName}}</option>
+          </select>              
+          <div *ngIf="wineForm.controls['category'].invalid && (wineForm.controls['category'].dirty || wineForm.controls['category'].touched)" class="alert alert-danger">
+            <div *ngIf="wineForm.controls['category'].errors.required">
+              La catégorie du vin est requise
+            </div>   
+          </div>
+
+          <label for="description">La description du vin</label>
+          <textarea class="form-control" [formControl]="wineForm.controls['description']" placeholder="Votre description du vin"> </textarea>             
+          <div *ngIf="wineForm.controls['description'].invalid && (wineForm.controls['description'].dirty || wineForm.controls['description'].touched)" class="alert alert-danger">
+            <div *ngIf="wineForm.controls['description'].errors.required">
+              La description du vin est requise
+            </div>
+            <div *ngIf="wineForm.controls['description'].errors.minlength">
+              La description du vin doit comprendre au minimum {{wineForm.controls['description'].errors.minlength.requiredLength}} caractères.
+            </div>  
+            <div *ngIf="wineForm.controls['description'].errors.maxlength">
+              La description doit comprendre au maximum {{wineForm.controls['description'].errors.maxlength.requiredLength }} caractères.
+            </div>        
+          </div>
+
+          <div class="text-center pt-4">
+            
+            <input type="submit" class="btn btn-outline-info mb-4 text-center mr-4" value="Ajouter" />                       
+            <input type="button" class="btn btn-outline-danger mb-4 text-center ml-4" value="Retour à mes vins" routerLink="/wineProviderList"/>                
+            
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

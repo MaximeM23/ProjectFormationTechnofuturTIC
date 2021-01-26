@@ -29,13 +29,13 @@ namespace DTO.Service
         }
 
         public IEnumerable<Address> GetAddressesByIdUser(int id)
-        {/*
-            IEnumerable<Address> addresses =  _addressRepo.GetAddressByIdUser(id).Select(x => x.AddressDTOToAddressDAO());
+        {
+            List<Address> addresses =  _addressRepo.GetAddressByIdUser(id).Select(x => x.AddressDTOToAddressDAO()).ToList();
             foreach(Address a in addresses)
             {
-
-            }*/
-            throw new NotImplementedException();
+                a.City = _cityRepo.GetOne(a.City.Id).CityDTOToCityDAO();
+            }
+            return addresses;
         }
 
         public IEnumerable<Address> GetAll()

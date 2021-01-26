@@ -37,4 +37,19 @@ export class NavbarComponent implements OnInit {
     this._sessionService.connectedUser = null;
     this._router.navigate(["/accueil"]);
   }
+
+  getCartQt() : number {
+    let qt = this._sessionService.getCartQt();
+    if(qt == null) return 0;
+    else return qt;
+  }
+
+  userNotLogged() : void {
+    if(this._sessionService.recoverIdUser() == undefined){
+      this._router.navigateByUrl("/login");
+    }
+    else if(this._sessionService.getCartQt() == 0){
+      this._router.navigateByUrl("/accueil");
+    }
+  }
 }

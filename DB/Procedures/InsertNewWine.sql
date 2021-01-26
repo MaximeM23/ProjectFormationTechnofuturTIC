@@ -11,7 +11,8 @@ INSERT INTO [dbo].[Wine]
            ,[Year]
            ,[Disabled]
            ,[IdProvider])
+	OUTPUT inserted.IdWine
      VALUES
-           (@WineName, @Description, @Year,1,1)
+           (@WineName, @Description, @Year,1,@IdProvider)
 END
 GO
