@@ -52,6 +52,10 @@ const routes: Routes = [
   {
     path: 'detailsCommand/:id',
     component: DetailsCommandComponent
+  },
+  {
+    path:"**",
+    component: AccueilComponent
   }
 ];
 

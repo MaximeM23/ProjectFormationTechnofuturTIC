@@ -75,7 +75,7 @@ export class DetailsWineComponent implements OnInit {
             {        
               this.AvgWine += this.wineDetails.comment[i].note;
             }
-            this.AvgWine = Math.round(this.AvgWine / this.wineDetails.comment.length);          
+            this.AvgWine = Math.round(this.AvgWine / this.wineDetails.comment.length); 
             this.commentForm.reset();          
           });
         });      
