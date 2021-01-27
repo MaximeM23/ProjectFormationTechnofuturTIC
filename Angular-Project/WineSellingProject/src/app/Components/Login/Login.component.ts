@@ -31,6 +31,12 @@ export class LoginComponent implements OnInit {
               private logService: LogginClientService) { }
 
   ngOnInit(): void {
+
+    if(this.sessionService.recoverIdUser() != null)
+    {
+      this.router.navigateByUrl("/accueil");
+    }
+
     this.loginForm = this.formBuilder.group({
       emailLog: this.formBuilder.control('',[Validators.required, Validators.email,Validators.minLength(3)]),
       passwordLog: this.formBuilder.control('',[Validators.required,Validators.minLength(3)])

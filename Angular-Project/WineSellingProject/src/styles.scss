@@ -1,6 +1,12 @@
 footer {
-    margin-top: 50px !important;
+    margin-top: 200px !important;
+    clear: both;
+    position: relative;
 }
+body {
+    min-height: 100%;
+}
+
 .wineBackGroundColor {
     background-color: 	#00415a;
 }
