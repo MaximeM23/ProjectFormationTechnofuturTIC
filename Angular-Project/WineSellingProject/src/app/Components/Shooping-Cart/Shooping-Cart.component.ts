@@ -30,21 +30,24 @@ export class ShoopingCartComponent implements OnInit {
   }
 
   payCart() : void {
-    if(this._sessionService.recoverIdUser() == undefined){
-      this._router.navigateByUrl("/login");
-    }
-    else {
-      let cmdWine : CommandWine[] = [];
-      for(let i = 0; i < this.cart.length; i++)
-      {
-        cmdWine.push(new CommandWine(this.cart[i].quantity,this.cart[i].id));
+    if(this.addressSelected)
+    {
+      if(this._sessionService.recoverIdUser() == undefined){
+        this._router.navigateByUrl("/login");
       }
-      let cmd : Command;
-      cmd = new Command(0,this._sessionService.recoverIdUser(),this.idAddressSelected,cmdWine);   
-      this._commandService.sendCommandToApi(cmd).subscribe(dt => {
-        this._sessionService.emptyCart();
-        this._router.navigateByUrl("/detailsCommand/"+dt);
-      });
+      else {
+        let cmdWine : CommandWine[] = [];
+        for(let i = 0; i < this.cart.length; i++)
+        {
+          cmdWine.push(new CommandWine(this.cart[i].quantity,this.cart[i].id));
+        }
+        let cmd : Command;
+        cmd = new Command(0,this._sessionService.recoverIdUser(),this.idAddressSelected,cmdWine);   
+        this._commandService.sendCommandToApi(cmd).subscribe(dt => {
+          this._sessionService.emptyCart();
+          this._router.navigateByUrl("/detailsCommand/"+dt);
+        });
+      }
     }
   }
 

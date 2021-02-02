@@ -68,11 +68,15 @@ export class DetailsWineComponent implements OnInit {
       this.commentForm.controls['note'].markAsTouched();
       if(this.commentForm.valid){
         let commentToSend = new CommentToSend(0,this.commentForm.controls['comment'].value,this.commentForm.controls['note'].value,this._sessionService.recoverIdUser(),parseInt(this.idWine))
-        this._commentService.insertNewComment(commentToSend).subscribe(dt => {          
-          this.commentForm.reset();          
+        this._commentService.insertNewComment(commentToSend).subscribe(dt => {
           this._wineService.getWineByWineId(this.idWine).subscribe(dt => {
-            this.wineDetails = this._mapperService.jsonToDetailsWine(dt);
-            this.AvgWine += parseInt(this.AvgWine.toString()) + this.commentForm.controls['note'].value 
+            this.wineDetails = this._mapperService.jsonToDetailsWine(dt);            
+            for(let i = 0; i < this.wineDetails.comment.length; i++)
+            {        
+              this.AvgWine += this.wineDetails.comment[i].note;
+            }
+            this.AvgWine = Math.round(this.AvgWine / this.wineDetails.comment.length); 
+            this.commentForm.reset();          
           });
         });      
       }

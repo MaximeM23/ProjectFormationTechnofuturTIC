@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Cart } from 'src/app/Models/Cart';
 import { DetailsCommand } from 'src/app/Models/DetailsCommand';
 import { CommandService } from 'src/app/Services/CommandService/CommandService.service';
 import { CommandMapperService } from 'src/app/Services/Mappers/CommandMapper.service';
+import { SessionStorageService } from 'src/app/Services/session-storage.service';
 
 @Component({
   selector: 'app-DetailsCommand',
@@ -16,7 +17,7 @@ export class DetailsCommandComponent implements OnInit {
   idCommand: number;
   prixTotal: number = 0;
 
-  constructor(private _commandService: CommandService, private _route: ActivatedRoute, private _commandMapper: CommandMapperService) { }
+  constructor(private _router: Router,private sessionService : SessionStorageService, private _commandService: CommandService, private _route: ActivatedRoute, private _commandMapper: CommandMapperService) { }
 
   ngOnInit() {
 
@@ -26,6 +27,12 @@ export class DetailsCommandComponent implements OnInit {
     })
 
     this._commandService.getDetailsByIdCommand(this.idCommand).subscribe(dt => {
+      if(dt["client"]["id"] != this.sessionService.recoverIdUser())
+      {
+        this._router.navigateByUrl("/accueil");
+      }
+
+      
       this.details = this._commandMapper.jsonToDetailsCommand(dt);
       for(let i = 0 ; i < this.details.winedetails.length;i++){
         this.prixTotal = parseInt(this.prixTotal.toString()) + (this.details.winedetails[i].winePrice * this.details.winedetails[i].quantity);
